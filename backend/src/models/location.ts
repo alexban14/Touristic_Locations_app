@@ -10,6 +10,10 @@ export interface ILoc {
     ticket: boolean;
     price?: number;
     images: string[];
+    reviews: {
+        type: Schema.Types.ObjectId;
+        ref: 'Review';
+    };
     creator: {
         type: Schema.Types.ObjectId;
         ref: 'User';
@@ -48,9 +52,13 @@ const LocSchema = new Schema({
             required: true
         }
     ],
+    reviews: {
+        type: Schema.Types.ObjectId,
+        ref: 'Review'
+    },
     creator: {
         type: Schema.Types.ObjectId,
-        required: true
+        required: 'User'
     }
 });
 

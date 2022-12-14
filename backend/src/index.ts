@@ -57,17 +57,17 @@ const StartServer = () => {
     router.use(session(sessionConfig));
     router.use(flash());
 
-    // router.use(passport.initialize());
-    // // persisten lging sessions
-    // router.use(passport.session());
-    // passport.use(new LocalStrategy(User.authenticate()));
-    // // serialize = store
-    // passport.serializeUser(User.serializeUser());
-    // passport.deserializeUser(User.deserializeUser());
+    router.use(passport.initialize());
+    // persisten lging sessions
+    router.use(passport.session());
+    passport.use(new LocalStrategy.Strategy(User.authenticate()));
+    // serialize = store
+    passport.serializeUser(User.serializeUser());
+    passport.deserializeUser(User.deserializeUser());
 
     router.use((req, res, next) => {
         Logging.info(req.session);
-        // res.locals.currentUser = req.user;
+        res.locals.currentUser = req.user;
         res.locals.success = req.flash('success');
         res.locals.error = req.flash('error');
         next();

@@ -7,6 +7,10 @@ export interface IReview {
         type: Schema.Types.ObjectId;
         ref: 'User';
     };
+    location: {
+        type: Schema.Types.ObjectId;
+        required: 'Location';
+    };
 }
 
 export interface IReviewSchema extends IReview, Document {}
@@ -22,7 +26,11 @@ const ReviewSchema = new Schema({
     },
     author: {
         type: Schema.Types.ObjectId,
-        required: true
+        ref: 'User'
+    },
+    location: {
+        type: Schema.Types.ObjectId,
+        required: 'Location'
     }
 });
 

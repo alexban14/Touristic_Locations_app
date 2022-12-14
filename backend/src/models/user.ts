@@ -18,4 +18,12 @@ const UserSchema: Schema = new Schema({
 // adds a unique value for the username and password
 UserSchema.plugin(passportLocalMongoose);
 
+// for the serialization to work
+type _User = IUserSchema;
+declare global {
+    namespace Express {
+        interface User extends _User {}
+    }
+}
+
 export default mongoose.model<IUserSchema>('User', UserSchema);
