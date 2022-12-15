@@ -1,17 +1,18 @@
 import express from 'express';
+import { Request, Response, NextFunction } from 'express';
 import http from 'http';
 const router = express();
 import mongoose from 'mongoose';
 import methodOverride from 'method-override';
 import session from 'express-session';
-import flash from 'connect-flash';
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
 
 import { config } from './config/config';
 import Logging from './library/Logging';
 import User from './models/user';
-import { IUserSchema } from './models/user';
+import locationRoutes from './routes/location';
+import userRoutes from './routes/user';
 
 mongoose
     .connect(config.mongo.url)
@@ -55,7 +56,6 @@ const StartServer = () => {
     };
 
     router.use(session(sessionConfig));
-    router.use(flash());
 
     router.use(passport.initialize());
     // persisten lging sessions
@@ -68,8 +68,6 @@ const StartServer = () => {
     router.use((req, res, next) => {
         Logging.info(req.session);
         res.locals.currentUser = req.user;
-        res.locals.success = req.flash('success');
-        res.locals.error = req.flash('error');
         next();
     });
 
@@ -87,6 +85,8 @@ const StartServer = () => {
     });
 
     // ROUTES
+    router.use('/locations', locationRoutes);
+    router.use('/auth', userRoutes);
 
     // Healthcheck
     router.get('/ping', (req, res, next) => res.status(200).json({ message: 'pong' }));

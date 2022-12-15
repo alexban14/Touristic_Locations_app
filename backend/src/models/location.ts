@@ -1,4 +1,6 @@
 import mongoose, { Document, Schema } from 'mongoose';
+import Logging from '../library/Logging';
+import Review from './review';
 
 export interface ILoc {
     name: string;
@@ -52,13 +54,28 @@ const LocSchema = new Schema({
             required: true
         }
     ],
-    reviews: {
-        type: Schema.Types.ObjectId,
-        ref: 'Review'
-    },
+    reviews: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Review'
+        }
+    ],
     creator: {
         type: Schema.Types.ObjectId,
-        required: 'User'
+        ref: 'User',
+        required: true
+    }
+});
+
+// middleware that deletes all reviews related to a location
+LocSchema.post('findOneAndDelete', async function (doc) {
+    Logging.info(doc);
+    if (doc) {
+        await Review.deleteMany({
+            _id: {
+                $in: doc.reviews
+            }
+        });
     }
 });
 

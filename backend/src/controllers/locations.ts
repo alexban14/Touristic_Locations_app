@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import Logging from '../library/Logging';
 import Location from '../models/location';
 
 const index = async (req: Request, res: Response) => {
@@ -30,7 +31,7 @@ const showLocation = async (req: Request, res: Response) => {
                 populate: { path: 'author' }
             })
             .populate('author');
-        console.log(location);
+        Logging.info(location);
         location ? res.status(200).json({ location }) : res.status(404).json({ message: 'Not found' });
     } catch (error) {
         res.status(500).json({ error });
