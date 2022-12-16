@@ -1,22 +1,18 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
 export interface IReview {
-    body: string;
+    description: string;
     rating: number;
     author: {
         type: Schema.Types.ObjectId;
         ref: 'User';
-    };
-    location: {
-        type: Schema.Types.ObjectId;
-        required: 'Location';
     };
 }
 
 export interface IReviewSchema extends IReview, Document {}
 
 const ReviewSchema = new Schema({
-    body: {
+    description: {
         type: String,
         required: true
     },
@@ -27,10 +23,6 @@ const ReviewSchema = new Schema({
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User'
-    },
-    location: {
-        type: Schema.Types.ObjectId,
-        required: 'Location'
     }
 });
 

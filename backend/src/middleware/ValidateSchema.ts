@@ -1,9 +1,10 @@
 import Joi, { ObjectSchema } from 'joi';
 import { Request, Response, NextFunction } from 'express';
 import { ILocSchema } from '../models/location';
+import { IReviewSchema } from '../models/review';
 import Logging from '../library/Logging';
 
-export const validateLocation = (schema: ObjectSchema) => {
+export const validateJoi = (schema: ObjectSchema) => {
     return async (req: Request, res: Response, next: NextFunction) => {
         try {
             await schema.validateAsync(req.body);
@@ -15,16 +16,19 @@ export const validateLocation = (schema: ObjectSchema) => {
     };
 };
 
-export const Schemas = {
-    location: Joi.object<ILocSchema>({
-        name: Joi.string().required(),
-        description: Joi.string().required(),
-        location: Joi.object({
-            lat: Joi.string().required(),
-            long: Joi.string().required()
-        }).required(),
-        ticket: Joi.boolean().required(),
-        price: Joi.number(),
-        images: Joi.array().items(Joi.string()).required()
-    }).required()
-};
+export const locationSchema = Joi.object<ILocSchema>({
+    name: Joi.string().required(),
+    description: Joi.string().required(),
+    location: Joi.object({
+        lat: Joi.string().required(),
+        long: Joi.string().required()
+    }).required(),
+    ticket: Joi.boolean().required(),
+    price: Joi.number().min(1),
+    images: Joi.array().items(Joi.string()).required()
+}).required();
+
+export const reviewSchema = Joi.object<IReviewSchema>({
+    description: Joi.string().required(),
+    rating: Joi.number().min(1).required()
+}).required();

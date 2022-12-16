@@ -13,6 +13,7 @@ import Logging from './library/Logging';
 import User from './models/user';
 import locationRoutes from './routes/location';
 import userRoutes from './routes/user';
+import reviewRoutes from './routes/review';
 
 mongoose
     .connect(config.mongo.url)
@@ -87,6 +88,7 @@ const StartServer = () => {
     // ROUTES
     router.use('/locations', locationRoutes);
     router.use('/auth', userRoutes);
+    router.use('/locations/:id/reviews', reviewRoutes);
 
     // Healthcheck
     router.get('/ping', (req, res, next) => res.status(200).json({ message: 'pong' }));
