@@ -49,10 +49,14 @@ const updateLocation = async (req: Request, res: Response) => {
 };
 
 const deleteLocation = async (req: Request, res: Response) => {
-    const { id } = req.params;
-    await Location.findByIdAndDelete(id);
-    const deletedLocation = await Location.findById(id);
-    !deletedLocation ? res.status(201).json({ message: 'Location Deleted' }) : res.status(404).json({ message: 'Location not found' });
+    try {
+        const { id } = req.params;
+        await Location.findByIdAndDelete(id);
+        const deletedLocation = await Location.findById(id);
+        !deletedLocation ? res.status(201).json({ message: 'Location Deleted' }) : res.status(404).json({ message: 'Location not found' });
+    } catch (error) {
+        res.status(500).json({ error });
+    }
 };
 
 export default { index, createLocation, showLocation, updateLocation, deleteLocation };

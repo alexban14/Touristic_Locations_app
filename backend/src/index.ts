@@ -16,6 +16,7 @@ import userRoutes from './routes/user';
 import reviewRoutes from './routes/review';
 
 mongoose
+    .set('strictQuery', false)
     .connect(config.mongo.url)
     .then(() => {
         Logging.info('MONGO conection OPEN!');
