@@ -16,19 +16,17 @@ export const validateJoi = (schema: ObjectSchema) => {
     };
 };
 
-export const locationSchema = Joi.object({
-    location: Joi.object<ILocSchema>({
-        name: Joi.string().required(),
-        description: Joi.string().required(),
-        location: Joi.object({
-            lat: Joi.string().required(),
-            long: Joi.string().required()
-        }).required(),
-        ticket: Joi.boolean().required(),
-        price: Joi.number().min(1),
-        images: Joi.array().items(Joi.string()).required()
-    }).required()
-});
+export const locationSchema = Joi.object<ILocSchema>({
+    name: Joi.string().required(),
+    description: Joi.string().required(),
+    location: Joi.object({
+        lat: Joi.string().required(),
+        long: Joi.string().required()
+    }).required(),
+    ticket: Joi.boolean().required(),
+    price: Joi.number().min(1),
+    images: Joi.array().items(Joi.string()).required()
+}).required();
 
 export const reviewSchema = Joi.object({
     review: Joi.object<IReviewSchema>({
