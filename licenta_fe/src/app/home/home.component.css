@@ -1,0 +1,15 @@
+.backdrop {
+    height: 100vh;
+    background-image: url('../../assets/imgs/altumcode-aIqmMlAcgr8-unsplash.jpg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.heading {
+    margin-left: 6rem;
+}
+
+a {
+    text-decoration: none;
+}
