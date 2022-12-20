@@ -1,15 +1,54 @@
-.backdrop {
-    height: 100vh;
-    background-image: url('../../assets/imgs/altumcode-aIqmMlAcgr8-unsplash.jpg');
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-.heading {
-    margin-left: 6rem;
+* {
+    box-sizing: border-box;
 }
 
 a {
     text-decoration: none;
 }
+
+.backdrop {
+    min-height: 100vh;
+    min-width: 100vw;
+    background-image: url('../../assets/imgs/altumcode-aIqmMlAcgr8-unsplash.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 0;
+}
+
+.navigation {
+    font-size: 1rem;
+    color: whitesmoke;
+    border-radius: 0.5rem;
+    z-index: 2;
+    opacity: 0.6;
+    background-image: linear-gradient(to right, #434343, #000000);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.navigation div div h1 {
+    text-shadow: 1px 1px 2px whitesmoke;
+}
+
+.navigation div div p {
+    text-shadow: none;
+}
+
+.navigation div div.col-6 {
+    border: 0.1rem solid #12e1b9;
+}
+
+@media (min-width: 576px) {
+    .backdrop {
+        background-image: url('../../assets/imgs/sibiuPiataMica.jpg');
+    }
+
+    .navigation {
+        font-size: 1.3rem;
+        font-weight: 500;
+    }
+}
+
+/* .heading {
+    margin-left: 6rem;
+} */
