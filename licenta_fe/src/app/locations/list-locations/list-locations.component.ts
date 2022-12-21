@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
-
+import { LocationsService } from 'src/app/services/locations.service';
 import { Location } from '../location.model';
-import * as fromApp from '../../store/app.reducer';
 
 @Component({
     selector: 'app-list-locations',
@@ -11,12 +9,11 @@ import * as fromApp from '../../store/app.reducer';
     styleUrls: ['./list-locations.component.css']
 })
 export class ListLocationsComponent implements OnInit {
-    locations: Location[] | undefined;
-    subscription: Observable<Location> | undefined;
+    locations: any;
 
-    constructor(private store: Store<fromApp.AppState>) {}
+    constructor(private locationsService: LocationsService) {}
 
     ngOnInit(): void {
-        this.subscription = this.store.select('locations').pipe((locationState) => locationState.locations);
+        this.locationsService.getAllLocations().subscribe((locations) => ((this.locations = locations), console.log(locations)));
     }
 }

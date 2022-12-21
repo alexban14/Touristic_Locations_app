@@ -1,4 +1,4 @@
-import { Review } from '../reivews/review.model';
+import { Review } from './reivews/review.model';
 
 export class Location {
     public name: string;
