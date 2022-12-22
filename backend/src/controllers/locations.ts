@@ -5,6 +5,7 @@ import Location from '../models/location';
 const index = async (req: Request, res: Response) => {
     try {
         const locations = await Location.find({});
+        console.log(locations);
         res.status(200).json({ locations });
     } catch (error) {
         res.status(500).json({ error });
@@ -25,12 +26,7 @@ const createLocation = async (req: Request, res: Response) => {
 const showLocation = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const location = await Location.findById(id)
-            .populate({
-                path: 'reviews,',
-                populate: { path: 'author' }
-            })
-            .populate('author');
+        const location = await Location.findById(id).populate('reviews').populate('creator');
         Logging.info(location);
         location ? res.status(200).json({ location }) : res.status(404).json({ message: 'Not found' });
     } catch (error) {

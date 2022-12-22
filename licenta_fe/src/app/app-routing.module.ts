@@ -25,11 +25,11 @@ const appRoutes: Routes = [
                 component: CreateLocationComponent
             },
             {
-                path: ':id',
+                path: 'get/:id',
                 component: ShowLocationComponent
             },
             {
-                path: ':id/edit',
+                path: 'get/:id/edit',
                 component: EditLocationComponent
             }
         ]
