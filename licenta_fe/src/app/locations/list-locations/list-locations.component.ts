@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
-import { LocationsService } from 'src/app/services/locations.service';
+import { LocationsService } from 'src/app/services/locations/locations.service';
 import { environment } from 'src/environments/environment';
 import { Location, LocWrapper } from '../location.model';
 

@@ -12,10 +12,25 @@ import { EditLocationComponent } from './locations/edit-location/edit-location.c
 import { HeaderComponent } from './header/header.component';
 import { LocationsComponent } from './locations/locations.component';
 import { ReivewsComponent } from './locations/reivews/reivews.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { LoginComponent } from './auth/login/login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-    declarations: [AppComponent, HomeComponent, LocationsComponent, ListLocationsComponent, ShowLocationComponent, CreateLocationComponent, EditLocationComponent, HeaderComponent, ReivewsComponent],
-    imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        LocationsComponent,
+        ListLocationsComponent,
+        ShowLocationComponent,
+        CreateLocationComponent,
+        EditLocationComponent,
+        HeaderComponent,
+        ReivewsComponent,
+        RegisterComponent,
+        LoginComponent
+    ],
+    imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule],
     providers: [],
     bootstrap: [AppComponent]
 })

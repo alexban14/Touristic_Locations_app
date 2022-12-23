@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { response } from 'express';
 import { Subscription } from 'rxjs';
-import { LocationsService } from 'src/app/services/locations.service';
+import { LocationsService } from 'src/app/services/locations/locations.service';
 import { Location, LocWrapper } from '../location.model';
 
 @Component({

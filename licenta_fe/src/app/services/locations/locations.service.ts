@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Location, LocWrapper } from '../locations/location.model';
+import { Location, LocWrapper } from '../../locations/location.model';
 
 @Injectable({
     providedIn: 'root'

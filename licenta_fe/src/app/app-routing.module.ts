@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 import { HomeComponent } from './home/home.component';
 import { CreateLocationComponent } from './locations/create-location/create-location.component';
 import { EditLocationComponent } from './locations/edit-location/edit-location.component';
@@ -31,6 +33,19 @@ const appRoutes: Routes = [
             {
                 path: 'get/:id/edit',
                 component: EditLocationComponent
+            }
+        ]
+    },
+    {
+        path: 'auth',
+        children: [
+            {
+                path: 'register',
+                component: RegisterComponent
+            },
+            {
+                path: 'login',
+                component: LoginComponent
             }
         ]
     }
