@@ -10,14 +10,26 @@
                     <div class="form-group">
                         <label for="username">Nume de utilizator</label>
                         <input formControlName="username" type="text" id="username" class="form-control rounded-0" required />
+                        <div *ngIf="registerForm.touched && registerForm.controls['username'].errors" class="text-danger mb-3">
+                            <div *ngIf="registerForm.touched && registerForm.controls['username'].errors['required']">Username-ul este necesar pentru a va inregistra.</div>
+                            <div *ngIf="registerForm.touched && registerForm.controls['username'].errors['minLength']">Username-ul trebuie sa contina cel putin 4 caractere.</div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input formControlName="email" type="email" id="email" class="form-control rounded-0" required />
+                        <div *ngIf="registerForm.touched && registerForm.controls['email'].errors" class="text-danger mb-3">
+                            <div *ngIf="registerForm.touched && registerForm.controls['email'].errors['required']">Email-ul este necesar pentru a va inregistra.</div>
+                            <div *ngIf="registerForm.touched && registerForm.controls['email'].errors['email']">Email-ul este invalid.</div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input formControlName="password" type="password" id="password" class="form-control rounded-0" required />
+                        <div *ngIf="registerForm.touched && registerForm.controls['password'].errors" class="text-danger mb-3">
+                            <div *ngIf="registerForm.touched && registerForm.controls['password'].errors['required']">Parola este necesar pentru a va inregistra.</div>
+                            <div *ngIf="registerForm.touched && registerForm.controls['password'].errors['minLength']">Parola trebuie sa contina cel putin 6 caractere.</div>
+                        </div>
                     </div>
                     <button class="btn btn-primary float-end my-2" type="submit" [disabled]="!registerForm.valid">Inregistreaza-te</button>
                 </form>

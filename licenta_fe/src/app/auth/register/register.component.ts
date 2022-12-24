@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
@@ -13,9 +13,9 @@ export class RegisterComponent implements OnInit {
 
     constructor(public fb: FormBuilder, private autService: AuthService, private _router: Router) {
         this.registerForm = this.fb.group({
-            username: '',
-            email: '',
-            password: ''
+            username: ['', [Validators.required, Validators.minLength(4)]],
+            email: ['', [Validators.required, Validators.email]],
+            password: ['', [Validators.required, Validators.minLength(6)]]
         });
 
         this.registerForm.valueChanges.subscribe(console.log);
