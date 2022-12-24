@@ -9,35 +9,37 @@ import { AuthService } from 'src/app/services/auth/auth.service';
     styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-    form: FormGroup = new FormGroup({});
+    registerForm: FormGroup;
 
-    constructor(public fb: FormBuilder, private autService: AuthService, private _router: Router) {}
-
-    ngOnInit(): void {
-        this.form = this.fb.group({
-            name: '',
+    constructor(public fb: FormBuilder, private autService: AuthService, private _router: Router) {
+        this.registerForm = this.fb.group({
+            username: '',
             email: '',
             password: ''
         });
+
+        this.registerForm.valueChanges.subscribe(console.log);
     }
+
+    ngOnInit(): void {}
 
     submitRegisterForm() {
-        console.log(this.form);
-        const formData = new FormData();
-        formData.append('username', this.form.get('username')!.value);
-        formData.append('email', this.form.get('email')!.value);
-        formData.append('password', this.form.get('password')!.value);
-        console.log(formData);
+        const registerFormValue = this.registerForm.value;
+        console.log(registerFormValue);
+        this.autService.register(registerFormValue).subscribe({
+            next: (res: any) => {
+                console.log(res);
+                this._router.navigate(['/locations/get']);
+            },
+            error: (err: any) => console.log(err)
+        });
     }
-
-    // registerUser() {
-    //     console.log(this.registerUserData);
-    //     this.autService.register(this.registerUserData).subscribe({
-    //         next: (res: any) => {
-    //             console.log(res);
-    //             this._router.navigate(['/locations/get']);
-    //         },
-    //         error: (err: any) => console.log(err)
-    //     });
-    // }
 }
+
+// const formData = new FormData();
+// formData.append('username', this.registerForm.get('username')!.value);
+// formData.append('email', this.registerForm.get('email')!.value);
+// formData.append('password', this.registerForm.get('password')!.value);
+// console.log(formData);
+// const FormValues = this.registerForm.valueChanges;
+// console.log(FormValues);

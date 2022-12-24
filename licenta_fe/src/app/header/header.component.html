@@ -1,5 +1,5 @@
-<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
-    <div class="container-fluid">
+<nav class="navbar navbar-dark navbar-expand-md bg-dark">
+    <div class="container-fluid d-flex justify-content-between">
         <a class="navbar-brand" routerLinkActive="active" routerLink="/">Home</a>
         <button
             class="navbar-toggler"
@@ -12,10 +12,14 @@
         >
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse d-flex align-self-end" id="navbarNavAltMarkup">
+        <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-link" routerLinkActive="active" routerLink="/locations/get">Locations</a>
                 <a class="nav-link" routerLinkActive="active" routerLink="/locations/new">Create Location</a>
+            </div>
+            <div class="navbar-nav">
+                <a class="nav-link" routerLink="/auth/login">Login</a>
+                <a class="nav-link" (click)="logoutUser()">Logout</a>
             </div>
         </div>
     </div>

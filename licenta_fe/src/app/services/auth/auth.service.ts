@@ -23,7 +23,7 @@ export class AuthService {
     }
 
     logout() {
-        return this.http.post(environment.baseURL + this.logoutEndpoint, localStorage.getItem('currentUser'));
+        return this.http.post(environment.baseURL + this.logoutEndpoint, sessionStorage.getItem('currentUser'));
         this._router.navigate(['/']);
     }
 }
