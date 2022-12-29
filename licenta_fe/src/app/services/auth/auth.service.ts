@@ -22,8 +22,8 @@ export class AuthService {
         return this.http.post(environment.baseURL + this.loginEndpoint, user);
     }
 
-    logout() {
-        return this.http.post(environment.baseURL + this.logoutEndpoint, sessionStorage.getItem('currentUser'));
-        this._router.navigate(['/']);
-    }
+    // logout() {
+    //     return this.http.post(environment.baseURL + this.logoutEndpoint, sessionStorage.getItem('currentUser'));
+    //     this._router.navigate(['/']);
+    // }
 }

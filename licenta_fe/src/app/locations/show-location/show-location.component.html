@@ -1,1 +1,43 @@
-<h1>{{ locationObj?.location.name }}</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mb-3">
+            <div id="carouselExampleControls" class="carousel slide mb-3" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" *ngFor="let image of locationObj?.location.images">
+                        <img src="{{ image }}" class="d-block w-100" />
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div>
+                <h3>{{ locationObj?.location.name }}</h3>
+                <button class="btn btn-outline-info mb-3 d-block px-2" *ngIf="locationObj?.location.ticket">Intrarea se face cu bilet</button>
+                <button class="btn btn-outline-primary mb-3 d-block px-2" *ngIf="locationObj?.location.price">Pretul biletului: {{ locationObj?.location.price }}</button>
+            </div>
+            <p>{{ locationObj?.location.description }}</p>
+        </div>
+        <div class="">
+            <h3>Rating-urile vizitatorilor</h3>
+            <div class="row">
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="card">
+                        <div class="card-body" *ngFor="let review of locationObj?.location.reviews">
+                            <!-- <h5 class="card-title">{{ review.creator.username }}</h5> -->
+                            <p class="card-text">{{ review.description }}</p>
+                            <h5 class="card-title">{{ review.rating }}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

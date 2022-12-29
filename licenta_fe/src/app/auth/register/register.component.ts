@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
         this.registerForm = this.fb.group({
             username: ['', [Validators.required, Validators.minLength(4)]],
             email: ['', [Validators.required, Validators.email]],
-            password: ['', [Validators.required, Validators.minLength(6)]]
+            password: ['', [Validators.required, Validators.minLength(4)]]
         });
 
         this.registerForm.valueChanges.subscribe(console.log);
@@ -35,11 +35,3 @@ export class RegisterComponent implements OnInit {
         });
     }
 }
-
-// const formData = new FormData();
-// formData.append('username', this.registerForm.get('username')!.value);
-// formData.append('email', this.registerForm.get('email')!.value);
-// formData.append('password', this.registerForm.get('password')!.value);
-// console.log(formData);
-// const FormValues = this.registerForm.valueChanges;
-// console.log(FormValues);
