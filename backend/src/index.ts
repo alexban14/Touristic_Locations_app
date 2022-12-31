@@ -4,6 +4,8 @@ import http from 'http';
 const router = express();
 import mongoose from 'mongoose';
 import methodOverride from 'method-override';
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
 import session from 'express-session';
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
@@ -41,12 +43,20 @@ const StartServer = () => {
         next();
     });
 
+    // const corsOptions = {
+    //     origin: 'http://localhost:4200',
+    //     credentials: true
+    // };
+
     // global middlewares
     router.use(express.urlencoded({ extended: true }));
+    router.use(cookieParser());
+    router.use(cors());
     router.use(express.json());
     router.use(methodOverride('_method'));
 
     const sessionConfig = {
+        name: 'session',
         secret: 'thisshouldbeabettersecret!',
         resave: false,
         saveUninitialized: false,
@@ -69,7 +79,7 @@ const StartServer = () => {
 
     router.use((req, res, next) => {
         Logging.info(req.session);
-        res.locals.currentUser = req.user;
+        // req.session.user = req.user;
         next();
     });
 

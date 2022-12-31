@@ -1,6 +1,14 @@
 import { NextFunction, Request, Response } from 'express';
+import session from 'express-session';
+
 import Logging from '../library/Logging';
 import User from '../models/user';
+
+declare module 'express-session' {
+    export interface SessionData {
+        user: { [key: string]: any };
+    }
+}
 
 const register = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -14,6 +22,7 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
                 next(err);
             }
             res.status(201).json({ message: 'Successfuly singed up!' });
+            req.session.user = registeredUser;
         });
     } catch (error) {
         res.status(500).json({ error });
