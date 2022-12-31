@@ -1,47 +1,57 @@
-<div class="col-md-6 mx-auto">
+<div class="col-md-10 col-lg-8 col-xl-6 mx-auto">
     <h4 class="mb-3">Detalii atractie turistica</h4>
-    <form class="needs-validation" novalidate>
+    <form [formGroup]="createLocationForm" (ngSubmit)="submitLocationForm()" class="needs-validation" novalidate>
         <div class="mb-3">
             <div class="input-group">
-                <input type="text" class="form-control" name="name" id="name" placeholder="Nume" required />
-                <div class="invalid-feedback" style="width: 100%">Numele este necesar</div>
+                <input formControlName="name" type="text" class="form-control" name="name" id="name" placeholder="Nume" required />
+            </div>
+            <div *ngIf="createLocationForm.touched && createLocationForm.controls['name'].errors" class="text-danger mb-3 d-block">
+                <div *ngIf="createLocationForm.touched && createLocationForm.controls['name'].errors['required']">Numele locatiei este necesar pentru a crea una noua</div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <label for="location[long]">Longitudine</label>
-                <input type="text" class="form-control" name="location[long]" id="location[long]" required />
-                <div class="invalid-feedback">Input necesar!</div>
+        <div formGroupName="location" class="row">
+            <div class="col-6 mb-3">
+                <label for="lat">Latitudine</label>
+                <input formControlName="lat" type="text" class="form-control" name="lat" id="lat" />
             </div>
-            <div class="col-md-6 mb-3">
-                <label for="location[lat]">Latitudine</label>
-                <input type="text" class="form-control" name="location[lat]" id="location[lat]" required />
-                <div class="invalid-feedback">Input necesar!</div>
-            </div>
-        </div>
-
-        <div class="mb-3">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="ticket" value="" id="ticket" checked required />
-                <label class="form-check-label" for="ticket"> Se intra cu bilet? </label>
+            <div class="col-6 mb-3">
+                <label for="long">Longitudine</label>
+                <input formControlName="long" type="text" class="form-control" name="long" id="long" />
             </div>
         </div>
 
         <div class="mb-3">
-            <label for="price">Pretul biletului<span class="text-muted"> (Optional)</span></label>
-            <input class="form-control" type="number" name="price" id="price" />
+            <label for="ticket">Intrarea se face cu bilet?</label>
+            <select formControlName="ticket" class="form-select" aria-label="Default select example" id="ticket">
+                <option value="true">Da</option>
+                <option value="false">Nu</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="price">Pretul biletului</label>
+            <input formControlName="price" class="form-control" type="number" name="price" id="price" />
+            <div *ngIf="createLocationForm.touched && createLocationForm.controls['price'].errors" class="text-danger mb-3 d-block">
+                <div *ngIf="createLocationForm.touched && createLocationForm.controls['price'].errors['required']">Este necesar sa specificati pretul biletului</div>
+            </div>
         </div>
         <div class="mb-3">
             <label for="images">Link imagine</label>
-            <input class="form-control" type="text" name="images" id="images" required />
+            <input formControlName="images" class="form-control" type="text" name="images" id="images" />
+            <div *ngIf="createLocationForm.touched && createLocationForm.controls['images'].errors" class="text-danger mb-3 d-block">
+                <div *ngIf="createLocationForm.touched && createLocationForm.controls['images'].errors['required']">Imagini despre locatiei sunt necesar pentru a crea una noua</div>
+            </div>
         </div>
 
         <div class="mb-3">
-            <label for="description">Descrie attractia turistica pe care vrei s-o adaugi:</label>
-            <textarea class="form-control" name="description" id="description" cols="30" rows="5" required></textarea>
+            <label for="description">Descrie atractia turistica pe care vrei s-o adaugi:</label>
+            <textarea formControlName="description" class="form-control" name="description" id="description" cols="30" rows="5"></textarea>
+            <div *ngIf="createLocationForm.touched && createLocationForm.controls['description'].errors" class="text-danger mb-3 d-block">
+                <div *ngIf="createLocationForm.touched && createLocationForm.controls['description'].errors['required']">Descrierea locatiei este necesar pentru a crea una noua</div>
+            </div>
         </div>
-        <button type="submit" class="btn btn-outline-info">Adauga</button>
+        <button type="submit" class="btn btn-outline-primary" [disabled]="!createLocationForm.valid">Adauga</button>
         <hr class="mb-4" />
     </form>
 </div>

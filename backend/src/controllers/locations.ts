@@ -26,7 +26,14 @@ const createLocation = async (req: Request, res: Response) => {
 const showLocation = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const location = await Location.findById(id).populate('reviews').populate('creator');
+        const location = await Location.findById(id)
+            .populate({
+                path: 'reviews',
+                populate: {
+                    path: 'author'
+                }
+            })
+            .populate('creator');
         Logging.info(location);
         location ? res.status(200).json({ location }) : res.status(404).json({ message: 'Not found' });
     } catch (error) {

@@ -31,9 +31,9 @@
                 <div class="col-sm-6 col-md-4 col-lg-3">
                     <div class="card">
                         <div class="card-body" *ngFor="let review of locationObj?.location.reviews">
-                            <!-- <h5 class="card-title">{{ review.creator.username }}</h5> -->
-                            <p class="card-text">{{ review.description }}</p>
-                            <h5 class="card-title">{{ review.rating }}</h5>
+                            <h5 class="card-title">{{ review.author.username | titlecase }}, a lasat un rating de: {{ review.rating }} din 5</h5>
+                            <hr />
+                            <p class="card-title">{{ review.description }}</p>
                         </div>
                     </div>
                 </div>
