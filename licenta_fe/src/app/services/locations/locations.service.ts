@@ -37,4 +37,12 @@ export class LocationsService {
             headers: new HttpHeaders().append('Content-Type', 'application/json')
         });
     }
+
+    deleteLocation(id: string) {
+        return this.http.delete(environment.baseURL + `/locations/delete/${id}`, {
+            observe: 'body',
+            withCredentials: true,
+            headers: new HttpHeaders().append('Content-Type', 'application/json')
+        });
+    }
 }

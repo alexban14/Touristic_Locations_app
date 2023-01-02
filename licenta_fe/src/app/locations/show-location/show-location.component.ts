@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { response } from 'express';
 import { Subscription } from 'rxjs';
 import { LocationsService } from 'src/app/services/locations/locations.service';
@@ -16,7 +16,7 @@ export class ShowLocationComponent implements OnInit, OnDestroy {
 
     id = this.route.snapshot.paramMap.get('id');
 
-    constructor(private locationsService: LocationsService, private route: ActivatedRoute) {}
+    constructor(private locationsService: LocationsService, private route: ActivatedRoute, private _router: Router) {}
 
     ngOnInit(): void {
         let locationWrapperObs;
@@ -25,6 +25,16 @@ export class ShowLocationComponent implements OnInit, OnDestroy {
         }
 
         this.subscription = locationWrapperObs?.subscribe((response) => ((this.locationObj = response), console.log(response)));
+    }
+
+    locationDelete() {
+        if (typeof this.id === 'string') {
+            this.locationsService.deleteLocation(this.id).subscribe({
+                next: (res: any) => console.log(res),
+                error: (err) => console.log(err)
+            });
+        }
+        this._router.navigate(['/locations/get']);
     }
 
     ngOnDestroy(): void {
