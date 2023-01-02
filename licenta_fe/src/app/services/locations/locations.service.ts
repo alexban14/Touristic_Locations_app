@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Location, LocationSend, LocWrapper } from '../../locations/location.model';
@@ -9,6 +9,7 @@ import { Location, LocationSend, LocWrapper } from '../../locations/location.mod
 export class LocationsService {
     private allLocationsEndpoint = '/locations/get';
     private createLocationEndpoint = '/locations/create';
+    private editLocationEndpoint = '/locations/edit';
     locationsObj?: LocWrapper;
 
     constructor(private http: HttpClient) {}
@@ -22,6 +23,18 @@ export class LocationsService {
     }
 
     createLocation(location: LocationSend) {
-        return this.http.post(environment.baseURL + this.createLocationEndpoint, location);
+        return this.http.post(environment.baseURL + this.createLocationEndpoint, location, {
+            observe: 'body',
+            withCredentials: true,
+            headers: new HttpHeaders().append('Content-Type', 'application/json')
+        });
+    }
+
+    editLocation(location: LocationSend, id: string) {
+        return this.http.put(environment.baseURL + this.editLocationEndpoint + `/${id}`, location, {
+            observe: 'body',
+            withCredentials: true,
+            headers: new HttpHeaders().append('Content-Type', 'application/json')
+        });
     }
 }

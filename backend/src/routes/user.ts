@@ -14,6 +14,6 @@ router.post(
     }),
     usersController.login
 );
-router.post('/logout', usersController.logout);
+router.get('/logout', usersController.logout);
 
 export = router;

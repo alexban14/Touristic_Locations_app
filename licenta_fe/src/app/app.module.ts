@@ -11,7 +11,6 @@ import { CreateLocationComponent } from './locations/create-location/create-loca
 import { EditLocationComponent } from './locations/edit-location/edit-location.component';
 import { HeaderComponent } from './header/header.component';
 import { LocationsComponent } from './locations/locations.component';
-import { ReivewsComponent } from './locations/reivews/reivews.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -26,7 +25,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         CreateLocationComponent,
         EditLocationComponent,
         HeaderComponent,
-        ReivewsComponent,
         RegisterComponent,
         LoginComponent
     ],

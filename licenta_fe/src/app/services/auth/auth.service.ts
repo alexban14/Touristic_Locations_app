@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
@@ -15,14 +15,22 @@ export class AuthService {
     constructor(private http: HttpClient, private _router: Router) {}
 
     register(user: RegisterUser) {
-        return this.http.post(environment.baseURL + this.registerEndpoint, user);
+        return this.http.post(environment.baseURL + this.registerEndpoint, user, {
+            observe: 'body',
+            withCredentials: true,
+            headers: new HttpHeaders().append('Content-Type', 'application/json')
+        });
     }
 
     login(user: LoginUser) {
-        return this.http.post(environment.baseURL + this.loginEndpoint, user);
+        return this.http.post(environment.baseURL + this.loginEndpoint, user, {
+            observe: 'body',
+            withCredentials: true,
+            headers: new HttpHeaders().append('Content-Type', 'application/json')
+        });
     }
 
     logout() {
-        return this.http.post(environment.baseURL + this.logoutEndpoint, localStorage.getItem('currentUser'));
+        return this.http.get(environment.baseURL + this.logoutEndpoint);
     }
 }

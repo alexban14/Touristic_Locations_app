@@ -43,15 +43,15 @@ const StartServer = () => {
         next();
     });
 
-    // const corsOptions = {
-    //     origin: 'http://localhost:4200',
-    //     credentials: true
-    // };
+    const corsOptions = {
+        origin: 'http://localhost:4200',
+        credentials: true
+    };
 
     // global middlewares
     router.use(express.urlencoded({ extended: true }));
     router.use(cookieParser());
-    router.use(cors());
+    router.use(cors(corsOptions));
     router.use(express.json());
     router.use(methodOverride('_method'));
 
@@ -70,7 +70,7 @@ const StartServer = () => {
     router.use(session(sessionConfig));
 
     router.use(passport.initialize());
-    // persisten lging sessions
+    // persisten loging sessions
     router.use(passport.session());
     passport.use(new LocalStrategy.Strategy(User.authenticate()));
     // serialize = store
@@ -85,7 +85,7 @@ const StartServer = () => {
 
     // API rules
     router.use((req, res, next) => {
-        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
         res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorizaton');
 
         if (req.method == 'OPTIONS') {
