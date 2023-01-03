@@ -8,6 +8,7 @@ import { EditLocationComponent } from './locations/edit-location/edit-location.c
 import { ListLocationsComponent } from './locations/list-locations/list-locations.component';
 import { LocationsComponent } from './locations/locations.component';
 import { ShowLocationComponent } from './locations/show-location/show-location.component';
+import { AuthGuard } from './services/auth/auth.guard';
 
 const appRoutes: Routes = [
     {
@@ -24,7 +25,8 @@ const appRoutes: Routes = [
             },
             {
                 path: 'new',
-                component: CreateLocationComponent
+                component: CreateLocationComponent,
+                canActivate: [AuthGuard]
             },
             {
                 path: 'get/:id',
@@ -32,7 +34,8 @@ const appRoutes: Routes = [
             },
             {
                 path: 'get/:id/edit',
-                component: EditLocationComponent
+                component: EditLocationComponent,
+                canActivate: [AuthGuard]
             }
         ]
     },
@@ -57,6 +60,7 @@ const appRoutes: Routes = [
 
 @NgModule({
     imports: [RouterModule.forRoot(appRoutes, { preloadingStrategy: PreloadAllModules })],
-    exports: [RouterModule]
+    exports: [RouterModule],
+    providers: [AuthGuard]
 })
 export class AppRoutingModule {}

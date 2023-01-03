@@ -46,3 +46,11 @@ export class LocWrapper {
         this.locations = locations;
     }
 }
+
+export class OneLocWrapper {
+    public location: Location;
+
+    constructor(location: Location) {
+        this.location = location;
+    }
+}

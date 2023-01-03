@@ -38,7 +38,21 @@ export class EditLocationComponent implements OnInit, OnDestroy {
             locationWrapperObs = this.locationsService.getOneLocation(this.id);
         }
 
-        this.subscription = locationWrapperObs?.subscribe((response) => ((this.locationObjToEdit = response), console.log(response)));
+        this.subscription = locationWrapperObs?.subscribe((response) => {
+            (this.locationObjToEdit = response),
+                console.log(response),
+                this.editedLocationForm.setValue({
+                    name: response.location.name,
+                    description: response.location.description,
+                    location: {
+                        lat: response.location.location.lat,
+                        long: response.location.location.long
+                    },
+                    ticket: response.location.ticket,
+                    price: response.location.price,
+                    images: response.location.images
+                });
+        });
     }
 
     submitEditedLocation() {
@@ -51,7 +65,7 @@ export class EditLocationComponent implements OnInit, OnDestroy {
             },
             ticket: this.editedLocationForm.controls['ticket'].value === 'true' ? true : false,
             price: this.editedLocationForm.controls['price'].value,
-            images: [this.editedLocationForm.controls['images'].value]
+            images: this.editedLocationForm.controls['images'].value
         };
 
         console.log(editedLocation);

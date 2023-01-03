@@ -17,8 +17,11 @@
                 <a class="nav-link" routerLinkActive="active" routerLink="/locations/get">Locations</a>
                 <a class="nav-link" routerLinkActive="active" routerLink="/locations/new">Create Location</a>
             </div>
-            <div class="navbar-nav">
-                <a class="nav-link" routerLinkActive="active" routerLink="/auth/login">Login</a>
+            <div class="navbar-nav" *ngIf="!isLoggedIn">
+                <a class="nav-link" routerLinkActive="active" routerLink="/auth/login">Logheaza-te</a>
+                <a class="nav-link" routerLinkActive="active" routerLink="/auth/register">Inregistreaza-te</a>
+            </div>
+            <div class="navbar-nav" *ngIf="isLoggedIn">
                 <a class="nav-link" (click)="logoutUser()">Logout</a>
             </div>
         </div>

@@ -24,6 +24,7 @@
         <div class="mb-3">
             <label for="ticket">Intrarea se face cu bilet?</label>
             <select formControlName="ticket" class="form-select" aria-label="Default select example" id="ticket">
+                <option [ngValue]="null" disabled>Intrarea se face cu bilet?</option>
                 <option value="true">Da</option>
                 <option value="false">Nu</option>
             </select>

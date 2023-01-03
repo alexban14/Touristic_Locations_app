@@ -12,9 +12,12 @@ export class AuthService {
     private loginEndpoint = '/auth/login';
     private logoutEndpoint = '/auth/logout';
 
+    isLoggedIn: boolean = false;
+
     constructor(private http: HttpClient, private _router: Router) {}
 
     register(user: RegisterUser) {
+        this.isLoggedIn = true;
         return this.http.post(environment.baseURL + this.registerEndpoint, user, {
             observe: 'body',
             withCredentials: true,
@@ -23,6 +26,7 @@ export class AuthService {
     }
 
     login(user: LoginUser) {
+        this.isLoggedIn = true;
         return this.http.post(environment.baseURL + this.loginEndpoint, user, {
             observe: 'body',
             withCredentials: true,
@@ -31,6 +35,7 @@ export class AuthService {
     }
 
     logout() {
+        this.isLoggedIn = false;
         return this.http.get(environment.baseURL + this.logoutEndpoint);
     }
 }
