@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { response } from 'express';
 import { Subscription } from 'rxjs';
 import { LocationsService } from 'src/app/services/locations/locations.service';
+import { ReviewsService } from 'src/app/services/locations/reviews.service';
 import { Location, LocWrapper } from '../location.model';
 
 @Component({
@@ -16,7 +18,16 @@ export class ShowLocationComponent implements OnInit, OnDestroy {
 
     id = this.route.snapshot.paramMap.get('id');
 
-    constructor(private locationsService: LocationsService, private route: ActivatedRoute, private _router: Router) {}
+    reviewForm: FormGroup;
+
+    constructor(private fb: FormBuilder, private locationsService: LocationsService, private reviewsService: ReviewsService, private route: ActivatedRoute, private _router: Router) {
+        this.reviewForm = this.fb.group({
+            description: ['', [Validators.required, Validators.minLength(5)]],
+            rating: [Number, [Validators.required, Validators.min(1), Validators.max(5)]]
+        });
+
+        this.reviewForm.valueChanges.subscribe(console.log);
+    }
 
     ngOnInit(): void {
         let locationWrapperObs;
@@ -35,6 +46,19 @@ export class ShowLocationComponent implements OnInit, OnDestroy {
             });
         }
         this._router.navigate(['/locations/get']);
+    }
+
+    submitReview() {
+        const createdReview = {
+            review: this.reviewForm.value
+        };
+        if (typeof this.id === 'string') {
+            this.reviewsService.createReview(createdReview, this.id).subscribe({
+                next: (res: any) => console.log(res),
+                error: (err) => console.log(err)
+            });
+        }
+        window.location.reload();
     }
 
     ngOnDestroy(): void {

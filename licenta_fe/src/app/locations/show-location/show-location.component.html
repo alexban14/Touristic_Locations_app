@@ -25,23 +25,54 @@
             <div>
                 <h3>{{ locationObj?.location.name }}</h3>
                 <button class="btn btn-outline-info mb-3 d-block px-2" *ngIf="locationObj?.location.ticket">Intrarea se face cu bilet</button>
-                <button class="btn btn-outline-primary mb-3 d-block px-2" *ngIf="locationObj?.location.price">Pretul biletului: {{ locationObj?.location.price }}</button>
+                <button class="btn btn-outline-primary mb-3 d-block px-2" *ngIf="locationObj?.location.ticket">Pretul biletului: {{ locationObj?.location.price }}</button>
             </div>
             <p>{{ locationObj?.location.description }}</p>
         </div>
-        <div class="">
-            <h3>Rating-urile vizitatorilor</h3>
-            <div class="row">
-                <div class="col-sm-6 col-md-4 col-lg-3">
-                    <div class="card">
-                        <div class="card-body" *ngFor="let review of locationObj?.location.reviews">
-                            <h5 class="card-title">{{ review.author.username | titlecase }}, a lasat un rating de: {{ review.rating }} din 5</h5>
-                            <hr />
-                            <p class="card-title">{{ review.description }}</p>
-                        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="" *ngIf="locationObj?.location.reviews.length > 0">
+                <h3>Rating-urile vizitatorilor</h3>
+                <div class="card mb-3" *ngFor="let review of locationObj?.location.reviews">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ review.author.username | titlecase }}, a lasat urmatorul rating: {{ review.rating }} din 5</h5>
+                        <hr />
+                        <p class="card-title">{{ review.description }}</p>
                     </div>
                 </div>
             </div>
+            <div *ngIf="locationObj?.location.reviews.length < 1">
+                <h3>Aceasta locatie nu are nici un rating</h3>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <h3>Lasa un review</h3>
+            <form [formGroup]="reviewForm" (ngSubmit)="submitReview()">
+                <div class="mb-3">
+                    <input formControlName="description" type="text" class="form-control" id="description" placeholder="Descrie-ti experienta" />
+                </div>
+                <div class="mb-3">
+                    <!-- <label for="rating" class="form-label">Rating</label>
+                    <input formControlName="rating" type="range" class="form-range" min="1" max="5" id="rating" /> -->
+                    <fieldset class="starability-basic">
+                        <legend>Rating:</legend>
+                        <input formControlName="rating" type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked aria-label="No rating." />
+                        <input formControlName="rating" type="radio" id="first-rate1" name="rating" value="1" />
+                        <label for="first-rate1" title="Terrible">1 star</label>
+                        <input formControlName="rating" type="radio" id="first-rate2" name="rating" value="2" />
+                        <label for="first-rate2" title="Not good">2 stars</label>
+                        <input formControlName="rating" type="radio" id="first-rate3" name="rating" value="3" />
+                        <label for="first-rate3" title="Average">3 stars</label>
+                        <input formControlName="rating" type="radio" id="first-rate4" name="rating" value="4" />
+                        <label for="first-rate4" title="Very good">4 stars</label>
+                        <input formControlName="rating" type="radio" id="first-rate5" name="rating" value="5" />
+                        <label for="first-rate5" title="Amazing">5 stars</label>
+                    </fieldset>
+                </div>
+                <button type="submit" class="btn btn-success" [disabled]="!reviewForm.valid">Adauga</button>
+            </form>
         </div>
     </div>
 </div>

@@ -8,6 +8,7 @@ import { EditLocationComponent } from './locations/edit-location/edit-location.c
 import { ListLocationsComponent } from './locations/list-locations/list-locations.component';
 import { LocationsComponent } from './locations/locations.component';
 import { ShowLocationComponent } from './locations/show-location/show-location.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthGuard } from './services/auth/auth.guard';
 
 const appRoutes: Routes = [
@@ -55,6 +56,10 @@ const appRoutes: Routes = [
                 redirectTo: ''
             }
         ]
+    },
+    {
+        path: '**',
+        component: NotFoundComponent
     }
 ];
 
