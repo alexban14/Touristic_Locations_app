@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth/auth.service';
+import { CheckService } from '../services/checking/check.service';
 
 @Component({
     selector: 'header',
@@ -8,17 +10,25 @@ import { AuthService } from '../services/auth/auth.service';
     styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-    isLoggedIn: boolean;
+    isLoggedIn: boolean | undefined;
+    subscription: Subscription | undefined;
 
-    constructor(private authService: AuthService, private _router: Router) {
-        this.isLoggedIn = this.authService.isLoggedIn;
+    constructor(private authService: AuthService, private checkService: CheckService, private _router: Router) {}
+
+    ngOnInit(): void {
+        this.checkService.isLogedIn().subscribe({
+            next: (response) => {
+                console.log(response), (this.isLoggedIn = response.logedIn);
+            },
+            error: (err) => console.log(err)
+        });
     }
-
-    ngOnInit(): void {}
 
     logoutUser() {
         this.authService.logout().subscribe({
-            next: (res: any) => console.log(res),
+            next: (res: any) => {
+                console.log(res);
+            },
             error: (err) => console.log(err)
         });
         this._router.navigate(['/']);

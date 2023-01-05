@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="btn-group mb-3">
+    <div class="btn-group mb-3" *ngIf="isAuthor">
         <button routerLink="edit" type="button" class="btn btn-info">Editeaza</button>
         <button (click)="locationDelete()" type="button" class="btn btn-danger">Sterge</button>
     </div>
@@ -37,7 +37,8 @@
                 <h3>Rating-urile vizitatorilor</h3>
                 <div class="card mb-3" *ngFor="let review of locationObj?.location.reviews">
                     <div class="card-body">
-                        <h5 class="card-title">{{ review.author.username | titlecase }}, a lasat urmatorul rating: {{ review.rating }} din 5</h5>
+                        <h5 class="card-title">{{ review.author.username | titlecase }}, a lasat un rating de {{ review.rating }} din 5</h5>
+                        <div class="starability-result" [attr.data-rating]="review.rating"></div>
                         <hr />
                         <p class="card-title">{{ review.description }}</p>
                     </div>

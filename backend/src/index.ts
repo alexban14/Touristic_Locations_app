@@ -16,6 +16,7 @@ import User from './models/user';
 import locationRoutes from './routes/location';
 import userRoutes from './routes/user';
 import reviewRoutes from './routes/review';
+import checkAuthorRoutes from './routes/checkAuthor';
 
 mongoose
     .set('strictQuery', false)
@@ -100,6 +101,7 @@ const StartServer = () => {
     router.use('/locations', locationRoutes);
     router.use('/auth', userRoutes);
     router.use('/locations/:id/reviews', reviewRoutes);
+    router.use('/check', checkAuthorRoutes);
 
     // Healthcheck
     router.get('/ping', (req, res, next) => res.status(200).json({ message: 'pong' }));

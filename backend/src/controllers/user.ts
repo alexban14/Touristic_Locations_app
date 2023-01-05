@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from 'express';
-import session from 'express-session';
 
 import Logging from '../library/Logging';
 import User from '../models/user';

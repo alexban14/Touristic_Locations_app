@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth/auth.service';
+import { CheckService } from '../services/checking/check.service';
 
 @Component({
     selector: 'app-home',
@@ -7,11 +8,9 @@ import { AuthService } from '../services/auth/auth.service';
     styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-    isLoggedIn: boolean;
+    isLoggedIn: boolean | undefined;
 
-    constructor(private authService: AuthService) {
-        this.isLoggedIn = this.authService.isLoggedIn;
-    }
+    constructor(private authService: AuthService, private checkService: CheckService) {}
 
     logoutUser() {
         this.authService.logout().subscribe({
@@ -20,5 +19,12 @@ export class HomeComponent implements OnInit {
         });
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.checkService.isLogedIn().subscribe({
+            next: (res: any) => {
+                console.log(res), (this.isLoggedIn = res.logedIn);
+            },
+            error: (err) => console.log(err)
+        });
+    }
 }
