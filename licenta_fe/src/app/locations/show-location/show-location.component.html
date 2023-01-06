@@ -48,7 +48,7 @@
                 <h3>Aceasta locatie nu are nici un rating</h3>
             </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6" *ngIf="isLogedIn">
             <h3>Lasa un review</h3>
             <form [formGroup]="reviewForm" (ngSubmit)="submitReview()">
                 <div class="mb-3">

@@ -14,8 +14,10 @@ import { ReviewsService } from 'src/app/services/locations/reviews.service';
 export class ShowLocationComponent implements OnInit, OnDestroy {
     subscription: Subscription | undefined;
     authorStatusSub: Subscription | undefined;
+    loginStatusSub: Subscription | undefined;
     locationObj?: any;
     isAuthor: boolean | unknown;
+    isLogedIn: boolean | unknown;
 
     id = this.route.snapshot.paramMap.get('id');
 
@@ -49,6 +51,13 @@ export class ShowLocationComponent implements OnInit, OnDestroy {
         this.authorStatusSub = auhtorStatusRes?.subscribe((response) => {
             (this.isAuthor = response.locationAuthor), console.log(response);
         });
+        let loginStatusRes = this.checkService.isLogedIn();
+        this.loginStatusSub = loginStatusRes.subscribe({
+            next: (response) => {
+                console.log(response), (this.isLogedIn = response.logedIn);
+            },
+            error: (error) => console.log(error)
+        });
     }
 
     locationDelete() {
@@ -76,5 +85,7 @@ export class ShowLocationComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.subscription?.unsubscribe();
+        this.authorStatusSub?.unsubscribe();
+        this.loginStatusSub?.unsubscribe();
     }
 }

@@ -8,7 +8,7 @@ router.post('/register', usersController.register);
 router.post(
     '/login',
     passport.authenticate('local', {
-        failureFlash: true,
+        // failureFlash: true,
         failureRedirect: '/login',
         keepSessionInfo: true
     }),
