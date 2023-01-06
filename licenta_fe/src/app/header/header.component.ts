@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth/auth.service';
 import { CheckService } from '../services/checking/check.service';
@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     subscription: Subscription | undefined;
     loginStatusSub: Subscription | undefined;
 
-    constructor(private authService: AuthService, private checkService: CheckService, private _router: Router) {}
+    constructor(private authService: AuthService, private checkService: CheckService, private _router: Router, private route: ActivatedRoute) {}
 
     ngOnInit(): void {
         this.loginStatusSub = this.checkService.isLogedIn().subscribe({
@@ -32,7 +32,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
             },
             error: (err) => console.log(err)
         });
-        this._router.navigate(['/']);
+        if (this._router.url == '/') {
+            window.location.reload();
+        } else {
+            this._router.navigate(['/']);
+        }
     }
 
     ngOnDestroy(): void {

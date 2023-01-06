@@ -1,26 +1,8 @@
+<header></header>
 <div class="container-fluid d-flex align-items-sm-center backdrop">
-    <div class="row container mt-3 mx-auto mr-sm-auto mb-auto my-sm-auto">
-        <div class="col-md-6 navigation p-3">
-            <div class="row mb-3">
-                <div class="col-12 heading">
-                    <h1 class="link-light">CE VIZITAM IN SIBIU?</h1>
-                    <p class="text-muted">OBIECTIVELE TURISTICE ALE SIBIULILUI</p>
-                </div>
-            </div>
-            <div class="row mb-3 text-center">
-                <div class="col-6" *ngIf="!isLoggedIn"><a class="link-light" routerLink="/auth/register">AUTENTIFICARE</a></div>
-                <div class="col-6" *ngIf="isLoggedIn"><a class="link-light" (click)="logoutUser()">LOGOUT</a></div>
-                <div class="col-6"><a class="link-light" routerLink="/locations/get">CE VIZITAM?</a></div>
-            </div>
-            <div class="row mb-3 text-center">
-                <div class="col-6"><a class="link-light">HARTA LOCATII</a></div>
-                <div class="col-6"><a class="link-light">EVENIMENTE</a></div>
-            </div>
-            <div class="row mb-3 text-center">
-                <div class="col-6"><a class="link-light">GRUPURI</a></div>
-                <div class="col-6"><a class="link-light">GASESTE CAZARE</a></div>
-            </div>
-            <div class="row mb-3 text-center"></div>
-        </div>
+    <div class="container heading mx-auto">
+        <h3>Bine ati venit in Sibiu!</h3>
+        <h2>Ai venit in locul potrivit pentru a primi cele mai utile informatii pentru o experienta de neuitat</h2>
+        <a class="btn btn-primary btn-xl text-uppercase" href="#services">Descopera</a>
     </div>
 </div>
