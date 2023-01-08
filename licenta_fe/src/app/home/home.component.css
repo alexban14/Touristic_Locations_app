@@ -79,3 +79,7 @@ a {
     font-weight: 700;
     font-style: italic;
 }
+
+.page-section {
+    padding: 6rem 0;
+}

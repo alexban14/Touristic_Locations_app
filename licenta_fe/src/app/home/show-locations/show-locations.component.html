@@ -1,0 +1,28 @@
+<div class="container" id="portfolio">
+    <div class="text-center">
+        <h3 class="section-heading text-uppercase">Exploarți atracțiile turistice</h3>
+        <h3 class="section-subheading text-muted">ale Sibiului</h3>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-sm-6 mb-4" *ngFor="let location of locationsArr">
+            <!-- Portfolio item 1-->
+            <div class="portfolio-item">
+                <a class="portfolio-link" data-bs-toggle="modal" routerLink="/locations/get/{{ location._id }}">
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content">
+                            <h5>Viziteaza</h5>
+                        </div>
+                    </div>
+                    <img class="img-fluid" src="{{ location.images[0] }}" />
+                </a>
+                <div class="portfolio-caption">
+                    <div class="portfolio-caption-heading">{{ location.name }}</div>
+                    <div class="portfolio-caption-subheading text-muted">{{ location.name | slice : 0 : 50 }}...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <a class="btn btn-primary btn-xl text-uppercase" routerLink="/locations/get">Vezi toate attractiile turistice</a>
+    </div>
+</div>

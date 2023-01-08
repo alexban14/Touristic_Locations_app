@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LocationsService } from 'src/app/services/locations/locations.service';
+import { LocationSend } from '../location.model';
 
 @Component({
     selector: 'app-edit-location',
@@ -26,7 +27,7 @@ export class EditLocationComponent implements OnInit, OnDestroy {
             }),
             ticket: [Boolean, Validators.required],
             price: [Number, Validators.required],
-            images: [[], Validators.required]
+            images: [this.fb.array, Validators.required]
         });
 
         this.editedLocationForm.valueChanges.subscribe(console.log);
@@ -56,7 +57,7 @@ export class EditLocationComponent implements OnInit, OnDestroy {
     }
 
     submitEditedLocation() {
-        const editedLocation = {
+        const editedLocation: LocationSend = {
             name: this.editedLocationForm.controls['name'].value,
             description: this.editedLocationForm.controls['description'].value,
             location: {
@@ -65,8 +66,13 @@ export class EditLocationComponent implements OnInit, OnDestroy {
             },
             ticket: this.editedLocationForm.controls['ticket'].value === 'true' ? true : false,
             price: this.editedLocationForm.controls['price'].value,
-            images: this.editedLocationForm.controls['images'].value
+            images: []
         };
+        if (typeof this.editedLocationForm.controls['images'].value == 'string') {
+            editedLocation.images.push(this.editedLocationForm.controls['images'].value);
+        } else {
+            editedLocation.images.push(...this.editedLocationForm.controls['images'].value);
+        }
 
         console.log(editedLocation);
 

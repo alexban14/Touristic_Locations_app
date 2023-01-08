@@ -15,6 +15,8 @@ import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ShowLocationsComponent } from './home/show-locations/show-locations.component';
+import { FooterComponent } from './home/footer/footer.component';
 
 @NgModule({
     declarations: [
@@ -28,7 +30,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
         HeaderComponent,
         RegisterComponent,
         LoginComponent,
-        NotFoundComponent
+        NotFoundComponent,
+        ShowLocationsComponent,
+        FooterComponent
     ],
     imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule],
     providers: [],
