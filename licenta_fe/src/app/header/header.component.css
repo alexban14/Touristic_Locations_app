@@ -223,13 +223,24 @@ ul ol {
     color: #000;
 }
 
+@media (max-width: 992px) {
+    #mainNav {
+        background-color: #212529;
+    }
+
+    #mainNav .navbar-nav .nav-item .nav-link.active,
+    #mainNav .navbar-nav .nav-item .nav-link:hover {
+        color: #fff;
+    }
+}
+
 @media (min-width: 992px) {
     #mainNav {
         padding-top: 1.5rem;
         padding-bottom: 1.5rem;
         color: #000;
         border: none;
-        background-color: transparent;
+        /* background-color: transparent; */
         transition: padding-top 0.3s ease-in-out, padding-bottom 0.3s ease-in-out;
     }
     #mainNav .navbar-brand {
@@ -239,11 +250,6 @@ ul ol {
     #mainNav .navbar-brand img {
         height: 2rem;
         transition: height 0.3s ease-in-out;
-    }
-    #mainNav.navbar-shrink {
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-        /* background-color: #212529; */
     }
     #mainNav.navbar-shrink .navbar-brand {
         font-size: 1.25em;

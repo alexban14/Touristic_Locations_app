@@ -8,8 +8,8 @@ a {
 }
 
 .backdrop {
-    min-height: 100vh;
-    min-width: 100vw;
+    height: 100vh;
+    width: 100%;
     background-image: url('../../assets/imgs/altumcode-aIqmMlAcgr8-unsplash.jpg');
     background-position: center;
     background-size: cover;
@@ -82,4 +82,33 @@ a {
 
 .page-section {
     padding: 6rem 0;
+}
+
+@media (max-width: 576px) {
+    .heading {
+        display: flex;
+        flex-direction: column;
+        margin-top: auto;
+        margin-bottom: 2rem;
+        color: #fff;
+        background-color: #212529;
+        padding: 0.5rem;
+        opacity: 0.8;
+        border-radius: 0.2rem;
+    }
+    .heading h2,
+    .heading h3 {
+        font-size: 1rem;
+        opacity: 1;
+    }
+    .heading h2 {
+        margin-bottom: 0.5rem;
+    }
+    .btn-xl {
+        padding: 0.3rem 0.7rem;
+        opacity: 1;
+    }
+    /* {
+        font-size: 0.7rem;
+    } */
 }

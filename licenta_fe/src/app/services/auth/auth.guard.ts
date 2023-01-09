@@ -1,18 +1,15 @@
-import { Injectable, OnDestroy, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CheckService } from '../checking/check.service';
-import { AuthService } from './auth.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class AuthGuard implements CanActivate, OnInit, OnDestroy {
+export class AuthGuard implements CanActivate {
     isLogedIn: boolean | undefined;
 
-    constructor(private checkService: CheckService, private _router: Router) {}
-
-    ngOnInit(): void {}
+    constructor(private checkService: CheckService) {}
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
         this.checkService.isLogedIn().subscribe({
@@ -27,6 +24,4 @@ export class AuthGuard implements CanActivate, OnInit, OnDestroy {
             return false;
         }
     }
-
-    ngOnDestroy(): void {}
 }

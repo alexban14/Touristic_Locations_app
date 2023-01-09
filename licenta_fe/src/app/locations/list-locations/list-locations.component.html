@@ -1,10 +1,10 @@
 <div class="row gx-3 mx-auto">
-    <div class="col-12 col-md-6 col-lg-4 mb-5" *ngFor="let location of locationsObj?.locations">
+    <div class="col-12 col-md-6 col-lg-4 mb-5 d-flex align-items-sm-center" *ngFor="let location of locationsObj?.locations">
         <div class="card">
             <img [src]="location.images[0]" class="card-img-top" alt="..." />
             <div class="card-body">
                 <h5 class="card-title">{{ location.name }}</h5>
-                <p class="card-text">{{ location.description }}</p>
+                <p class="card-text">{{ location.description | slice : 0 : 100 }}...</p>
                 <a [routerLink]="['/locations/get', location._id]" class="btn btn-outline-primary">Viziteaza</a>
             </div>
         </div>

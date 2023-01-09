@@ -10,7 +10,7 @@ import { CheckService } from '../services/checking/check.service';
     styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-    isLoggedIn: boolean | undefined;
+    public isLoggedIn: boolean | undefined;
     subscription: Subscription | undefined;
     loginStatusSub: Subscription | undefined;
 

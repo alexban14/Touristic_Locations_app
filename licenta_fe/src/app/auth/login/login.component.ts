@@ -18,8 +18,8 @@ export class LoginComponent implements OnInit {
 
     constructor(private fb: FormBuilder, private authService: AuthService, private _router: Router) {
         this.loginForm = this.fb.group({
-            username: ['', [Validators.required, Validators.minLength(4)]],
-            password: ['', [Validators.required, Validators.minLength(4)]]
+            username: ['', [Validators.required, Validators.minLength(3)]],
+            password: ['', [Validators.required, Validators.minLength(3)]]
         });
 
         this.loginForm.valueChanges.subscribe(console.log);
