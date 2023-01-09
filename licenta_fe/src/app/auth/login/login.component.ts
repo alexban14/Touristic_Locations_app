@@ -9,6 +9,8 @@ import { AuthService } from 'src/app/services/auth/auth.service';
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+    loginErr: string = 'null';
+
     loginUserData = {
         username: '',
         password: ''
@@ -32,7 +34,10 @@ export class LoginComponent implements OnInit {
                 console.log(res);
                 this._router.navigate(['/locations/get']);
             },
-            error: (err: any) => console.log(err)
+            error: (err: any) => {
+                this.loginErr = 'Credentiale incorecte, parola sau username gresit.';
+                console.log(err);
+            }
         });
     }
 

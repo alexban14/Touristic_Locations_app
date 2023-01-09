@@ -1,6 +1,10 @@
 <header></header>
 <div class="row wrapper">
     <div class="col-md-6 mx-auto">
+        <div *ngIf="loginErr != 'null'" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <h3>{{ loginErr }}</h3>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
         <div class="card rounded-0 card-header mt-5">
             <div class="card-header">
                 <h3 class="mb-0">Logeaza-te</h3>
@@ -29,5 +33,3 @@
         </div>
     </div>
 </div>
-
-<!-- (click)="registerUser()"  -->

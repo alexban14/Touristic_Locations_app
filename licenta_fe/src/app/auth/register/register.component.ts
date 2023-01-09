@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
     styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+    registerErr: string = 'null';
     registerForm: FormGroup;
 
     constructor(public fb: FormBuilder, private autService: AuthService, private _router: Router) {
@@ -31,7 +32,10 @@ export class RegisterComponent implements OnInit {
                 console.log(res);
                 this._router.navigate(['/locations/get']);
             },
-            error: (err: any) => console.log(err)
+            error: (err: any) => {
+                this.registerErr = 'Email-ul sau Username-ul este deja inregistrat.';
+                console.log(err);
+            }
         });
     }
 }
