@@ -1,5 +1,4 @@
 import express from 'express';
-import { Request, Response, NextFunction } from 'express';
 import http from 'http';
 const router = express();
 import mongoose from 'mongoose';

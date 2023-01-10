@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import Logging from '../library/Logging';
 import Location from '../models/location';
+import { imgFile } from '../models/imgFile';
 
 const index = async (req: Request, res: Response) => {
     try {
@@ -15,6 +16,7 @@ const index = async (req: Request, res: Response) => {
 const createLocation = async (req: Request, res: Response) => {
     try {
         const location = new Location(req.body);
+        location.images = req.files?.map((f: imgFile) => ({ url: f.url, filename: f.filename }));
         location.creator = req.user?._id;
         await location.save();
         res.status(201).json({ location });

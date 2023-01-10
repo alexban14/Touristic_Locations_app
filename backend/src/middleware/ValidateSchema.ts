@@ -24,8 +24,8 @@ export const locationSchema = Joi.object<ILocSchema>({
         long: Joi.string().required()
     }).required(),
     ticket: Joi.boolean().required(),
-    price: Joi.number().min(1),
-    images: Joi.array().items(Joi.string()).required()
+    price: Joi.number().min(1)
+    // images: Joi.array().items(Joi.string()).required()
 }).required();
 
 export const reviewSchema = Joi.object({

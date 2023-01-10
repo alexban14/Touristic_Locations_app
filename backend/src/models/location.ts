@@ -50,8 +50,8 @@ const LocSchema = new Schema({
     price: Number,
     images: [
         {
-            type: String,
-            required: true
+            url: String,
+            filename: String
         }
     ],
     reviews: [
