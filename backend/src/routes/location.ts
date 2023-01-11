@@ -1,9 +1,9 @@
-import express from 'express';
+import * as express from 'express';
 import multer from 'multer';
 import locationsController from '../controllers/locations';
 import { validateJoi, locationSchema } from '../middleware/ValidateSchema';
 import { isLogedIn, isLocationAuthor } from '../middleware/validateAuthor';
-const { storage } = require('../cloudinary/cloudinary.config.js');
+const { storage } = require('../cloudinary.config');
 const upload = multer({ storage });
 
 const router = express.Router();

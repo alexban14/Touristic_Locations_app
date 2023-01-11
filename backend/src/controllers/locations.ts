@@ -13,7 +13,7 @@ const index = async (req: Request, res: Response) => {
     }
 };
 
-const createLocation = async (req: Request, res: Response) => {
+const createLocation = async (req: any, res: Response) => {
     try {
         const location = new Location(req.body);
         location.images = req.files?.map((f: imgFile) => ({ url: f.url, filename: f.filename }));
