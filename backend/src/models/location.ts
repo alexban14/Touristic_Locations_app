@@ -9,7 +9,7 @@ export interface ILoc {
         lat: string;
         long: string;
     };
-    ticket: boolean;
+    ticket: string;
     price?: number;
     images: string[];
     reviews: {
@@ -44,14 +44,14 @@ const LocSchema = new Schema({
         }
     },
     ticket: {
-        type: Boolean,
+        type: String,
         required: true
     },
     price: Number,
     images: [
         {
-            url: String,
-            filename: String
+            type: String,
+            required: true
         }
     ],
     reviews: [

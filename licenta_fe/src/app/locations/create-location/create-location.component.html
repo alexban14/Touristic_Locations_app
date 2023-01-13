@@ -38,11 +38,14 @@
             </div>
         </div>
         <div class="mb-3">
-            <label for="images">Link imagine</label>
+            <!-- <label for="images">Link imagine</label>
             <input formControlName="images" class="form-control" type="text" name="images" id="images" />
             <div *ngIf="createLocationForm.touched && createLocationForm.controls['images'].errors" class="text-danger mb-3 d-block">
                 <div *ngIf="createLocationForm.touched && createLocationForm.controls['images'].errors['required']">Imagini despre locatiei sunt necesar pentru a crea una noua</div>
-            </div>
+            </div> -->
+            <label for="images" class="form-label">Alege o imagine</label>
+            <input class="form-control" formControlName="images" type="file" id="images" />
+            <!-- (change)="onFileSelected($event)" #fileUpload -->
         </div>
 
         <div class="mb-3">

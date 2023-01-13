@@ -22,11 +22,11 @@ export class LocationsService {
         return this.http.get<OneLocWrapper>(environment.baseURL + this.allLocationsEndpoint + `/${id}`);
     }
 
-    createLocation(location: LocationSend) {
+    createLocation(location: any) {
         return this.http.post(environment.baseURL + this.createLocationEndpoint, location, {
             observe: 'body',
             withCredentials: true,
-            headers: new HttpHeaders().append('Content-Type', 'application/json')
+            headers: new HttpHeaders().append('Content-Type', 'multipart/form-data')
         });
     }
 
