@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const MONGO_URL = 'mongodb://127.0.0.1:27017/touristic-locations';
+const MONGO_URL_GRIDFS = 'mongodb://127.0.0.1:27017/gridFs';
 
 const SERVER_PORT = process.env.SERVER_PORT;
 
@@ -12,7 +13,8 @@ const CLOUDINARY_SECRET = process.env.CLOUDINARY_SECRET;
 
 export const config = {
     mongo: {
-        url: MONGO_URL
+        url: MONGO_URL,
+        gridFs: MONGO_URL_GRIDFS
     },
     server: {
         port: SERVER_PORT

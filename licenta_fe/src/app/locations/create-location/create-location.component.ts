@@ -22,11 +22,19 @@ export class CreateLocationComponent implements OnInit {
                 long: ['', Validators.required]
             }),
             ticket: [Boolean, Validators.required],
-            price: [Number, Validators.required],
-            images: [null]
+            price: [Number, Validators.required]
+            // images: [File]
         });
 
         this.createLocationForm.valueChanges.subscribe(console.log);
+    }
+
+    onFileSelected(event: any) {
+        this.images = event.target.files[0];
+        if (this.images) {
+            this.formDataToSend.append('file', this.images);
+        }
+        console.log(event.target.files[0]);
     }
 
     submitLocationForm() {
@@ -36,9 +44,9 @@ export class CreateLocationComponent implements OnInit {
         this.formDataToSend.append('location.long', this.createLocationForm.controls['location'].value.long);
         this.formDataToSend.append('ticket', this.createLocationForm.controls['ticket'].value);
         this.formDataToSend.append('price', this.createLocationForm.controls['price'].value);
-        this.formDataToSend.append('files', this.createLocationForm.controls['images'].value);
+        // this.formDataToSend.append('file', this.createLocationForm.controls['images'].value);
 
-        console.log(this.formDataToSend, this.createLocationForm.controls['images'].value);
+        console.log(this.formDataToSend);
 
         this.locationsService.createLocation(this.formDataToSend).subscribe({
             next: (res: any) => {
@@ -64,10 +72,3 @@ export class CreateLocationComponent implements OnInit {
 //     price: this.createLocationForm.controls['price'].value,
 //     file: this.createLocationForm.controls['images'].value
 // };
-
-// onFileSelected(event: any) {
-//     this.images = event.target.files[0];
-//     if (this.images) {
-//         this.formDataToSend.append('images', this.images);
-//     }
-// }

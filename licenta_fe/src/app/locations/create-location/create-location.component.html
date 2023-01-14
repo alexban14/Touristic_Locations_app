@@ -44,8 +44,7 @@
                 <div *ngIf="createLocationForm.touched && createLocationForm.controls['images'].errors['required']">Imagini despre locatiei sunt necesar pentru a crea una noua</div>
             </div> -->
             <label for="images" class="form-label">Alege o imagine</label>
-            <input class="form-control" formControlName="images" type="file" id="images" />
-            <!-- (change)="onFileSelected($event)" #fileUpload -->
+            <input class="form-control" [name]="images" type="file" id="images" (change)="onFileSelected($event)" #fileUpload />
         </div>
 
         <div class="mb-3">

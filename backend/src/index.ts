@@ -31,7 +31,7 @@ mongoose
         Logging.error(err);
     });
 
-const connection = mongoose.createConnection(config.mongo.url);
+const connection = mongoose.createConnection(config.mongo.gridFs);
 
 connection.once('open', () => {
     let gridFs = GridFs(connection.db, mongoose.mongo);

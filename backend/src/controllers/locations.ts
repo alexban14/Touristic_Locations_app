@@ -19,7 +19,7 @@ const createLocation = async (req: Request, res: Response) => {
         // location.creator = req.user?._id;
         // await location.save();
         // res.status(201).json({ location });
-        console.log(req.body, req.files, req.headers);
+        console.log(req.body, req.file, req.headers);
     } catch (error) {
         res.status(500).json({ error });
     }
