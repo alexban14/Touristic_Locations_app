@@ -1,6 +1,6 @@
 <div class="col-md-10 col-lg-8 col-xl-6 mx-auto">
     <h4 class="mb-3">Detalii atractie turistica</h4>
-    <form [formGroup]="createLocationForm" (ngSubmit)="submitLocationForm()" class="needs-validation" novalidate>
+    <form [formGroup]="createLocationForm" enctype="multipart/form-data" (ngSubmit)="submitLocationForm()" class="needs-validation" novalidate>
         <div class="mb-3">
             <div class="input-group">
                 <input formControlName="name" type="text" class="form-control" name="name" id="name" placeholder="Nume" required />

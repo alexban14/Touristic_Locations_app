@@ -19,7 +19,7 @@ import userRoutes from './routes/user';
 import reviewRoutes from './routes/review';
 import checkAuthorRoutes from './routes/checkAuthor';
 
-const connection = mongoose
+mongoose
     .set('strictQuery', false)
     .connect(config.mongo.url)
     .then(() => {
@@ -31,15 +31,12 @@ const connection = mongoose
         Logging.error(err);
     });
 
-// const connection = mongoose.createConnection(config.mongo.url);
+const connection = mongoose.createConnection(config.mongo.url);
 
-// connection.once('open', () => {
-//     Logging.info('MONGO conection OPEN!');
-//     StartServer();
-
-//     let gridFs = GridFs(connection.db, mongoose.mongo);
-//     gridFs.collection('uploads');
-// });
+connection.once('open', () => {
+    let gridFs = GridFs(connection.db, mongoose.mongo);
+    gridFs.collection('uploads');
+});
 
 // Only start server if mongoDB is connected
 const StartServer = () => {

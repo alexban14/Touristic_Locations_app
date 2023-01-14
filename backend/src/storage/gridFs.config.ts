@@ -4,9 +4,10 @@ import crypto from 'crypto';
 import path from 'path';
 import multer from 'multer';
 import { GridFsStorage } from 'multer-gridfs-storage';
+import { config } from '../config/config';
 
 const storage = new GridFsStorage({
-    url: 'mongodb://host:27017/database',
+    url: config.mongo.url,
     file: (req: Request, file: any) => {
         return new Promise((resolve, reject) => {
             crypto.randomBytes(16, (err, buf) => {
