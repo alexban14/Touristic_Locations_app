@@ -50,7 +50,8 @@ const LocSchema = new Schema({
     price: Number,
     images: [
         {
-            type: String,
+            type: Schema.Types.ObjectId,
+            ref: 'Upload',
             required: true
         }
     ],

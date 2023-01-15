@@ -3,7 +3,6 @@ import http from 'http';
 const router = express();
 
 import mongoose from 'mongoose';
-import GridFs from 'gridfs-stream';
 import methodOverride from 'method-override';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
@@ -30,13 +29,6 @@ mongoose
         Logging.error('MONGO conection ERROR!');
         Logging.error(err);
     });
-
-const connection = mongoose.createConnection(config.mongo.gridFs);
-
-connection.once('open', () => {
-    let gridFs = GridFs(connection.db, mongoose.mongo);
-    gridFs.collection('uploads');
-});
 
 // Only start server if mongoDB is connected
 const StartServer = () => {

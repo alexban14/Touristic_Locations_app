@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import Logging from '../library/Logging';
-import Location from '../models/location';
+import Location, { ILocSchema } from '../models/location';
+import { gridFs } from '../storage/gridFs.config';
 
 const index = async (req: Request, res: Response) => {
     try {
@@ -12,14 +13,14 @@ const index = async (req: Request, res: Response) => {
     }
 };
 
-const createLocation = async (req: Request, res: Response) => {
+const createLocation = async (req: any, res: Response) => {
     try {
-        // const location = new Location(req.body);
-        // // location.images = req.files?.map((f: imgFile) => ({ url: f.url, filename: f.filename }));
-        // location.creator = req.user?._id;
-        // await location.save();
-        // res.status(201).json({ location });
-        console.log(req.body, req.file, req.headers);
+        const location = new Location(req.body);
+        location.images.push(req.file.id);
+        location.creator = req.user?._id;
+        await location.save();
+        console.log(location);
+        res.status(201).json({ location });
     } catch (error) {
         res.status(500).json({ error });
     }
@@ -36,6 +37,14 @@ const showLocation = async (req: Request, res: Response) => {
                 }
             })
             .populate('creator');
+        gridFs.findOne({ _id: location?.images[0] }, (err: Error, file) => {
+            if (!file || file.length === 0) {
+                return res.status(404).json({ err: 'No file found in images.' });
+            } else
+                (location: ILocSchema) => {
+                    location.images = [file];
+                };
+        });
         Logging.info(location);
         location ? res.status(200).json({ location }) : res.status(404).json({ message: 'Not found' });
     } catch (error) {

@@ -2,7 +2,7 @@ import * as express from 'express';
 import locationsController from '../controllers/locations';
 import { validateJoi, locationSchema } from '../middleware/ValidateSchema';
 import { isLogedIn, isLocationAuthor } from '../middleware/validateAuthor';
-import upload from '../storage/gridFs.config';
+import { upload } from '../storage/gridFs.config';
 
 const router = express.Router();
 
