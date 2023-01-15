@@ -37,16 +37,18 @@ const showLocation = async (req: Request, res: Response) => {
                 }
             })
             .populate('creator');
+        let imgFile: File;
         gridFs.findOne({ _id: location?.images[0] }, (err: Error, file) => {
+            // imgFile = file;
             if (!file || file.length === 0) {
                 return res.status(404).json({ err: 'No file found in images.' });
-            } else
-                (location: ILocSchema) => {
-                    location.images = [file];
-                };
+            } else {
+                const readStream = gridFs.createReadStream(file._id);
+                readStream.pipe(res);
+            }
         });
-        Logging.info(location);
-        location ? res.status(200).json({ location }) : res.status(404).json({ message: 'Not found' });
+        // Logging.info(location);
+        // location ? res.status(200).json({ location }) : res.status(404).json({ message: 'Not found' });
     } catch (error) {
         res.status(500).json({ error });
     }

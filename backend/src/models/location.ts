@@ -51,7 +51,7 @@ const LocSchema = new Schema({
     images: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'Upload',
+            ref: 'fs.files',
             required: true
         }
     ],
