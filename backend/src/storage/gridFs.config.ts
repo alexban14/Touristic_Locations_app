@@ -1,6 +1,6 @@
 import { Request } from 'express';
 import mongoose from 'mongoose';
-import GridFs from 'gridfs-stream';
+import Grid from 'gridfs-stream';
 import crypto from 'crypto';
 import path from 'path';
 import multer from 'multer';
@@ -9,10 +9,10 @@ import { config } from '../config/config';
 
 const connection = mongoose.createConnection(config.mongo.gridFs);
 
-export let gridFs: GridFs.Grid;
+export let gfs: Grid.Grid;
 connection.once('open', () => {
-    gridFs = GridFs(connection.db, mongoose.mongo);
-    gridFs.collection('uploads');
+    gfs = Grid(connection.db, mongoose.mongo);
+    gfs.collection('uploads');
 });
 
 const storage = new GridFsStorage({
@@ -33,4 +33,5 @@ const storage = new GridFsStorage({
         });
     }
 });
+
 export const upload = multer({ storage });

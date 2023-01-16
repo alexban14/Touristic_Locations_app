@@ -17,6 +17,7 @@ import locationRoutes from './routes/location';
 import userRoutes from './routes/user';
 import reviewRoutes from './routes/review';
 import checkAuthorRoutes from './routes/checkAuthor';
+import imgFiles from './routes/uploadImg';
 
 mongoose
     .set('strictQuery', false)
@@ -102,6 +103,7 @@ const StartServer = () => {
     router.use('/auth', userRoutes);
     router.use('/locations/:id/reviews', reviewRoutes);
     router.use('/check', checkAuthorRoutes);
+    router.use('/imgFiles', imgFiles);
 
     // Healthcheck
     router.get('/ping', (req, res, next) => res.status(200).json({ message: 'pong' }));

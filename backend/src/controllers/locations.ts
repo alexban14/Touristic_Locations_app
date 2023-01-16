@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import Logging from '../library/Logging';
 import Location, { ILocSchema } from '../models/location';
-import { gridFs } from '../storage/gridFs.config';
 
 const index = async (req: Request, res: Response) => {
     try {
@@ -13,10 +12,9 @@ const index = async (req: Request, res: Response) => {
     }
 };
 
-const createLocation = async (req: any, res: Response) => {
+const createLocation = async (req: Request, res: Response) => {
     try {
         const location = new Location(req.body);
-        location.images.push(req.file.id);
         location.creator = req.user?._id;
         await location.save();
         console.log(location);
@@ -37,18 +35,8 @@ const showLocation = async (req: Request, res: Response) => {
                 }
             })
             .populate('creator');
-        let imgFile: File;
-        gridFs.findOne({ _id: location?.images[0] }, (err: Error, file) => {
-            // imgFile = file;
-            if (!file || file.length === 0) {
-                return res.status(404).json({ err: 'No file found in images.' });
-            } else {
-                const readStream = gridFs.createReadStream(file._id);
-                readStream.pipe(res);
-            }
-        });
-        // Logging.info(location);
-        // location ? res.status(200).json({ location }) : res.status(404).json({ message: 'Not found' });
+        Logging.info(location);
+        location ? res.status(200).json({ location }) : res.status(404).json({ message: 'Not found' });
     } catch (error) {
         res.status(500).json({ error });
     }
