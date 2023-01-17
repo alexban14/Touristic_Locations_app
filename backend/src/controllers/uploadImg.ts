@@ -7,16 +7,18 @@ const uploadImg = (req: Request, res: Response) => {
 };
 
 const getImg = (req: Request, res: Response) => {
-    gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
-        console.log(err ? err : file);
-        if (!file) {
-            return res.status(404).json({ err: 'No file found in images.' });
-        } else {
-            // const readStream = gridFs.createReadStream(file?.filename);
-            // readStream.pipe(res);
-            res.status(200).json({ file });
-        }
-    });
+    const file = gfs.find({ filename: req.params.filename });
+    return res.status(200).json({ file });
+    // => {
+    //     console.log(err ? err : file);
+    //     if (!file) {
+    //         return res.status(404).json({ err: 'No file found in images.' });
+    //     } else {
+    //         const downloadStream = gfs.openDownloadStream;
+    //         downloadStream.pipe(res);
+    //         // res.status(200).json({ file });
+    //     }
+    // };
 };
 
 export default { uploadImg, getImg };

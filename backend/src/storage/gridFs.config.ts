@@ -1,19 +1,12 @@
 import { Request } from 'express';
 import mongoose from 'mongoose';
-import Grid from 'gridfs-stream';
 import crypto from 'crypto';
 import path from 'path';
 import multer from 'multer';
 import { GridFsStorage } from 'multer-gridfs-storage';
 import { config } from '../config/config';
 
-const connection = mongoose.createConnection(config.mongo.gridFs);
-
-export let gfs: Grid.Grid;
-connection.once('open', () => {
-    gfs = Grid(connection.db, mongoose.mongo);
-    gfs.collection('uploads');
-});
+export let gfs = new mongoose.mongo.GridFSBucket(mongoose.connection.db, { bucketName: 'files' });
 
 const storage = new GridFsStorage({
     url: config.mongo.url,
@@ -34,4 +27,12 @@ const storage = new GridFsStorage({
     }
 });
 
-export const upload = multer({ storage });
+export const upload = multer({ storage }).single('file');
+
+// const connection = mongoose.createConnection(config.mongo.gridFs);
+
+// export let gfs: Grid.Grid;
+// connection.once('open', () => {
+//     gfs = Grid(connection.db, connection.mongo);
+//     gfs.collection('uploads');
+// });

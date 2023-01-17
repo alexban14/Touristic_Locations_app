@@ -5,7 +5,7 @@ import uploadImgController from '../controllers/uploadImg';
 
 const router = express.Router();
 
-router.post('/upload', isLogedIn, upload.single('file'), uploadImgController.uploadImg);
+router.post('/upload', isLogedIn, uploadImgController.uploadImg);
 router.get('/get/:filename', uploadImgController.getImg);
 
 export = router;

@@ -9,7 +9,6 @@ import cors from 'cors';
 import session from 'express-session';
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
-
 import { config } from './config/config';
 import Logging from './library/Logging';
 import User from './models/user';
