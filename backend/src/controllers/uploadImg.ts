@@ -14,9 +14,10 @@ const getImg = async (req: Request, res: Response) => {
         if (!files || files.length === 0) {
             res.status(404).json({ message: 'No files found' });
         } else {
-            // const readStream = gfs.openDowenloadStream(fileName);
+            gfs.openDownloadStreamByName(fileName).pipe(res);
             // readStream.pipe(res);
-            return res.status(200).send(files);
+            // res.download(file);
+            // return res.status(200).send(files);
         }
     } catch (error) {
         res.status(500).send(error);
