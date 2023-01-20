@@ -6,7 +6,10 @@ import multer from 'multer';
 import { GridFsStorage } from 'multer-gridfs-storage';
 import { config } from '../config/config';
 
-export let gfs = new mongoose.mongo.GridFSBucket(mongoose.connection.db, { bucketName: 'files' });
+export let gfs: any;
+mongoose.connection.once('open', () => {
+    gfs = new mongoose.mongo.GridFSBucket(mongoose.connection.db, { bucketName: 'files' });
+});
 
 const storage = new GridFsStorage({
     url: config.mongo.url,
@@ -19,7 +22,7 @@ const storage = new GridFsStorage({
                 const filename = buf.toString('hex') + path.extname(file.originalname);
                 const fileInfo = {
                     filename: filename,
-                    bucketName: 'uploads'
+                    bucketName: 'files'
                 };
                 resolve(fileInfo);
             });
@@ -27,7 +30,7 @@ const storage = new GridFsStorage({
     }
 });
 
-export const upload = multer({ storage }).single('file');
+export const upload = multer({ storage });
 
 // const connection = mongoose.createConnection(config.mongo.gridFs);
 

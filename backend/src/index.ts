@@ -2,7 +2,7 @@ import express from 'express';
 import http from 'http';
 const router = express();
 
-import mongoose from 'mongoose';
+import mongoose, { Mongoose } from 'mongoose';
 import methodOverride from 'method-override';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
