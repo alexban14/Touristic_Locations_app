@@ -1,11 +1,25 @@
 <div class="row gx-3 mx-auto">
     <div class="col-12 col-md-6 col-lg-4 mb-5 d-flex align-items-sm-center" *ngFor="let location of locationsObj?.locations">
-        <div class="card">
-            <img [src]="location.images[0]" class="card-img-top" alt="..." />
+        <!-- <div class="card">
+            <img src="http://localhost:3500/imgFiles/get/{{ location.images[0] }}" class="card-img-top" alt="..." />
             <div class="card-body">
                 <h5 class="card-title">{{ location.name }}</h5>
                 <p class="card-text">{{ location.description | slice : 0 : 100 }}...</p>
                 <a [routerLink]="['/locations/get', location._id]" class="btn btn-outline-primary">Viziteaza</a>
+            </div>
+        </div> -->
+        <div class="portfolio-item">
+            <a class="portfolio-link" data-bs-toggle="modal" routerLink="/locations/get/{{ location._id }}">
+                <div class="portfolio-hover">
+                    <div class="portfolio-hover-content">
+                        <h5>Viziteaza</h5>
+                    </div>
+                </div>
+                <img class="img-fluid" src="http://localhost:3500/imgFiles/get/{{ location.images[0] }}" />
+            </a>
+            <div class="portfolio-caption">
+                <div class="portfolio-caption-heading">{{ location.name }}</div>
+                <div class="portfolio-caption-subheading text-muted">{{ location.description | slice : 0 : 100 }}...</div>
             </div>
         </div>
     </div>

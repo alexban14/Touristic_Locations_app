@@ -25,8 +25,8 @@ export class LocationsService {
     createLocation(location: any) {
         return this.http.post(environment.baseURL + this.createLocationEndpoint, location, {
             observe: 'body',
-            withCredentials: true
-            // headers: new HttpHeaders().append('Content-Type', 'multipart/form-data')
+            withCredentials: true,
+            headers: new HttpHeaders().append('Content-Type', 'application/json')
         });
     }
 
