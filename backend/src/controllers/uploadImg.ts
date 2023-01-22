@@ -1,9 +1,15 @@
 import { Request, Response } from 'express';
+import mongoose from 'mongoose';
 import { gfs } from '../storage/gridFs.config';
 
 const uploadImg = (req: Request, res: Response) => {
     console.log(req.body);
     res.status(201).json({ fileName: req.file?.filename });
+};
+
+const uploadImgs = (req: Request, res: Response) => {
+    console.log(req.body);
+    res.status(201).json({ files: 'Files uploaded succesfully' });
 };
 
 const getImg = async (req: Request, res: Response) => {
@@ -24,4 +30,17 @@ const getImg = async (req: Request, res: Response) => {
     }
 };
 
-export default { uploadImg, getImg };
+const deleteImg = async (req: Request, res: Response) => {
+    try {
+        const file = await gfs.find({ filename: req.params.filename }).toArray();
+        console.log(file);
+        const fileId = new mongoose.Types.ObjectId(file[0]._id);
+        gfs.delete(fileId);
+        res.status(201).json({ message: 'Image deleted!' });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error });
+    }
+};
+
+export default { uploadImg, uploadImgs, getImg, deleteImg };

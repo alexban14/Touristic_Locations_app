@@ -24,15 +24,15 @@
         <div class="col-md-4">
             <div>
                 <h3>{{ locationObj?.location.name }}</h3>
-                <button class="btn btn-outline-info mb-3 d-block px-2" *ngIf="locationObj?.location.ticket">Intrarea se face cu bilet</button>
-                <button class="btn btn-outline-primary mb-3 d-block px-2" *ngIf="locationObj?.location.ticket">Pretul biletului: {{ locationObj?.location.price }}</button>
+                <button class="btn btn-info mb-3 d-block px-2" *ngIf="locationObj?.location.ticket">Intrarea se face cu bilet</button>
+                <button class="btn btn-primary mb-3 d-block px-2" *ngIf="locationObj?.location.ticket">Pretul biletului: {{ locationObj?.location.price }} RON</button>
             </div>
             <p>{{ locationObj?.location.description }}</p>
         </div>
     </div>
     <hr />
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-6 mb-3 border-bottom">
             <div class="" *ngIf="locationObj?.location.reviews.length > 0">
                 <h3>Rating-urile vizitatorilor</h3>
                 <div class="card mb-3" *ngFor="let review of locationObj?.location.reviews">
@@ -59,7 +59,7 @@
                     <input formControlName="rating" type="range" class="form-range" min="1" max="5" id="rating" /> -->
                     <fieldset class="starability-basic">
                         <legend>Rating:</legend>
-                        <input formControlName="rating" type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked aria-label="No rating." />
+                        <input formControlName="rating" type="radio" id="no-rate" class="input-no-rate" name="rating" value="1" checked aria-label="No rating." />
                         <input formControlName="rating" type="radio" id="first-rate1" name="rating" value="1" />
                         <label for="first-rate1" title="Terrible">1 star</label>
                         <input formControlName="rating" type="radio" id="first-rate2" name="rating" value="2" />

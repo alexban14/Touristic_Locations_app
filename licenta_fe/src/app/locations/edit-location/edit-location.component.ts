@@ -13,6 +13,9 @@ import { LocationSend } from '../location.model';
 export class EditLocationComponent implements OnInit, OnDestroy {
     subscription: Subscription | undefined;
     locationObjToEdit?: any;
+    images: any;
+    deleteImage: string[] = [];
+    imgToUploadForm: FormData = new FormData();
     id = this.route.snapshot.paramMap.get('id');
 
     editedLocationForm: FormGroup;
@@ -26,11 +29,18 @@ export class EditLocationComponent implements OnInit, OnDestroy {
                 long: ['', Validators.required]
             }),
             ticket: [Boolean, Validators.required],
-            price: [Number, Validators.required],
-            images: [this.fb.array, Validators.required]
+            price: [Number, Validators.required]
         });
 
         this.editedLocationForm.valueChanges.subscribe(console.log);
+    }
+
+    onFileSelected(event: any) {
+        this.images = event.target.files[0];
+        if (this.images) {
+            this.imgToUploadForm.append('file', this.images);
+        }
+        console.log(event.target.files[0]);
     }
 
     ngOnInit(): void {
@@ -56,7 +66,9 @@ export class EditLocationComponent implements OnInit, OnDestroy {
         });
     }
 
-    submitEditedLocation() {
+    submitEditedLocation() {}
+
+    updateLocation() {
         const editedLocation: LocationSend = {
             name: this.editedLocationForm.controls['name'].value,
             description: this.editedLocationForm.controls['description'].value,

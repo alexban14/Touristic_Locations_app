@@ -6,12 +6,17 @@ export interface BackendResponseUpload {
     fileName: string;
 }
 
+export interface BackendResponseUploads {
+    filenames: string[];
+}
+
 @Injectable({
     providedIn: 'root'
 })
 export class ImgUploadService {
     private imgUploadEndpoint = '/imgFiles/upload';
-    private imgDownloadEndpoint = '/imgFiles/get/';
+    private imgUploadsEndpoint = '/imgFiles/uploadMulti';
+    private imgDeleteEndpoint = '/imgFiles/delete/';
 
     constructor(private http: HttpClient) {}
 
@@ -22,7 +27,17 @@ export class ImgUploadService {
         });
     }
 
-    downloadImg(fileName: string) {
-        return this.http.get<File[]>(environment.baseURL + this.imgDownloadEndpoint + fileName);
+    uploadImgs(file: FormData) {
+        return this.http.post<BackendResponseUploads>(environment.baseURL + this.imgUploadsEndpoint, file, {
+            observe: 'body',
+            withCredentials: true
+        });
+    }
+
+    deleteImg(fileName: string) {
+        return this.http.delete<string>(environment.baseURL + this.imgDeleteEndpoint + fileName, {
+            observe: 'body',
+            withCredentials: true
+        });
     }
 }

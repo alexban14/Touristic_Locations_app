@@ -6,15 +6,16 @@ ToDo
 + FE: send file request to the file upload endpoint
 + FE: save the filename that comes as a response from the uploaded file with the base API url as a link to that image
 + FE: bind the image link to the image source of thye template
-+ FE: list location component to show location in the same way as the home page
++ FE: list locations component to show locations in the same way as the home page
 
+22/01/2023 =>
++ FE: display delete button for review author
++ BE: make delete endpoint
 - BE: make an endpoint for uploading multiple images
-- BE: make delete endpoint
 - FE: make edit form so user cand both delete and upload new images
 - FE: location show page redesign
 - FE:	give the navbar a background when #scrolled, change the redirect path after login to "/"
+- FE: add some nice fonts to the text of the locationshow page
 
 (after finishing with images upload and deletion) =>
 - FE: add the mapquest functionality (Yelp-Camp)
-
-

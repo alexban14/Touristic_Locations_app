@@ -1,61 +1,3 @@
-<!-- <div class="col-md-10 col-lg-8 col-xl-6 mx-auto">
-    <h4 class="mb-3">Detalii atractie turistica</h4>
-    <form [formGroup]="editedLocationForm" (ngSubmit)="submitEditedLocation()" class="needs-validation" novalidate>
-        <div class="mb-3">
-            <div class="input-group">
-                <input formControlName="name" type="text" class="form-control" name="name" id="name" placeholder="Nume" required value="{{ locationObjToEdit?.location.name }}" />
-            </div>
-            <div *ngIf="editedLocationForm.touched && editedLocationForm.controls['name'].errors" class="text-danger mb-3 d-block">
-                <div *ngIf="editedLocationForm.touched && editedLocationForm.controls['name'].errors['required']">Numele locatiei este necesar pentru a crea una noua</div>
-            </div>
-        </div>
-
-        <div formGroupName="location" class="row">
-            <div class="col-6 mb-3">
-                <label for="lat">Latitudine</label>
-                <input formControlName="lat" type="text" class="form-control" name="lat" id="lat" value="{{ locationObjToEdit?.location.location.lat }}" required />
-            </div>
-            <div class="col-6 mb-3">
-                <label for="long">Longitudine</label>
-                <input formControlName="long" type="text" class="form-control" name="long" id="long" value="{{ locationObjToEdit?.location.location.long }}" required />
-            </div>
-        </div>
-
-        <div class="mb-3">
-            <label for="ticket">Intrarea se face cu bilet?</label>
-            <select formControlName="ticket" class="form-select" aria-label="Default select example" id="ticket">
-                <option value="true" [selected]="locationObjToEdit?.location.ticket">Da</option>
-                <option value="false" [selected]="!locationObjToEdit?.location.ticket">Nu</option>
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label for="price">Pretul biletului</label>
-            <input formControlName="price" class="form-control" type="number" name="price" id="price" value="{{ locationObjToEdit?.location.price }}" required />
-            <div *ngIf="editedLocationForm.touched && editedLocationForm.controls['price'].errors" class="text-danger mb-3 d-block">
-                <div *ngIf="editedLocationForm.touched && editedLocationForm.controls['price'].errors['required']">Este necesar sa specificati pretul biletului</div>
-            </div>
-        </div>
-        <div class="mb-3">
-            <label for="images">Link imagine</label>
-            <input formControlName="images" class="form-control" type="text" name="images" id="images" value="{{ locationObjToEdit?.location.images[0] }}" required />
-            <div *ngIf="editedLocationForm.touched && editedLocationForm.controls['images'].errors" class="text-danger mb-3 d-block">
-                <div *ngIf="editedLocationForm.touched && editedLocationForm.controls['images'].errors['required']">Imagini despre locatiei sunt necesar pentru a crea una noua</div>
-            </div>
-        </div>
-
-        <div class="mb-3">
-            <label for="description">Descrie atractia turistica pe care vrei s-o adaugi:</label>
-            <textarea formControlName="description" class="form-control" name="description" id="description" cols="30" rows="5" value="{{ locationObjToEdit?.location.description }}"></textarea>
-            <div *ngIf="editedLocationForm.touched && editedLocationForm.controls['description'].errors" class="text-danger mb-3 d-block">
-                <div *ngIf="editedLocationForm.touched && editedLocationForm.controls['description'].errors['required']">Descrierea locatiei este necesar pentru a crea una noua</div>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-outline-primary" [disabled]="!editedLocationForm.valid">Adauga</button>
-        <hr class="mb-4" />
-    </form>
-</div> -->
-
 <div class="col-md-10 col-lg-8 col-xl-6 mx-auto">
     <h4 class="mb-3">Detalii atractie turistica</h4>
     <form [formGroup]="editedLocationForm" (ngSubmit)="submitEditedLocation()" class="needs-validation" novalidate>
@@ -95,19 +37,27 @@
             </div>
         </div>
         <div class="mb-3">
-            <label for="images">Link imagine</label>
+            <!-- <label for="images">Link imagine</label>
             <input formControlName="images" class="form-control" type="text" name="images" id="images" required />
             <div *ngIf="editedLocationForm.touched && editedLocationForm.controls['images'].errors" class="text-danger mb-3 d-block">
                 <div *ngIf="editedLocationForm.touched && editedLocationForm.controls['images'].errors['required']">Imagini despre locatiei sunt necesar pentru a crea una noua</div>
-            </div>
+            </div> -->
+            <label for="images" class="form-label">Alege o imagine</label>
+            <input class="form-control" [name]="images" type="file" id="images" (change)="onFileSelected($event)" #fileUpload />
         </div>
-
         <div class="mb-3">
             <label for="description">Descrie atractia turistica pe care vrei s-o adaugi:</label>
             <textarea formControlName="description" class="form-control" name="description" id="description" cols="30" rows="5"></textarea>
             <div *ngIf="editedLocationForm.touched && editedLocationForm.controls['description'].errors" class="text-danger mb-3 d-block">
                 <div *ngIf="editedLocationForm.touched && editedLocationForm.controls['description'].errors['required']">Descrierea locatiei este necesar pentru a crea una noua</div>
             </div>
+        </div>
+        <div class="mb-3">
+            <img src="http://localhost:3500/imgFiles/get/{{ locationObjToEdit?.location.images[0] }} " alt="" class="img-thumbnail" />
+            <div class="form-check-inline">
+                <input type="checkbox" id="image" [name]="deleteImage" value="{{ locationObjToEdit?.location.images[0] }}" />
+            </div>
+            <label for="image">Delete image?</label>
         </div>
         <button type="submit" class="btn btn-outline-primary" [disabled]="!editedLocationForm.valid">Editeaza</button>
         <hr class="mb-4" />
