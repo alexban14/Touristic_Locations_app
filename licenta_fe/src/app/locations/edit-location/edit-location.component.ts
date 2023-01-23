@@ -60,8 +60,8 @@ export class EditLocationComponent implements OnInit, OnDestroy {
                         long: response.location.location.long
                     },
                     ticket: response.location.ticket,
-                    price: response.location.price,
-                    images: response.location.images
+                    price: response.location.price
+                    // images: response.location.images
                 });
         });
     }

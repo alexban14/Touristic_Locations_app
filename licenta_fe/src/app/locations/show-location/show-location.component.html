@@ -24,8 +24,10 @@
         <div class="col-md-4">
             <div>
                 <h3>{{ locationObj?.location.name }}</h3>
-                <button class="btn btn-info mb-3 d-block px-2" *ngIf="locationObj?.location.ticket">Intrarea se face cu bilet</button>
-                <button class="btn btn-primary mb-3 d-block px-2" *ngIf="locationObj?.location.ticket">Pretul biletului: {{ locationObj?.location.price }} RON</button>
+                <div *ngIf="locationObj?.location.ticket == 'true'">
+                    <button class="btn btn-info mb-3 d-block px-2">Intrarea se face cu bilet</button>
+                    <button class="btn btn-primary mb-3 d-block px-2">Pretul biletului: {{ locationObj?.location.price }} RON</button>
+                </div>
             </div>
             <p>{{ locationObj?.location.description }}</p>
         </div>
