@@ -23,26 +23,26 @@
         </div>
         <div class="col-md-4">
             <div>
-                <h3>{{ locationObj?.location.name }}</h3>
+                <h3 class="caption-heading mb-3">{{ locationObj?.location.name }}</h3>
                 <div *ngIf="locationObj?.location.ticket == 'true'">
-                    <button class="btn btn-info mb-3 d-block px-2">Intrarea se face cu bilet</button>
-                    <button class="btn btn-primary mb-3 d-block px-2">Pretul biletului: {{ locationObj?.location.price }} RON</button>
+                    <button class="btn btn-info mb-3 d-block px-2 caption-subheading">Intrarea se face cu bilet</button>
+                    <button class="btn btn-primary mb-3 d-block px-2 caption-subheading">Pretul biletului: {{ locationObj?.location.price }} RON</button>
                 </div>
             </div>
-            <p>{{ locationObj?.location.description }}</p>
+            <p class="caption-subheading">{{ locationObj?.location.description }}</p>
         </div>
     </div>
     <hr />
     <div class="row">
         <div class="col-lg-6 mb-3 border-bottom">
             <div class="" *ngIf="locationObj?.location.reviews.length > 0">
-                <h3>Rating-urile vizitatorilor</h3>
+                <h3 class="caption-heading mb-3">Rating-urile vizitatorilor</h3>
                 <div class="card mb-3" *ngFor="let review of locationObj?.location.reviews">
                     <div class="card-body">
-                        <h5 class="card-title">{{ review.author.username | titlecase }}, a lasat un rating de {{ review.rating }} din 5</h5>
+                        <h5 class="card-title caption-subheading">{{ review.author.username | titlecase }}, a lasat un rating de {{ review.rating }} din 5</h5>
                         <div class="starability-result" [attr.data-rating]="review.rating"></div>
                         <hr />
-                        <p class="card-title">{{ review.description }}</p>
+                        <p class="card-title description">{{ review.description }}</p>
                     </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@
             </div>
         </div>
         <div class="col-lg-6" *ngIf="isLogedIn">
-            <h3>Lasa un review</h3>
+            <h3 class="caption-heading mb-3">Lasa un review</h3>
             <form [formGroup]="reviewForm" (ngSubmit)="submitReview()">
                 <div class="mb-3">
                     <input formControlName="description" type="text" class="form-control" id="description" placeholder="Descrie-ti experienta" />
@@ -60,7 +60,7 @@
                     <!-- <label for="rating" class="form-label">Rating</label>
                     <input formControlName="rating" type="range" class="form-range" min="1" max="5" id="rating" /> -->
                     <fieldset class="starability-basic">
-                        <legend>Rating:</legend>
+                        <legend class="caption-subheading">Rating:</legend>
                         <input formControlName="rating" type="radio" id="no-rate" class="input-no-rate" name="rating" value="1" checked aria-label="No rating." />
                         <input formControlName="rating" type="radio" id="first-rate1" name="rating" value="1" />
                         <label for="first-rate1" title="Terrible">1 star</label>

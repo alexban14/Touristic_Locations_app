@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
         this.authService.login(loginFormValue).subscribe({
             next: (res: any) => {
                 console.log(res);
-                this._router.navigate(['/locations/get']);
+                this._router.navigate(['/']);
             },
             error: (err: any) => {
                 this.loginErr = 'Credentiale incorecte, parola sau username gresit.';
