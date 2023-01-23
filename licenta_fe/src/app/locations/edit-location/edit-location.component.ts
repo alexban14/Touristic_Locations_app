@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ImgUploadService } from 'src/app/services/locations/img-upload.service';
 import { LocationsService } from 'src/app/services/locations/locations.service';
 import { LocationSend } from '../location.model';
 
@@ -15,12 +16,13 @@ export class EditLocationComponent implements OnInit, OnDestroy {
     locationObjToEdit?: any;
     images: any;
     deleteImage: string[] = [];
+    newImgFileName: string[] = [];
     imgToUploadForm: FormData = new FormData();
     id = this.route.snapshot.paramMap.get('id');
 
     editedLocationForm: FormGroup;
 
-    constructor(private fb: FormBuilder, private locationsService: LocationsService, private _router: Router, private route: ActivatedRoute) {
+    constructor(private fb: FormBuilder, private locationsService: LocationsService, private imgUploadService: ImgUploadService, private _router: Router, private route: ActivatedRoute) {
         this.editedLocationForm = this.fb.group({
             name: ['', Validators.required],
             description: ['', Validators.required],
@@ -29,7 +31,8 @@ export class EditLocationComponent implements OnInit, OnDestroy {
                 long: ['', Validators.required]
             }),
             ticket: [Boolean, Validators.required],
-            price: [Number, Validators.required]
+            price: [Number, Validators.required],
+            images: ['']
         });
 
         this.editedLocationForm.valueChanges.subscribe(console.log);
@@ -49,26 +52,47 @@ export class EditLocationComponent implements OnInit, OnDestroy {
             locationWrapperObs = this.locationsService.getOneLocation(this.id);
         }
 
-        this.subscription = locationWrapperObs?.subscribe((response) => {
-            (this.locationObjToEdit = response),
-                console.log(response),
-                this.editedLocationForm.setValue({
-                    name: response.location.name,
-                    description: response.location.description,
-                    location: {
-                        lat: response.location.location.lat,
-                        long: response.location.location.long
-                    },
-                    ticket: response.location.ticket,
-                    price: response.location.price
-                    // images: response.location.images
-                });
+        this.subscription = locationWrapperObs?.subscribe({
+            next: (response) => {
+                (this.locationObjToEdit = response),
+                    console.log(response),
+                    this.editedLocationForm.setValue({
+                        name: response.location.name,
+                        description: response.location.description,
+                        location: {
+                            lat: response.location.location.lat,
+                            long: response.location.location.long
+                        },
+                        ticket: response.location.ticket,
+                        price: response.location.price,
+                        images: response.location.images
+                    }),
+                    (this.deleteImage = response.location.images);
+            },
+            error: (err) => console.log(err)
         });
     }
 
-    submitEditedLocation() {}
+    submitEditedLocation() {
+        if (this.imgToUploadForm.has('file')) {
+            this.imgUploadService.deleteImg(this.deleteImage[0]).subscribe({
+                next: (res) => {
+                    console.log(res),
+                        this.imgUploadService.uploadImg(this.imgToUploadForm).subscribe({
+                            next: (res) => {
+                                this.newImgFileName.push(res.fileName);
+                                console.log(res), this.updateLocation(this.newImgFileName);
+                            }
+                        });
+                },
+                error: (err) => console.log(err)
+            });
+        } else {
+            this.updateLocation(this.editedLocationForm.controls['images'].value);
+        }
+    }
 
-    updateLocation() {
+    updateLocation(imageToSend: string[]) {
         const editedLocation: LocationSend = {
             name: this.editedLocationForm.controls['name'].value,
             description: this.editedLocationForm.controls['description'].value,
@@ -76,15 +100,15 @@ export class EditLocationComponent implements OnInit, OnDestroy {
                 lat: this.editedLocationForm.controls['location'].value.lat,
                 long: this.editedLocationForm.controls['location'].value.long
             },
-            ticket: this.editedLocationForm.controls['ticket'].value === 'true' ? true : false,
+            ticket: this.editedLocationForm.controls['ticket'].value, //=== 'true' ? true : false,
             price: this.editedLocationForm.controls['price'].value,
-            images: []
+            images: imageToSend
         };
-        if (typeof this.editedLocationForm.controls['images'].value == 'string') {
-            editedLocation.images.push(this.editedLocationForm.controls['images'].value);
-        } else {
-            editedLocation.images.push(...this.editedLocationForm.controls['images'].value);
-        }
+        // if (typeof this.editedLocationForm.controls['images'].value == 'string') {
+        //     editedLocation.images.push(this.editedLocationForm.controls['images'].value);
+        // } else {
+        //     editedLocation.images.push(...this.editedLocationForm.controls['images'].value);
+        // }
 
         console.log(editedLocation);
 

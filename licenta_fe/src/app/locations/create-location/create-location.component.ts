@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ImgUploadService } from 'src/app/services/locations/img-upload.service';
@@ -56,7 +56,7 @@ export class CreateLocationComponent {
                 lat: this.createLocationForm.controls['location'].value.lat,
                 long: this.createLocationForm.controls['location'].value.long
             },
-            ticket: this.createLocationForm.controls['ticket'].value === 'true' ? true : false,
+            ticket: this.createLocationForm.controls['ticket'].value, // === 'true' ? true : false,
             price: this.createLocationForm.controls['price'].value,
             images: this.fileNames
         };

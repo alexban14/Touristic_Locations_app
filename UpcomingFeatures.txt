@@ -13,12 +13,13 @@ ToDo
 
 23/01/2023 =>
 + FE: when sending delete req for a location also delete the image linked to it
-- FE: make edit form so user cand both delete and upload new images
-- FE: display delete button for review author
-- FE: location show page redesign
-- FE:	give the navbar a background when #scrolled, change the redirect path after login to "/"
-- FE: add some nice fonts to the text of the locationshow page
+- FE: make edit form so after a user uploads a new image the old one will be deleted
 
 (after finishing with images upload and deletion) =>
+- FE: display delete button for review author
+- FE:	give the navbar a background when #scrolled, change the redirect path after login to "/"
+- FE: add some nice fonts to the text of the locationshow page
 - FE: add the mapquest functionality (Yelp-Camp)
 - BE: make an endpoint for uploading multiple images
+- FE / BE: resolve the authGuard problem with the loginStatus checking
+- FE: location show page redesign

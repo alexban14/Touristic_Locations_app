@@ -52,13 +52,13 @@
                 <div *ngIf="editedLocationForm.touched && editedLocationForm.controls['description'].errors['required']">Descrierea locatiei este necesar pentru a crea una noua</div>
             </div>
         </div>
-        <div class="mb-3">
+        <!-- <div class="mb-3">
             <img src="http://localhost:3500/imgFiles/get/{{ locationObjToEdit?.location.images[0] }} " alt="" class="img-thumbnail" />
             <div class="form-check-inline">
                 <input type="checkbox" id="image" [name]="deleteImage" value="{{ locationObjToEdit?.location.images[0] }}" />
             </div>
             <label for="image">Delete image?</label>
-        </div>
+        </div> -->
         <button type="submit" class="btn btn-outline-primary" [disabled]="!editedLocationForm.valid">Editeaza</button>
         <hr class="mb-4" />
     </form>

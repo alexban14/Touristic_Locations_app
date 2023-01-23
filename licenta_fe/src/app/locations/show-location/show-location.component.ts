@@ -50,9 +50,7 @@ export class ShowLocationComponent implements OnInit, OnDestroy {
             auhtorStatusRes = this.checkService.isLocationAuthor(this.id);
         }
 
-        this.subscription = locationWrapperObs?.subscribe(
-            (response) => ((this.locationObj = response), console.log(response), (this.imgFilename = response.location.images[0]), console.log(this.imgFilename))
-        );
+        this.subscription = locationWrapperObs?.subscribe((response) => ((this.locationObj = response), console.log(response), (this.imgFilename = response.location.images[0])));
         this.authorStatusSub = auhtorStatusRes?.subscribe((response) => {
             (this.isAuthor = response.locationAuthor), console.log(response);
         });
