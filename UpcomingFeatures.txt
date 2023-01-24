@@ -18,7 +18,11 @@ ToDo
 (after finishing with images upload and deletion) =>
 + FE:	give the navbar a background when #scrolled, change the redirect path after login to "/"
 + FE: add some nice fonts to the text of the locationshow page
+
+24/01/2024 =>
 - FE: add the mapquest functionality (Yelp-Camp)
+- FE: integrate the booking.com API
 - BE: make an endpoint for uploading multiple images
 - FE / BE: resolve the authGuard problem with the loginStatus checking
 - FE: location show page redesign
+- FE + BE: google account authentication 
