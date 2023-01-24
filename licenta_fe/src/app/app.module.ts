@@ -17,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ShowLocationsComponent } from './home/show-locations/show-locations.component';
 import { FooterComponent } from './home/footer/footer.component';
+import { MapquestComponent } from './mapquest/mapquest.component';
 
 @NgModule({
     declarations: [
@@ -32,7 +33,8 @@ import { FooterComponent } from './home/footer/footer.component';
         LoginComponent,
         NotFoundComponent,
         ShowLocationsComponent,
-        FooterComponent
+        FooterComponent,
+        MapquestComponent
     ],
     imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule],
     providers: [],
