@@ -27,8 +27,8 @@ export class EditLocationComponent implements OnInit, OnDestroy {
             name: ['', Validators.required],
             description: ['', Validators.required],
             location: this.fb.group({
-                lat: ['', Validators.required],
-                long: ['', Validators.required]
+                lat: [Number, Validators.required],
+                long: [Number, Validators.required]
             }),
             ticket: [Boolean, Validators.required],
             price: [Number, Validators.required],

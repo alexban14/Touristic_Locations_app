@@ -20,8 +20,8 @@ export const locationSchema = Joi.object<ILocSchema>({
     name: Joi.string().required(),
     description: Joi.string().required(),
     location: Joi.object({
-        lat: Joi.string().required(),
-        long: Joi.string().required()
+        lat: Joi.number().min(4).required(),
+        long: Joi.number().min(4).required()
     }).required(),
     ticket: Joi.string().required(),
     price: Joi.number().min(1),

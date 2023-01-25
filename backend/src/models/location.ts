@@ -6,8 +6,8 @@ export interface ILoc {
     name: string;
     description: string;
     location: {
-        lat: string;
-        long: string;
+        lat: number;
+        long: number;
     };
     ticket: string;
     price?: number;
@@ -35,11 +35,11 @@ const LocSchema = new Schema({
     },
     location: {
         lat: {
-            type: String,
+            type: Number,
             required: true
         },
         long: {
-            type: String,
+            type: Number,
             required: true
         }
     },

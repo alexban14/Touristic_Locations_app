@@ -21,8 +21,8 @@ export class CreateLocationComponent {
             name: ['', Validators.required],
             description: ['', Validators.required],
             location: this.fb.group({
-                lat: ['', Validators.required],
-                long: ['', Validators.required]
+                lat: [Number, Validators.minLength(4), Validators.required],
+                long: [Number, Validators.minLength(4), Validators.required]
             }),
             ticket: [Boolean, Validators.required],
             price: [Number, Validators.required]

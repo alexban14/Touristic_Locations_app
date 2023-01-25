@@ -54,8 +54,8 @@ export class MapquestComponent implements OnInit, OnDestroy {
         for (let location of locationsObj.locations) {
             let oneLocMarker = {
                 label: location.name,
-                lat: parseFloat(location.location.lat),
-                lng: parseFloat(location.location.long)
+                lat: location.location.lat,
+                lng: location.location.long
             };
             this.locationsMarkers.push(oneLocMarker);
         }
@@ -77,11 +77,11 @@ export class MapquestComponent implements OnInit, OnDestroy {
                 styles: mapStyles
             });
 
-            // const marker = new google.maps.Marker({
-            //     label: 'Sibiu',
-            //     position: this.sibiuGeo,
-            //     map: this.map
-            // });
+            const marker = new google.maps.Marker({
+                label: 'Sibiu',
+                position: this.sibiuGeo,
+                map: this.map
+            });
             for (let locationMarker of locationsMarkers) {
                 const marker = new google.maps.Marker({
                     label: locationMarker.label,
