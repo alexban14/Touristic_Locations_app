@@ -24,7 +24,10 @@ ToDo
 
 25/01/2022 =>
 + FE: dotenv file setup
-- FE: show locations pin points on the map
++ FE: show locations pin points on the map
++ FE: styled the show loactions map pin points
+
+- FE: integrate the Google Map to location show page
 - FE: integrate the booking.com API
 - BE: make an endpoint for uploading multiple images
 - FE / BE: resolve the authGuard problem with the loginStatus checking

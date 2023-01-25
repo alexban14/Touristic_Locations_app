@@ -1,60 +1,62 @@
-<div class="col-md-10 col-lg-8 col-xl-6 mx-auto">
-    <h4 class="mb-3">Detalii atractie turistica</h4>
-    <form [formGroup]="createLocationForm" enctype="multipart/form-data" (ngSubmit)="submitLocationForm()" class="needs-validation" novalidate>
-        <div class="mb-3">
-            <div class="input-group">
-                <input formControlName="name" type="text" class="form-control" name="name" id="name" placeholder="Nume" required />
+<div class="container p-3 mt-5 wrapper">
+    <div class="col-md-10 col-lg-8 col-xl-6 mx-auto">
+        <h4 class="mb-3">Detalii atractie turistica</h4>
+        <form [formGroup]="createLocationForm" enctype="multipart/form-data" (ngSubmit)="submitLocationForm()" class="needs-validation" novalidate>
+            <div class="mb-3">
+                <div class="input-group">
+                    <input formControlName="name" type="text" class="form-control" name="name" id="name" placeholder="Nume" required />
+                </div>
+                <div *ngIf="createLocationForm.touched && createLocationForm.controls['name'].errors" class="text-danger mb-3 d-block">
+                    <div *ngIf="createLocationForm.touched && createLocationForm.controls['name'].errors['required']">Numele locatiei este necesar pentru a crea una noua</div>
+                </div>
             </div>
-            <div *ngIf="createLocationForm.touched && createLocationForm.controls['name'].errors" class="text-danger mb-3 d-block">
-                <div *ngIf="createLocationForm.touched && createLocationForm.controls['name'].errors['required']">Numele locatiei este necesar pentru a crea una noua</div>
-            </div>
-        </div>
 
-        <div formGroupName="location" class="row">
-            <div class="col-6 mb-3">
-                <label for="lat">Latitudine</label>
-                <input formControlName="lat" type="text" class="form-control" name="lat" id="lat" />
+            <div formGroupName="location" class="row">
+                <div class="col-6 mb-3">
+                    <label for="lat">Latitudine</label>
+                    <input formControlName="lat" type="text" class="form-control" name="lat" id="lat" />
+                </div>
+                <div class="col-6 mb-3">
+                    <label for="long">Longitudine</label>
+                    <input formControlName="long" type="text" class="form-control" name="long" id="long" />
+                </div>
             </div>
-            <div class="col-6 mb-3">
-                <label for="long">Longitudine</label>
-                <input formControlName="long" type="text" class="form-control" name="long" id="long" />
-            </div>
-        </div>
 
-        <div class="mb-3">
-            <label for="ticket">Intrarea se face cu bilet?</label>
-            <select formControlName="ticket" class="form-select" aria-label="Default select example" id="ticket">
-                <option [ngValue]="null" disabled>Intrarea se face cu bilet?</option>
-                <option value="true">Da</option>
-                <option value="false">Nu</option>
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label for="price">Pretul biletului</label>
-            <input formControlName="price" class="form-control" type="number" name="price" id="price" />
-            <div *ngIf="createLocationForm.touched && createLocationForm.controls['price'].errors" class="text-danger mb-3 d-block">
-                <div *ngIf="createLocationForm.touched && createLocationForm.controls['price'].errors['required']">Este necesar sa specificati pretul biletului</div>
+            <div class="mb-3">
+                <label for="ticket">Intrarea se face cu bilet?</label>
+                <select formControlName="ticket" class="form-select" aria-label="Default select example" id="ticket">
+                    <option [ngValue]="null" disabled>Intrarea se face cu bilet?</option>
+                    <option value="true">Da</option>
+                    <option value="false">Nu</option>
+                </select>
             </div>
-        </div>
-        <div class="mb-3">
-            <!-- <label for="images">Link imagine</label>
+
+            <div class="mb-3">
+                <label for="price">Pretul biletului</label>
+                <input formControlName="price" class="form-control" type="number" name="price" id="price" />
+                <div *ngIf="createLocationForm.touched && createLocationForm.controls['price'].errors" class="text-danger mb-3 d-block">
+                    <div *ngIf="createLocationForm.touched && createLocationForm.controls['price'].errors['required']">Este necesar sa specificati pretul biletului</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <!-- <label for="images">Link imagine</label>
             <input formControlName="images" class="form-control" type="text" name="images" id="images" />
             <div *ngIf="createLocationForm.touched && createLocationForm.controls['images'].errors" class="text-danger mb-3 d-block">
                 <div *ngIf="createLocationForm.touched && createLocationForm.controls['images'].errors['required']">Imagini despre locatiei sunt necesar pentru a crea una noua</div>
             </div> -->
-            <label for="images" class="form-label">Alege o imagine</label>
-            <input class="form-control" [name]="images" type="file" id="images" (change)="onFileSelected($event)" #fileUpload />
-        </div>
-
-        <div class="mb-3">
-            <label for="description">Descrie atractia turistica pe care vrei s-o adaugi:</label>
-            <textarea formControlName="description" class="form-control" name="description" id="description" cols="30" rows="5"></textarea>
-            <div *ngIf="createLocationForm.touched && createLocationForm.controls['description'].errors" class="text-danger mb-3 d-block">
-                <div *ngIf="createLocationForm.touched && createLocationForm.controls['description'].errors['required']">Descrierea locatiei este necesar pentru a crea una noua</div>
+                <label for="images" class="form-label">Alege o imagine</label>
+                <input class="form-control" [name]="images" type="file" id="images" (change)="onFileSelected($event)" #fileUpload />
             </div>
-        </div>
-        <button type="submit" class="btn btn-outline-primary" [disabled]="!createLocationForm.valid">Adauga</button>
-        <hr class="mb-4" />
-    </form>
+
+            <div class="mb-3">
+                <label for="description">Descrie atractia turistica pe care vrei s-o adaugi:</label>
+                <textarea formControlName="description" class="form-control" name="description" id="description" cols="30" rows="5"></textarea>
+                <div *ngIf="createLocationForm.touched && createLocationForm.controls['description'].errors" class="text-danger mb-3 d-block">
+                    <div *ngIf="createLocationForm.touched && createLocationForm.controls['description'].errors['required']">Descrierea locatiei este necesar pentru a crea una noua</div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-outline-primary" [disabled]="!createLocationForm.valid">Adauga</button>
+            <hr class="mb-4" />
+        </form>
+    </div>
 </div>
