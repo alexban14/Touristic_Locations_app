@@ -72,8 +72,8 @@ export class MapquestComponent implements OnInit, OnDestroy {
 
             this.map = new google.maps.Map(document.getElementById('map')!, {
                 center: this.sibiuGeo,
-                zoom: 12
-                // styles: mapStyles
+                zoom: 10,
+                styles: mapStyles
             });
 
             const img = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
@@ -91,6 +91,9 @@ export class MapquestComponent implements OnInit, OnDestroy {
                     icon: img
                 });
                 marker.setMap(this.map);
+                google.maps.event.addListener(marker, 'click', () => {
+                    window.alert('Makrer was clicked');
+                });
             }
         });
     }
