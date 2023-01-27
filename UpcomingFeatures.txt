@@ -19,18 +19,21 @@ ToDo
 + FE:	give the navbar a background when #scrolled, change the redirect path after login to "/"
 + FE: add some nice fonts to the text of the locationshow page
 
-24/01/2024 =>
+24/01/2023 =>
 + FE: add the map functionality (googlemaps/js-api-loader)
 
-25/01/2022 =>
+25/01/2023 =>
 + FE: dotenv file setup
 + FE: show locations pin points on the map
 + FE: styled the show loactions map pin points
 
+27-26/01/2023
 + FE: pop up modal for the pinpoints (https://duncan99.wordpress.com/2011/10/08/google-maps-api-infowindows/)
++ FE: add the modal to be targeted by the event listener
++ FE: styled the pop up 
 
-- FE: add the modal to be targeted by the event listener
-- FE: integrate the Google Map to location show page
+- FE: create location form refinement
+- FE: location create form instruction on how to get long and lat of a location
 - FE: integrate the booking.com API
 - BE: make an endpoint for uploading multiple images
 - FE / BE: resolve the authGuard problem with the loginStatus checking (see: https://www.dotnettricks.com/learn/angular/sharing-data-between-angular-components-methods)

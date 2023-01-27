@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Loader } from '@googlemaps/js-api-loader';
 import { Observable, Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -10,6 +11,8 @@ export interface locationMarker {
     label: string;
     lat: number;
     lng: number;
+    id: string;
+    description: string;
 }
 
 @Component({
@@ -18,6 +21,8 @@ export interface locationMarker {
     styleUrls: ['./mapquest.component.css']
 })
 export class MapquestComponent implements OnInit, OnDestroy {
+    @ViewChild('locationModal', { static: false }) locationModal: any;
+
     locationsSubscirption: Subscription | undefined;
     locationsObj?: LocWrapper;
     locationsMarkers: locationMarker[] = [];
@@ -26,7 +31,7 @@ export class MapquestComponent implements OnInit, OnDestroy {
         lng: 24.13
     };
 
-    constructor(private locationsService: LocationsService) {}
+    constructor(private locationsService: LocationsService, private _router: Router) {}
 
     title = 'google-maps';
     private map!: google.maps.Map;
@@ -55,7 +60,9 @@ export class MapquestComponent implements OnInit, OnDestroy {
             let oneLocMarker = {
                 label: location.name,
                 lat: location.location.lat,
-                lng: location.location.long
+                lng: location.location.long,
+                id: location._id,
+                description: location.description
             };
             this.locationsMarkers.push(oneLocMarker);
         }
@@ -80,10 +87,7 @@ export class MapquestComponent implements OnInit, OnDestroy {
 
             for (let locationMarker of locationsMarkers) {
                 const marker = new google.maps.Marker({
-                    // label: {
-                    //     text: locationMarker.label,
-                    //     className: 'marker-label'
-                    // },
+                    title: locationMarker.label,
                     position: {
                         lat: locationMarker.lat,
                         lng: locationMarker.lng
@@ -91,20 +95,30 @@ export class MapquestComponent implements OnInit, OnDestroy {
                     icon: img
                 });
                 marker.setMap(this.map);
+
+                const contentString =
+                    '<div id="content">' +
+                    '<div class="card" style="width: 18rem;">' +
+                    '<div class="card-body">' +
+                    `<h5 class="card-title">${locationMarker.label}</h5>` +
+                    `<p class="card-text">${locationMarker.description}</p>` +
+                    `<a href=http://localhost:4200/locations/get/${locationMarker.id}><button class="btn btn-outline-primary">Detalii</button></a>` +
+                    '</div>' +
+                    '</div>' +
+                    '</div>';
+
+                const infoWindow = new google.maps.InfoWindow({
+                    content: contentString,
+                    ariaLabel: 'Urlu'
+                });
+
                 google.maps.event.addListener(marker, 'click', () => {
-                    window.alert('Makrer was clicked');
+                    infoWindow.open({
+                        anchor: marker,
+                        map: this.map
+                    });
                 });
             }
         });
     }
 }
-
-// const svgMarker = {
-//     path: 'M-1.547 12l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM0 0q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z',
-//     fillColor: 'blue',
-//     fillOpacity: 0.6,
-//     strokeWeight: 0,
-//     rotation: 0,
-//     scale: 2,
-//     anchor: new google.maps.Point(0, 20)
-// };
