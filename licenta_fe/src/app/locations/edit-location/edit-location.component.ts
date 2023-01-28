@@ -97,8 +97,8 @@ export class EditLocationComponent implements OnInit, OnDestroy {
             name: this.editedLocationForm.controls['name'].value,
             description: this.editedLocationForm.controls['description'].value,
             location: {
-                lat: parseFloat(this.editedLocationForm.controls['location'].value.lat),
-                long: parseFloat(this.editedLocationForm.controls['location'].value.long)
+                lat: this.editedLocationForm.controls['location'].value.lat,
+                long: this.editedLocationForm.controls['location'].value.long
             },
             ticket: this.editedLocationForm.controls['ticket'].value, //=== 'true' ? true : false,
             price: this.editedLocationForm.controls['price'].value,
