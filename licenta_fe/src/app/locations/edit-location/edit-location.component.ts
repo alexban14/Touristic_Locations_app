@@ -27,8 +27,8 @@ export class EditLocationComponent implements OnInit, OnDestroy {
             name: ['', Validators.required],
             description: ['', Validators.required],
             location: this.fb.group({
-                lat: [Number, Validators.required],
-                long: [Number, Validators.required]
+                lat: ['', Validators.required],
+                long: ['', Validators.required]
             }),
             ticket: [Boolean, Validators.required],
             price: [Number, Validators.required],
@@ -97,8 +97,8 @@ export class EditLocationComponent implements OnInit, OnDestroy {
             name: this.editedLocationForm.controls['name'].value,
             description: this.editedLocationForm.controls['description'].value,
             location: {
-                lat: this.editedLocationForm.controls['location'].value.lat,
-                long: this.editedLocationForm.controls['location'].value.long
+                lat: parseFloat(this.editedLocationForm.controls['location'].value.lat),
+                long: parseFloat(this.editedLocationForm.controls['location'].value.long)
             },
             ticket: this.editedLocationForm.controls['ticket'].value, //=== 'true' ? true : false,
             price: this.editedLocationForm.controls['price'].value,

@@ -13,6 +13,7 @@ export interface locationMarker {
     lng: number;
     id: string;
     description: string;
+    image: string;
 }
 
 @Component({
@@ -62,7 +63,8 @@ export class MapquestComponent implements OnInit, OnDestroy {
                 lat: location.location.lat,
                 lng: location.location.long,
                 id: location._id,
-                description: location.description
+                description: location.description,
+                image: location.images[0]
             };
             this.locationsMarkers.push(oneLocMarker);
         }
@@ -98,7 +100,8 @@ export class MapquestComponent implements OnInit, OnDestroy {
 
                 const contentString =
                     '<div id="content">' +
-                    '<div class="card" style="width: 18rem;">' +
+                    '<div class="card" style="width: 20rem;">' +
+                    `<img src=http://localhost:3500/imgFiles/get/${locationMarker.image} class="card-img-top" alt="...">` +
                     '<div class="card-body">' +
                     `<h5 class="card-title">${locationMarker.label}</h5>` +
                     `<p class="card-text">${locationMarker.description}</p>` +
@@ -109,7 +112,7 @@ export class MapquestComponent implements OnInit, OnDestroy {
 
                 const infoWindow = new google.maps.InfoWindow({
                     content: contentString,
-                    ariaLabel: 'Urlu'
+                    ariaLabel: locationMarker.label
                 });
 
                 google.maps.event.addListener(marker, 'click', () => {

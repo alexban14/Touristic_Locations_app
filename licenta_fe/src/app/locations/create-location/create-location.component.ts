@@ -53,8 +53,8 @@ export class CreateLocationComponent {
             name: this.createLocationForm.controls['name'].value,
             description: this.createLocationForm.controls['description'].value,
             location: {
-                lat: this.createLocationForm.controls['location'].value.lat,
-                long: this.createLocationForm.controls['location'].value.long
+                lat: parseFloat(this.createLocationForm.controls['location'].value.lat),
+                long: parseFloat(this.createLocationForm.controls['location'].value.long)
             },
             ticket: this.createLocationForm.controls['ticket'].value, // === 'true' ? true : false,
             price: this.createLocationForm.controls['price'].value,
