@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ImgUploadService } from 'src/app/services/locations/img-upload.service';
@@ -22,17 +22,17 @@ export class EditLocationComponent implements OnInit, OnDestroy {
 
     editedLocationForm: FormGroup;
 
-    constructor(private fb: FormBuilder, private locationsService: LocationsService, private imgUploadService: ImgUploadService, private _router: Router, private route: ActivatedRoute) {
-        this.editedLocationForm = this.fb.group({
-            name: ['', Validators.required],
-            description: ['', Validators.required],
-            location: this.fb.group({
-                lat: ['', Validators.required],
-                long: ['', Validators.required]
+    constructor(private locationsService: LocationsService, private imgUploadService: ImgUploadService, private _router: Router, private route: ActivatedRoute) {
+        this.editedLocationForm = new FormGroup({
+            name: new FormControl('', [Validators.minLength(4), Validators.maxLength(20), Validators.required]),
+            description: new FormControl('', [Validators.required]),
+            location: new FormGroup({
+                lat: new FormControl('', [Validators.required]),
+                long: new FormControl('', [Validators.required])
             }),
-            ticket: [Boolean, Validators.required],
-            price: [Number, Validators.required],
-            images: ['']
+            ticket: new FormControl('', [Validators.required]),
+            price: new FormControl('', [Validators.pattern(/^[0-9]+$/), Validators.min(1), Validators.max(1000), Validators.required]),
+            images: new FormControl()
         });
 
         this.editedLocationForm.valueChanges.subscribe(console.log);

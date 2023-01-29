@@ -32,10 +32,12 @@ ToDo
 + FE: add the modal to be targeted by the event listener
 + FE: styled the pop up 
 
-- FE: create location form refinement
-- FE: location create form instruction on how to get long and lat of a location
-- FE: integrate the booking.com API
+29/01/2023
++ FE: location create form instruction on how to get long and lat of a location
++ FE: create location form refinement
+
 - BE: make an endpoint for uploading multiple images
 - FE / BE: resolve the authGuard problem with the loginStatus checking (see: https://www.dotnettricks.com/learn/angular/sharing-data-between-angular-components-methods)
-- FE: location show page redesign
 - FE + BE: google account authentication 
+
+- FE / BE: start implementing the calendar events section

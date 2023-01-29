@@ -6,8 +6,8 @@
                 <div class="input-group">
                     <input formControlName="name" type="text" class="form-control" name="name" id="name" placeholder="Nume" required />
                 </div>
-                <div *ngIf="editedLocationForm.touched && editedLocationForm.controls['name'].errors" class="text-danger mb-3 d-block">
-                    <div *ngIf="editedLocationForm.touched && editedLocationForm.controls['name'].errors['required']">Numele locatiei este necesar pentru a crea una noua</div>
+                <div *ngIf="editedLocationForm.controls['name'].touched && editedLocationForm.controls['name'].errors" class="text-danger mb-3 d-block">
+                    <div class="mb-3" *ngIf="editedLocationForm.controls['name'].errors['required']">Numele locatiei este necesar pentru a crea una noua</div>
                 </div>
             </div>
 
@@ -20,6 +20,14 @@
                     <label for="long">Longitudine</label>
                     <input formControlName="long" type="text" class="form-control" name="long" id="long" required />
                 </div>
+                <hr />
+                <div class="mb-3 info-link">
+                    <a href="https://www.gps-coordinates.net/">
+                        <p>Puteti folosi acest tool pentru a afla loactia oricarei adrese.</p>
+                    </a>
+                    <img class="img-fluid" src="../../../assets/imgs/ss_gps_tool.png" alt="" />
+                </div>
+                <hr />
             </div>
 
             <div class="mb-3">
@@ -28,13 +36,18 @@
                     <option value="true" [selected]="locationObjToEdit?.location.ticket">Da</option>
                     <option value="false" [selected]="!locationObjToEdit?.location.ticket">Nu</option>
                 </select>
+                <div *ngIf="editedLocationForm.controls['ticket'].touched && editedLocationForm.controls['ticket'].errors" class="text-danger mb-3 d-block">
+                    <div class="mb-3" *ngIf="editedLocationForm.controls['ticket'].errors['required']">Este necesar sa specificati da ce se poate vizita cu bilet sau fara.</div>
+                </div>
             </div>
 
             <div class="mb-3">
                 <label for="price">Pretul biletului</label>
                 <input formControlName="price" class="form-control" type="number" name="price" id="price" required />
-                <div *ngIf="editedLocationForm.touched && editedLocationForm.controls['price'].errors" class="text-danger mb-3 d-block">
-                    <div *ngIf="editedLocationForm.touched && editedLocationForm.controls['price'].errors['required']">Este necesar sa specificati pretul biletului</div>
+                <div *ngIf="editedLocationForm.controls['price'].touched && editedLocationForm.controls['price'].errors" class="text-danger mb-3 d-block">
+                    <div class="mb-3" *ngIf="editedLocationForm.controls['price'].errors['required']">
+                        Este necesar sa specificati, pretul de intrare, in cazul in care nu se percepe taxa de intrare puneti un numar la intamplare.
+                    </div>
                 </div>
             </div>
             <div class="mb-3">
@@ -49,8 +62,8 @@
             <div class="mb-3">
                 <label for="description">Descrie atractia turistica pe care vrei s-o adaugi:</label>
                 <textarea formControlName="description" class="form-control" name="description" id="description" cols="30" rows="5"></textarea>
-                <div *ngIf="editedLocationForm.touched && editedLocationForm.controls['description'].errors" class="text-danger mb-3 d-block">
-                    <div *ngIf="editedLocationForm.touched && editedLocationForm.controls['description'].errors['required']">Descrierea locatiei este necesar pentru a crea una noua</div>
+                <div *ngIf="editedLocationForm.controls['description'].touched && editedLocationForm.controls['description'].errors" class="text-danger mb-3 d-block">
+                    <div *ngIf="editedLocationForm.controls['description'].errors['required']">Descrierea locatiei este necesar pentru a crea una noua</div>
                 </div>
             </div>
             <!-- <div class="mb-3">

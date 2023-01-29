@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ImgUploadService } from 'src/app/services/locations/img-upload.service';
 import { LocationsService } from 'src/app/services/locations/locations.service';
@@ -16,16 +16,16 @@ export class CreateLocationComponent {
     imgToUploadForm: FormData = new FormData();
     fileNames: string[] = [];
 
-    constructor(private fb: FormBuilder, private imgUploadService: ImgUploadService, private locationsService: LocationsService, private _router: Router) {
-        this.createLocationForm = this.fb.group({
-            name: ['', Validators.required],
-            description: ['', Validators.required],
-            location: this.fb.group({
-                lat: ['', Validators.required],
-                long: ['', Validators.required]
+    constructor(private imgUploadService: ImgUploadService, private locationsService: LocationsService, private _router: Router) {
+        this.createLocationForm = new FormGroup({
+            name: new FormControl('', [Validators.minLength(4), Validators.maxLength(20), Validators.required]),
+            description: new FormControl('', [Validators.required]),
+            location: new FormGroup({
+                lat: new FormControl('', [Validators.required]),
+                long: new FormControl('', [Validators.required])
             }),
-            ticket: [Boolean, Validators.required],
-            price: [Number, Validators.required]
+            ticket: new FormControl('', [Validators.required]),
+            price: new FormControl('', [Validators.pattern(/^[0-9]+$/), Validators.min(1), Validators.max(1000), Validators.required])
         });
 
         this.createLocationForm.valueChanges.subscribe(console.log);
