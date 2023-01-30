@@ -24,7 +24,7 @@ export class EditLocationComponent implements OnInit, OnDestroy {
 
     constructor(private locationsService: LocationsService, private imgUploadService: ImgUploadService, private _router: Router, private route: ActivatedRoute) {
         this.editedLocationForm = new FormGroup({
-            name: new FormControl('', [Validators.minLength(4), Validators.maxLength(20), Validators.required]),
+            name: new FormControl('', [Validators.minLength(4), Validators.maxLength(40), Validators.required]),
             description: new FormControl('', [Validators.required]),
             location: new FormGroup({
                 lat: new FormControl('', [Validators.required]),

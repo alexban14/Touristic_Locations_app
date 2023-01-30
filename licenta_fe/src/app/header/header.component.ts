@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth/auth.service';
 import { CheckService } from '../services/checking/check.service';
+import { DataStorageService } from '../services/data-storage.service';
 
 @Component({
     selector: 'header',
@@ -10,16 +11,23 @@ import { CheckService } from '../services/checking/check.service';
     styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-    public isLoggedIn: boolean | undefined;
+    public isLogedIn: boolean | undefined;
     subscription: Subscription | undefined;
+    dataServiceSub: Subscription | undefined;
     loginStatusSub: Subscription | undefined;
 
-    constructor(private authService: AuthService, private checkService: CheckService, private _router: Router, private route: ActivatedRoute) {}
+    constructor(private authService: AuthService, private dataService: DataStorageService, private checkService: CheckService, private _router: Router) {}
 
     ngOnInit(): void {
         this.loginStatusSub = this.checkService.isLogedIn().subscribe({
-            next: (response) => {
-                console.log(response), (this.isLoggedIn = response.logedIn);
+            next: (response: any) => {
+                this.dataService.changeLogedIn(response),
+                    (this.dataServiceSub = this.dataService.currentLogedIn.subscribe({
+                        next: (response: any) => {
+                            (this.isLogedIn = response.logedIn), console.log(this.isLogedIn);
+                        },
+                        error: (err) => console.log(err)
+                    }));
             },
             error: (err) => console.log(err)
         });
@@ -29,14 +37,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.authService.logout().subscribe({
             next: (res: any) => {
                 console.log(res);
+                this.dataService.changeLogedIn(false);
+                if (this._router.url == '/') {
+                    window.location.reload();
+                } else {
+                    this._router.navigate(['/']);
+                }
             },
             error: (err) => console.log(err)
         });
-        if (this._router.url == '/') {
-            window.location.reload();
-        } else {
-            this._router.navigate(['/']);
-        }
     }
 
     ngOnDestroy(): void {

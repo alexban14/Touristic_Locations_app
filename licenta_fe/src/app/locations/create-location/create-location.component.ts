@@ -18,7 +18,7 @@ export class CreateLocationComponent {
 
     constructor(private imgUploadService: ImgUploadService, private locationsService: LocationsService, private _router: Router) {
         this.createLocationForm = new FormGroup({
-            name: new FormControl('', [Validators.minLength(4), Validators.maxLength(20), Validators.required]),
+            name: new FormControl('', [Validators.minLength(4), Validators.maxLength(40), Validators.required]),
             description: new FormControl('', [Validators.required]),
             location: new FormGroup({
                 lat: new FormControl('', [Validators.required]),

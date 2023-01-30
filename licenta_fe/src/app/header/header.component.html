@@ -8,10 +8,10 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0 my-auto">
                 <li class="nav-item"><a class="nav-link" routerLinkActive="active" routerLink="/locations/get">Atractii turistice</a></li>
-                <li *ngIf="isLoggedIn" class="nav-item"><a class="nav-link" routerLinkActive="active" routerLink="/locations/new">Creaza Atractie</a></li>
-                <li *ngIf="!isLoggedIn" class="nav-item"><a class="nav-link" routerLinkActive="active" routerLink="/auth/login">Conectare</a></li>
-                <li *ngIf="!isLoggedIn" class="nav-item"><a class="nav-link" routerLinkActive="active" routerLink="/auth/register">Cont nou</a></li>
-                <li *ngIf="isLoggedIn" class="nav-item"><a class="nav-link" routerLinkActive="active" (click)="logoutUser()">Deconectare</a></li>
+                <li *ngIf="isLogedIn" class="nav-item"><a class="nav-link" routerLinkActive="active" routerLink="/locations/new">Creaza Atractie</a></li>
+                <li *ngIf="!isLogedIn" class="nav-item"><a class="nav-link" routerLinkActive="active" routerLink="/auth/login">Conectare</a></li>
+                <li *ngIf="!isLogedIn" class="nav-item"><a class="nav-link" routerLinkActive="active" routerLink="/auth/register">Cont nou</a></li>
+                <li *ngIf="isLogedIn" class="nav-item"><a class="nav-link" routerLinkActive="active" (click)="logoutUser()">Deconectare</a></li>
             </ul>
         </div>
     </div>

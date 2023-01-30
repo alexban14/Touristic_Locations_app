@@ -36,8 +36,13 @@ ToDo
 + FE: location create form instruction on how to get long and lat of a location
 + FE: create location form refinement
 
+30/01/2023
++ FE: create/edit forms maxLenght validator was too small
+
 - BE: make an endpoint for uploading multiple images
 - FE / BE: resolve the authGuard problem with the loginStatus checking (see: https://www.dotnettricks.com/learn/angular/sharing-data-between-angular-components-methods)
 - FE + BE: google account authentication 
+
+- FE + BE: application setup for deploy
 
 - FE / BE: start implementing the calendar events section

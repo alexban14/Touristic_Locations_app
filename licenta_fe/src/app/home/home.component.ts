@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth/auth.service';
 import { CheckService } from '../services/checking/check.service';
+import { DataStorageService } from '../services/data-storage.service';
 
 @Component({
     selector: 'app-home',
@@ -9,29 +10,21 @@ import { CheckService } from '../services/checking/check.service';
     styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-    loginStatusSub: Subscription | undefined;
-    isLoggedIn: boolean | undefined;
+    dataServiceSub: Subscription | undefined;
+    isLogedIn: boolean | undefined;
 
-    constructor(private authService: AuthService, private checkService: CheckService) {}
-
-    logoutUser() {
-        this.authService.logout().subscribe({
-            next: (res: any) => console.log(res),
-            error: (err) => console.log(err)
-        });
-        window.location.reload();
-    }
+    constructor(private dataService: DataStorageService) {}
 
     ngOnInit(): void {
-        this.loginStatusSub = this.checkService.isLogedIn().subscribe({
-            next: (res: any) => {
-                console.log(res), (this.isLoggedIn = res.logedIn);
+        this.dataServiceSub = this.dataService.currentLogedIn.subscribe({
+            next: (response: any) => {
+                (this.isLogedIn = response.logedIn), console.log(this.isLogedIn);
             },
             error: (err) => console.log(err)
         });
     }
 
     ngOnDestroy(): void {
-        this.loginStatusSub?.unsubscribe();
+        this.dataServiceSub?.unsubscribe();
     }
 }

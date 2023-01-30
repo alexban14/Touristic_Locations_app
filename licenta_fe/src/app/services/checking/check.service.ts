@@ -1,7 +1,22 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { CheckResponse, LocationAuthorResponse } from './checkRes.model';
+
+export class CheckResponse {
+    logedIn: boolean;
+
+    constructor(logedIn: boolean) {
+        this.logedIn = logedIn;
+    }
+}
+
+export class LocationAuthorResponse {
+    locationAuthor: boolean;
+
+    constructor(locationAuthor: boolean) {
+        this.locationAuthor = locationAuthor;
+    }
+}
 
 @Injectable({
     providedIn: 'root'

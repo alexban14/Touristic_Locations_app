@@ -25,8 +25,7 @@ export class AuthService {
     login(user: LoginUser) {
         return this.http.post(environment.baseURL + this.loginEndpoint, user, {
             observe: 'body',
-            withCredentials: true,
-            headers: new HttpHeaders().append('Content-Type', 'application/json')
+            withCredentials: true
         });
     }
 
