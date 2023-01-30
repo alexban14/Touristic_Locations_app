@@ -17,9 +17,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.dataServiceSub = this.dataService.currentLogedIn.subscribe({
-            next: (response: any) => {
-                (this.isLogedIn = response.logedIn), console.log(this.isLogedIn);
-            },
+            next: (response: any) => (this.isLogedIn = response.logedIn),
             error: (err) => console.log(err)
         });
     }

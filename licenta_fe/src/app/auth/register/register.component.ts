@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { DataStorageService } from 'src/app/services/data-storage.service';
 
 @Component({
     selector: 'app-register',
@@ -12,7 +13,7 @@ export class RegisterComponent implements OnInit {
     registerErr: string = 'null';
     registerForm: FormGroup;
 
-    constructor(public fb: FormBuilder, private autService: AuthService, private _router: Router) {
+    constructor(public fb: FormBuilder, private autService: AuthService, private dataService: DataStorageService, private _router: Router) {
         this.registerForm = this.fb.group({
             username: ['', [Validators.required, Validators.minLength(4)]],
             email: ['', [Validators.required, Validators.email]],
@@ -30,6 +31,7 @@ export class RegisterComponent implements OnInit {
         this.autService.register(registerFormValue).subscribe({
             next: (res: any) => {
                 console.log(res);
+                this.dataService.changeLogedIn(true);
                 this._router.navigate(['/locations/get']);
             },
             error: (err: any) => {
