@@ -13,6 +13,7 @@ import { config } from './config/config';
 import Logging from './library/Logging';
 import User from './models/user';
 import locationRoutes from './routes/location';
+import eventRoutes from './routes/events';
 import userRoutes from './routes/user';
 import reviewRoutes from './routes/review';
 import checkAuthorRoutes from './routes/checkAuthor';
@@ -99,6 +100,7 @@ const StartServer = () => {
 
     // ROUTES
     router.use('/locations', locationRoutes);
+    router.use('/events', eventRoutes);
     router.use('/auth', userRoutes);
     router.use('/locations/:id/reviews', reviewRoutes);
     router.use('/check', checkAuthorRoutes);

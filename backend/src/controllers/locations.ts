@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import Logging from '../library/Logging';
-import Location, { ILocSchema } from '../models/location';
+import Location from '../models/location';
 
 const index = async (req: Request, res: Response) => {
     try {
