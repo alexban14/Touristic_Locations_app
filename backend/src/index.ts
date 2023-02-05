@@ -13,7 +13,7 @@ import { config } from './config/config';
 import Logging from './library/Logging';
 import User from './models/user';
 import locationRoutes from './routes/location';
-import eventRoutes from './routes/events';
+import eventRoutes from './routes/event';
 import userRoutes from './routes/user';
 import reviewRoutes from './routes/review';
 import checkAuthorRoutes from './routes/checkAuthor';

@@ -54,6 +54,18 @@ const editEvent = async (req: Request, res: Response) => {
     }
 };
 
-const deleteEvent = async (req: Request, res: Response) => {};
+const deleteEvent = async (req: Request, res: Response) => {
+    try {
+        const id = req.params.id;
+        await Event.findByIdAndDelete(id);
+        const deletedEvent = await Event.findById(id);
+        if (deletedEvent) {
+            res.status(404).json({ message: 'Could not delete the event, because it was not found' });
+        }
+        res.status(201).json({ message: 'Event deleted' });
+    } catch (error) {
+        res.status(500).json({ error });
+    }
+};
 
-export default { index, createEvent, editEvent, deleteEvent };
+export default { index, createEvent, showEvent, editEvent, deleteEvent };

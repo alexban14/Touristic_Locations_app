@@ -41,18 +41,20 @@ ToDo
 
 05/02/2023
 + FE / BE: start implementing the calendar events section
-- BE: strucutre the schema model for an event
-- BE: make the endopints for full CRUD
-- BE: Date construct in the schema model for every object (location, event, review)
-- BE: test the endpoints in postman
++ BE: strucutre the schema model for an event
++ BE: make the endopints for full CRUD
++ BE: JOI events object validation
++ BE: check for loged in user for, creating a new event
 
-- BE: JOI events object validation
-- BE: check for loged in user for, creating a new event
+- BE: test the endpoints in postman
+- BE: more complex queries (filter by category, date selected, etc)
 - BE: check for events creator, so that only he can edit or delete an event
 
 
-- FE / BE: locations object to also have a date construct
+- FE / BE: Date construct in the schema model for every object (location, event, review)
 - FE / BE: make location price not required
+- BE: introduce pagination for events, locations, reviews
+
 - BE: make an endpoint for uploading multiple images
 - FE / BE: resolve the authGuard problem with the loginStatus checking (see: https://www.dotnettricks.com/learn/angular/sharing-data-between-angular-components-methods)
 - FE + BE: google account authentication 
