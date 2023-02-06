@@ -48,9 +48,11 @@ ToDo
 
 06/02/2023
 + BE: test the endpoints in postman
-- FE: event angular component
-	- routing,
-	- create events component,
++ FE: event angular component
+	+ routing,
+	+ create events component,
+
+07/02/2023
 	- create service file,
 	- edit events component,
 	- display events :
