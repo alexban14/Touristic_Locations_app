@@ -10,7 +10,7 @@ export class LocationsService {
     private allLocationsEndpoint = '/locations/get';
     private createLocationEndpoint = '/locations/create';
     private editLocationEndpoint = '/locations/edit';
-    locationsObj?: LocWrapper;
+    private deleteLocationEndpoint = '/locations/delete';
 
     constructor(private http: HttpClient) {}
 
@@ -39,7 +39,7 @@ export class LocationsService {
     }
 
     deleteLocation(id: string) {
-        return this.http.delete(environment.baseURL + `/locations/delete/${id}`, {
+        return this.http.delete(environment.baseURL + this.deleteLocationEndpoint + `/${id}`, {
             observe: 'body',
             withCredentials: true,
             headers: new HttpHeaders().append('Content-Type', 'application/json')

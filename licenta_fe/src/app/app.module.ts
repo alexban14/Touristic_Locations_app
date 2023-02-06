@@ -18,6 +18,12 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ShowLocationsComponent } from './home/show-locations/show-locations.component';
 import { FooterComponent } from './home/footer/footer.component';
 import { MapquestComponent } from './mapquest/mapquest.component';
+import { EventsComponent } from './eventsPage/events.component';
+import { ListEventsComponent } from './eventsPage/list-events/list-events.component';
+import { CreateEventComponent } from './eventsPage/create-event/create-event.component';
+import { EditEventComponent } from './eventsPage/edit-event/edit-event.component';
+import { SelectDatesComponent } from './eventsPage/list-events/select-dates/select-dates.component';
+import { ShowEventsComponent } from './eventsPage/list-events/show-events/show-events.component';
 
 @NgModule({
     declarations: [
@@ -34,7 +40,13 @@ import { MapquestComponent } from './mapquest/mapquest.component';
         NotFoundComponent,
         ShowLocationsComponent,
         FooterComponent,
-        MapquestComponent
+        MapquestComponent,
+        EventsComponent,
+        ListEventsComponent,
+        CreateEventComponent,
+        EditEventComponent,
+        SelectDatesComponent,
+        ShowEventsComponent
     ],
     imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule],
     providers: [],

@@ -51,6 +51,7 @@ ToDo
 - FE: event angular component
 	- routing,
 	- create events component,
+	- create service file,
 	- edit events component,
 	- display events :
 		- calendar to select which events are taking place in a certain time frame ( & filter events by category

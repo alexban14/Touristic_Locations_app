@@ -12,7 +12,6 @@ import { LocationsService } from 'src/app/services/locations/locations.service';
 export class CreateLocationComponent {
     createLocationForm: FormGroup;
     images: any;
-    formDataToSend: FormData = new FormData();
     imgToUploadForm: FormData = new FormData();
     fileNames: string[] = [];
 
