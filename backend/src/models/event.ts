@@ -4,7 +4,8 @@ enum category {
     theater = 'theater',
     music_festival = 'music_festival',
     comdey_show = 'comdey_show',
-    movie_festival = 'movie_festival'
+    movie_festival = 'movie_festival',
+    sports = 'sports'
 }
 
 export interface IEvent {
@@ -19,7 +20,7 @@ export interface IEvent {
         long: number;
     };
     ticket: string;
-    price: string;
+    price: number;
     ticketsLink: string;
     image: string;
     creator: {
@@ -49,7 +50,7 @@ const EventSchema = new Schema({
     },
     category: {
         type: String,
-        enum: ['theater', 'music_festival', 'comdey_show', 'movie_festival'],
+        enum: ['theater', 'music_festival', 'comdey_show', 'movie_festival', 'sports'],
         required: true
     },
     description: {

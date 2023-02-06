@@ -44,7 +44,7 @@ const editEvent = async (req: Request, res: Response) => {
         const id = req.params.id;
         const editedEvent = req.body;
         editedEvent.creationDate = Date.now();
-        const updatedEvent = await Event.findByIdAndUpdate(id);
+        const updatedEvent = await Event.findByIdAndUpdate(id, { ...editedEvent });
         if (!updatedEvent) {
             res.status(404).json({ message: 'Event not found' });
         }

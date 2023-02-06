@@ -7,7 +7,6 @@ import { ILocSchema } from '../models/location';
 import { IReviewSchema } from '../models/review';
 import { IEventSchema } from '../models/event';
 import Logging from '../library/Logging';
-import { join } from 'path';
 
 export const validateJoi = (schema: ObjectSchema) => {
     return async (req: Request, res: Response, next: NextFunction) => {
@@ -35,8 +34,10 @@ export const locationSchema = Joi.object<ILocSchema>({
 
 export const eventSchema = Joi.object<IEventSchema>({
     name: Joi.string().required(),
-    startDate: Joi.date().required(), // .format('DD-MM-YYYY'),
-    endDate: Joi.date().required(), //.format('DD-MM-YYYY'),
+    // startDate: Joi.string().required(),
+    // endDate: Joi.string().required(),
+    startDate: Joi.date().format('DD-MM-YYYY').utc().required(),
+    endDate: Joi.date().format('DD-MM-YYYY').utc().required(),
     category: Joi.string().required(),
     description: Joi.string().required(),
     location: Joi.object({
@@ -45,7 +46,7 @@ export const eventSchema = Joi.object<IEventSchema>({
     }).required(),
     ticket: Joi.string().required(),
     price: Joi.number().min(1),
-    ticketsLink: Joi.string().required(),
+    ticketsLink: Joi.string(),
     image: Joi.string().required()
 }).required();
 

@@ -46,12 +46,25 @@ ToDo
 + BE: JOI events object validation
 + BE: check for loged in user for, creating a new event
 
-- BE: test the endpoints in postman
+06/02/2023
++ BE: test the endpoints in postman
+- FE: event angular component
+	- routing,
+	- create events component,
+	- edit events component,
+	- display events :
+		- calendar to select which events are taking place in a certain time frame ( & filter events by category
+		- show events
+		- display one event as a modal
+
+- FE: break the angular app.module & app-routing.module into multiple separate modules for each feature set
 - BE: more complex queries (filter by category, date selected, etc)
 - BE: check for events creator, so that only he can edit or delete an event
 
 
 - FE / BE: Date construct in the schema model for every object (location, event, review)
+- FE / BE: price to not be required
+- FE: login & register forms to have the same style as create and edit
 - FE / BE: make location price not required
 - BE: introduce pagination for events, locations, reviews
 
