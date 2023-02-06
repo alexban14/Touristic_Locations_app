@@ -1,6 +1,6 @@
 import Joi, { ObjectSchema } from 'joi';
 import('@joi/date');
-Joi.extend(require('@joi/date'));
+const JoiDate = Joi.extend(require('@joi/date'));
 
 import { Request, Response, NextFunction } from 'express';
 import { ILocSchema } from '../models/location';
@@ -36,8 +36,8 @@ export const eventSchema = Joi.object<IEventSchema>({
     name: Joi.string().required(),
     // startDate: Joi.string().required(),
     // endDate: Joi.string().required(),
-    startDate: Joi.date().format('DD-MM-YYYY').utc().required(),
-    endDate: Joi.date().format('DD-MM-YYYY').utc().required(),
+    startDate: JoiDate.date().format(['DD-MM-YYYY']).required(),
+    endDate: JoiDate.date().format(['DD-MM-YYYY']).required(),
     category: Joi.string().required(),
     description: Joi.string().required(),
     location: Joi.object({
