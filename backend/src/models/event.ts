@@ -11,8 +11,8 @@ enum category {
 export interface IEvent {
     name: string;
     creationDate: number;
-    startDate: string;
-    endDate: string;
+    startDate: number;
+    endDate: number;
     category: category;
     description: string;
     location: {
@@ -41,11 +41,11 @@ const EventSchema = new Schema({
         required: true
     },
     startDate: {
-        type: String,
+        type: Number,
         required: true
     },
     endDate: {
-        type: String,
+        type: Number,
         required: true
     },
     category: {

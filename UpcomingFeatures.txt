@@ -54,7 +54,9 @@ ToDo
 
 07/02/2023
 	+ create events component,
+
 	- edit events component,
+	- move create routes from header to a button grup related to their section
 	- display events :
 		- calendar to select which events are taking place in a certain time frame ( & filter events by category
 		- show events
