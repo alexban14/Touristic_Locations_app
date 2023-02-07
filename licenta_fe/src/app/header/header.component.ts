@@ -21,10 +21,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.loginStatusSub = this.checkService.isLogedIn().subscribe({
             next: (response: any) => {
-                this.dataService.changeLogedIn(response),
+                this.dataService.changeLogedIn(response.logedIn),
+                    /* console.log('raspuns de la server cu statusul userului:', response), */
                     (this.dataServiceSub = this.dataService.currentLogedIn.subscribe({
                         next: (response: any) => {
-                            (this.isLogedIn = response.logedIn), console.log(this.isLogedIn);
+                            this.isLogedIn = response /*, console.log(this.isLogedIn) */;
                         },
                         error: (err) => console.log(err)
                     }));

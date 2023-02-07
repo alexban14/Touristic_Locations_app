@@ -2,6 +2,7 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { response } from 'express';
 import { EventsService } from 'src/app/services/eventsPage/events.service';
 import { ImgUploadService } from 'src/app/services/locations/img-upload.service';
 
@@ -13,14 +14,15 @@ import { ImgUploadService } from 'src/app/services/locations/img-upload.service'
 export class CreateEventComponent implements OnInit {
     createEventForm: FormGroup;
     image: any;
+    imgToUploadForm: FormData = new FormData();
     formDataToSend: FormData = new FormData();
     fileName: string = '';
 
     constructor(private imgUploadService: ImgUploadService, private eventsService: EventsService, private _router: Router) {
         this.createEventForm = new FormGroup({
             name: new FormControl('', [Validators.minLength(4), Validators.maxLength(40), Validators.required]),
-            startDate: new FormControl(formatDate('', 'DD-MM-YYY', 'GMT+2'), Validators.required),
-            endDate: new FormControl(formatDate('', 'DD-MM-YYY', 'GMT+2'), Validators.required),
+            // startDate: new FormControl('', Validators.required),
+            // endDate: new FormControl('', Validators.required),
             category: new FormControl('', [Validators.required]),
             location: new FormGroup({
                 lat: new FormControl('', [Validators.required]),
@@ -28,21 +30,35 @@ export class CreateEventComponent implements OnInit {
             }),
             ticket: new FormControl('', [Validators.required]),
             price: new FormControl('', [Validators.pattern(/^[0-9]+$/), Validators.min(1), Validators.max(1000)]),
-            ticketsLink: new FormControl('', [Validators.required])
+            ticketsLink: new FormControl(''),
+            description: new FormControl('', [Validators.minLength(100), Validators.maxLength(10000), Validators.required])
         });
 
         this.createEventForm.valueChanges.subscribe(console.log);
     }
 
-    onFileSelected(event: any) {}
+    onFileSelected(event: any) {
+        this.image = event.target.files[0];
+        if (this.image) {
+            this.imgToUploadForm.append('file', this.image);
+        }
+        console.log(event.target.files[0]);
+    }
 
-    submitEventForm() {}
+    submitEventForm() {
+        this.imgUploadService.uploadImg(this.imgToUploadForm).subscribe({
+            next: (response: any) => {
+                console.log(response), (this.fileName = response.fileName);
+            },
+            error: (error) => console.log(error)
+        });
+    }
 
     sendEvent() {
         const eventToSend = {
             name: this.createEventForm.controls['name'].value,
-            startDate: this.createEventForm.controls['startDate'].value,
-            endDate: this.createEventForm.controls['endDate'].value,
+            // startDate: this.createEventForm.controls['startDate'].value,
+            // endDate: this.createEventForm.controls['endDate'].value,
             category: this.createEventForm.controls['category'].value,
             location: {
                 lat: this.createEventForm.controls['location'].value.lat,

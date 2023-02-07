@@ -1,1 +1,74 @@
-<p>create-event works!</p>
+<div class="container p-3 mt-5 wrapper">
+    <div class="col-md-10 col-lg-8 col-xl-6 mx-auto">
+        <h4 class="mb-3">Detalii despre evenimentul pe care doriti sa-l adaugati</h4>
+        <form [formGroup]="createEventForm" enctype="multipart/form-data" (ngSubmit)="submitEventForm()" class="needs-validation" novalidate>
+            <div class="mb-3">
+                <input formControlName="name" type="text" class="form-control" name="name" id="name" placeholder="Nume" />
+                <div *ngIf="createEventForm.controls['name'].touched && createEventForm.controls['name'].errors" class="text-danger mb-3 d-block">
+                    <div class="mb-3" *ngIf="createEventForm.controls['name'].errors['required']">Numele evenimentului este necesar pentru a crea unul nou.</div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="ticket">Selecteaza o categorie in care se incadreaza evenimentul</label>
+                <select formControlName="category" class="form-select" aria-label="Default select example">
+                    <option value="theater">Teatru</option>
+                    <option value="music_festival">Festival de muzica</option>
+                    <option value="comdey_show">Comedie</option>
+                    <option value="movie_festival">Festval de film</option>
+                    <option value="sports">Sport</option>
+                </select>
+            </div>
+
+            <div formGroupName="location" class="row">
+                <div class="col-6 mb-3">
+                    <label for="lat">Latitudine</label>
+                    <input formControlName="lat" type="text" class="form-control" name="lat" id="lat" />
+                </div>
+                <div class="col-6 mb-3">
+                    <label for="long">Longitudine</label>
+                    <input formControlName="long" type="text" class="form-control" name="long" id="long" />
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="ticket">Intrarea se face cu bilet?</label>
+                <select formControlName="ticket" class="form-select" aria-label="Default select example" id="ticket">
+                    <option [ngValue]="null" disabled>Intrarea se face cu bilet?</option>
+                    <option value="true">Da</option>
+                    <option value="false">Nu</option>
+                </select>
+                <div *ngIf="createEventForm.controls['ticket'].touched && createEventForm.controls['ticket'].errors" class="text-danger mb-3 d-block">
+                    <div class="mb-3" *ngIf="createEventForm.controls['ticket'].errors['required']">Este necesar sa specificati da ce se poate bilet sau fara la evenimentul dumneavoastra.</div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="price">Pretul biletului</label>
+                <input formControlName="price" class="form-control" type="number" name="price" id="price" />
+                <div *ngIf="createEventForm.controls['price'].touched && createEventForm.controls['price'].errors" class="text-danger mb-3 d-block">
+                    <div *ngIf="createEventForm.controls['price'].errors['patern']">Pretul trebuie sa fie un numar pozitiv.</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="images" class="form-label">Alege o imagine</label>
+                <input class="form-control" [name]="image" type="file" id="images" (change)="onFileSelected($event)" #fileUpload />
+            </div>
+
+            <div class="mb-3">
+                <label for="ticketsLink" class="form-label">Link catre un procesator de bilete</label>
+                <input formControlName="ticketsLink" type="text" class="form-control" name="ticketsLink" id="ticketsLink" />
+            </div>
+
+            <div class="mb-3">
+                <label for="description">Descrie atractia turistica pe care vrei s-o adaugi:</label>
+                <textarea formControlName="description" class="form-control" name="description" id="description" cols="30" rows="5"></textarea>
+                <div *ngIf="createEventForm.controls['description'].touched && createEventForm.controls['description'].errors" class="text-danger mb-3 d-block">
+                    <div *ngIf="createEventForm.controls['description'].errors['required']">Descrierea evenimentului este necesar pentru a crea un eveniment</div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-outline-primary" [disabled]="!createEventForm.valid">Adauga</button>
+            <hr class="mb-4" />
+        </form>
+    </div>
+</div>

@@ -10,9 +10,11 @@ import { DataStorageService } from '../data-storage.service';
 export class AuthGuard implements CanActivate {
     isLogedIn!: boolean;
 
-    constructor(private dataService: DataStorageService) {
+    constructor(private dataService: DataStorageService, private _router: Router) {
         this.dataService.currentLogedIn.subscribe({
-            next: (response: any) => (this.isLogedIn = response.logedIn),
+            next: (response: any) => {
+                (this.isLogedIn = response), console.log(this.isLogedIn);
+            },
             error: (err) => console.log(err)
         });
     }
@@ -21,6 +23,7 @@ export class AuthGuard implements CanActivate {
         if (this.isLogedIn === true) {
             return true;
         } else {
+            this._router.navigate(['/auth/register']);
             return false;
         }
     }

@@ -10,6 +10,7 @@
                 <li class="nav-item"><a class="nav-link" routerLinkActive="active" routerLink="/locations/get">Atractii turistice</a></li>
                 <li class="nav-item"><a class="nav-link" routerLinkActive="active" routerLink="/events/get">Evenimente</a></li>
                 <li *ngIf="isLogedIn" class="nav-item"><a class="nav-link" routerLinkActive="active" routerLink="/locations/new">Creaza Atractie</a></li>
+                <li *ngIf="isLogedIn" class="nav-item"><a class="nav-link" routerLinkActive="active" routerLink="/events/new">Creaza Eveniment</a></li>
                 <li *ngIf="!isLogedIn" class="nav-item"><a class="nav-link" routerLinkActive="active" routerLink="/auth/login">Conectare</a></li>
                 <li *ngIf="!isLogedIn" class="nav-item"><a class="nav-link" routerLinkActive="active" routerLink="/auth/register">Cont nou</a></li>
                 <li *ngIf="isLogedIn" class="nav-item"><a class="nav-link" routerLinkActive="active" (click)="logoutUser()">Deconectare</a></li>
