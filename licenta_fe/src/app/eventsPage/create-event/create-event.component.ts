@@ -21,8 +21,8 @@ export class CreateEventComponent implements OnInit {
     constructor(private imgUploadService: ImgUploadService, private eventsService: EventsService, private _router: Router) {
         this.createEventForm = new FormGroup({
             name: new FormControl('', [Validators.minLength(4), Validators.maxLength(40), Validators.required]),
-            // startDate: new FormControl('', Validators.required),
-            // endDate: new FormControl('', Validators.required),
+            startDate: new FormControl('', [Validators.required]),
+            endDate: new FormControl('', [Validators.required]),
             category: new FormControl('', [Validators.required]),
             location: new FormGroup({
                 lat: new FormControl('', [Validators.required]),
@@ -48,27 +48,33 @@ export class CreateEventComponent implements OnInit {
     submitEventForm() {
         this.imgUploadService.uploadImg(this.imgToUploadForm).subscribe({
             next: (response: any) => {
-                console.log(response), (this.fileName = response.fileName);
+                console.log(response), (this.fileName = response.fileName), this.sendEvent();
             },
             error: (error) => console.log(error)
         });
     }
 
     sendEvent() {
+        const dates = {
+            startDate: new Date(this.createEventForm.controls['startDate'].value),
+            endDate: new Date(this.createEventForm.controls['endDate'].value)
+        };
+        console.log(dates);
+
         const eventToSend = {
             name: this.createEventForm.controls['name'].value,
-            // startDate: this.createEventForm.controls['startDate'].value,
-            // endDate: this.createEventForm.controls['endDate'].value,
+            startDate: dates.endDate.getTime(),
+            endDate: dates.startDate.getTime(),
             category: this.createEventForm.controls['category'].value,
             location: {
                 lat: this.createEventForm.controls['location'].value.lat,
                 long: this.createEventForm.controls['location'].value.long
             },
             ticket: this.createEventForm.controls['ticket'].value,
-            price: this.createEventForm.controls['price'],
-            image: this.fileName
+            price: this.createEventForm.controls['price'].value,
+            image: this.fileName,
+            description: this.createEventForm.controls['description'].value
         };
-
         console.log(eventToSend);
 
         this.eventsService.createEvent(eventToSend).subscribe({

@@ -1,5 +1,5 @@
 <div class="container p-3 mt-5 wrapper">
-    <div class="col-md-10 col-lg-8 col-xl-6 mx-auto">
+    <div class="col-md-10 col-xl-8 mx-auto">
         <h4 class="mb-3">Detalii despre evenimentul pe care doriti sa-l adaugati</h4>
         <form [formGroup]="createEventForm" enctype="multipart/form-data" (ngSubmit)="submitEventForm()" class="needs-validation" novalidate>
             <div class="mb-3">
@@ -9,8 +9,20 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-6 mb-3">
+                    <label for="startDate">Data de incepere</label>
+                    <input formControlName="startDate" type="date" class="form-control" id="startDate" />
+                </div>
+
+                <div class="col-6 mb-3">
+                    <label for="endDate">Data de final</label>
+                    <input formControlName="endDate" type="date" class="form-control" id="endDate" />
+                </div>
+            </div>
+
             <div class="mb-3">
-                <label for="ticket">Selecteaza o categorie in care se incadreaza evenimentul</label>
+                <label for="category">Selecteaza o categorie in care se incadreaza evenimentul</label>
                 <select formControlName="category" class="form-select" aria-label="Default select example">
                     <option value="theater">Teatru</option>
                     <option value="music_festival">Festival de muzica</option>

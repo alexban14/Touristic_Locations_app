@@ -34,10 +34,10 @@ export const locationSchema = Joi.object<ILocSchema>({
 
 export const eventSchema = Joi.object<IEventSchema>({
     name: Joi.string().required(),
-    // startDate: Joi.string().required(),
-    // endDate: Joi.string().required(),
-    startDate: JoiDate.date().format(['DD-MM-YYYY']).required(),
-    endDate: JoiDate.date().format(['DD-MM-YYYY']).required(),
+    startDate: Joi.number().required(),
+    endDate: Joi.number().required(),
+    // startDate: JoiDate.date().format(['MM-DD-YYYY']).required(),
+    // endDate: JoiDate.date().format(['MM-DD-YYYY']).required(),
     category: Joi.string().required(),
     description: Joi.string().required(),
     location: Joi.object({

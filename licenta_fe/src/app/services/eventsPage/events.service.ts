@@ -23,7 +23,7 @@ export class EventsService {
     }
 
     createEvent(event: any) {
-        return this.http.post<OneEventWrapper>(environment.baseURL + this.createEvent, event, {
+        return this.http.post<OneEventWrapper>(environment.baseURL + this.createEventEndpoint, event, {
             observe: 'body',
             withCredentials: true,
             headers: new HttpHeaders().append('Content-Type', 'application/json')
