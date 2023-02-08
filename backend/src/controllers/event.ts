@@ -12,6 +12,49 @@ const index = async (req: Request, res: Response) => {
     }
 };
 
+const showFromStartDate = async (req: Request, res: Response) => {
+    try {
+        const startDate = req.query.startDate;
+        if (!startDate) {
+            res.status(404).json({ message: 'Start date parameter missing from the request' });
+        }
+        const events = await Event.find({ startDate: { $gte: startDate } });
+        Logging.info(events);
+        events ? res.status(200).json({ events }) : res.status(404).json({ message: 'No events found starting with this date' });
+    } catch (error) {
+        res.status(500).json({ error });
+    }
+};
+
+const showFromStartEnd = async (req: Request, res: Response) => {
+    try {
+        const startDate = req.query.startDate;
+        const endDate = req.query.endDate;
+        if (!startDate || !endDate) {
+            res.status(404).json({ message: 'Start date parameter missing from the request' });
+        }
+        const events = await Event.find({ startDate: { $gte: startDate, $lte: endDate } });
+        Logging.info(events);
+        events ? res.status(200).json({ events }) : res.status(404).json({ message: 'No events found starting with this date' });
+    } catch (error) {
+        res.status(500).json({ error });
+    }
+};
+
+const showByCategory = async (req: Request, res: Response) => {
+    try {
+        const categoryParam = req.query.category;
+        if (!categoryParam) {
+            res.status(404).json({ message: 'Category parameter missing from the request' });
+        }
+        const events = await Event.find({ category: categoryParam });
+        Logging.info(events);
+        events ? res.status(200).json({ events }) : res.status(404).json({ message: 'No events found for the specified category' });
+    } catch (error) {
+        res.status(500).json({ error });
+    }
+};
+
 const createEvent = async (req: Request, res: Response) => {
     try {
         const event = new Event(req.body);
@@ -28,7 +71,7 @@ const createEvent = async (req: Request, res: Response) => {
 const showEvent = async (req: Request, res: Response) => {
     try {
         const id = req.params.id;
-        const event = await Event.findById(id);
+        const event = await Event.findById(id).populate('creator');
         Logging.info(event);
         if (!event) {
             res.status(400).json({ message: 'Event not found' });
@@ -68,4 +111,4 @@ const deleteEvent = async (req: Request, res: Response) => {
     }
 };
 
-export default { index, createEvent, showEvent, editEvent, deleteEvent };
+export default { index, showFromStartDate, showFromStartEnd, showByCategory, createEvent, showEvent, editEvent, deleteEvent };
