@@ -31,7 +31,7 @@ const showFromStartEnd = async (req: Request, res: Response) => {
         const startDate = req.query.startDate;
         const endDate = req.query.endDate;
         if (!startDate || !endDate) {
-            res.status(404).json({ message: 'Start date parameter missing from the request' });
+            res.status(404).json({ message: 'Start date or end date parameter missing from the request' });
         }
         const events = await Event.find({ startDate: { $gte: startDate, $lte: endDate } });
         Logging.info(events);

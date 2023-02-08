@@ -18,6 +18,31 @@ export class EventsService {
         return this.http.get<EventWrapper>(environment.baseURL + this.allEventsEndpoint);
     }
 
+    eventsByStartDate(startDate: number) {
+        return this.http.get<EventWrapper>(environment.baseURL + '/fromStartDate', {
+            params: {
+                startDate: startDate
+            }
+        });
+    }
+
+    eventsByStartEnd(startDate: number, endDate: number) {
+        return this.http.get<EventWrapper>(environment.baseURL + '/fromStartEnd', {
+            params: {
+                startDate: startDate,
+                endDate: endDate
+            }
+        });
+    }
+
+    eventsByCategory(category: string) {
+        return this.http.get<EventWrapper>(environment.baseURL + 'byCategory', {
+            params: {
+                category: category
+            }
+        });
+    }
+
     getOneEvent(id: string) {
         return this.http.get<OneEventWrapper>(environment.baseURL + this.allEventsEndpoint + `/${id}`);
     }
@@ -39,7 +64,7 @@ export class EventsService {
     }
 
     deleteEvent(id: string) {
-        return this.http.delete<{ message: string }>(environment.baseURL + this.deleteEvent + `/${id}`, {
+        return this.http.delete<{ message: string }>(environment.baseURL + this.deleteEventEndpoint + `/${id}`, {
             observe: 'body',
             withCredentials: true,
             headers: new HttpHeaders().append('Content-Type', 'application/json')
