@@ -1,6 +1,6 @@
 <h3 class="p-3 mb-5 text-center d-block border-bottom border-primary filterHeader">Filtreaza evenimentele</h3>
 <div class="row" class="d-flex flex-column flex-md-row align-items-center justify-content-center">
-    <div class="col-12 col-md-3 mx-3 my-3 p-3 bg-info bg-opacity-10 border border-info border-end-0 rounded-start">
+    <div class="col-12 col-md-3 mx-3 my-3 p-3 bg-primary bg-opacity-10 border border-primary border-end-0 rounded-start">
         <form [formGroup]="startDateForm" (ngSubmit)="submitStartForm()">
             <div class="mb-3">
                 <label for="startDate">Dupa data de incepere</label>
@@ -9,7 +9,7 @@
             <button type="submit" class="btn btn-warning" [disabled]="!startDateForm.valid">Filtreaza</button>
         </form>
     </div>
-    <div class="col-12 col-md-6 mx-3 my-3 p-3 bg-info bg-opacity-10 border border-info border-start-0 border-end-0">
+    <div class="col-12 col-md-6 mx-3 my-3 p-3 bg-primary bg-opacity-10 border border-primary border-start-0 border-end-0">
         <form [formGroup]="startEndForm" (ngSubmit)="submitStartEndForm()">
             <div class="row">
                 <div class="mb-3 col-6">
@@ -17,15 +17,15 @@
                     <input type="date" class="form-control" formControlName="startDate" id="startDate" />
                 </div>
                 <div class="mb-3 col-6">
-                    <label for="endDate">si de final</label>
+                    <label for="endDate">si data de final</label>
                     <input type="date" class="form-control" formControlName="endDate" id="endDate" />
                 </div>
             </div>
             <button type="submit" class="btn btn-warning" [disabled]="!startEndForm.valid">Filtreaza</button>
         </form>
     </div>
-    <div class="col-12 col-md-3 mx-3 my-3 p-3 bg-info bg-opacity-10 border border-info border-start-0 rounded-end">
-        <form [formGroup]="categoryFrom" (ngSubmit)="categoryForm()">
+    <div class="col-12 col-md-3 mx-3 my-3 p-3 bg-primary bg-opacity-10 border border-primary border-start-0 rounded-end">
+        <form [formGroup]="categoryForm" (ngSubmit)="submitCategoryForm()">
             <div class="mb-3">
                 <label for="category">Dupa categorie</label>
                 <select formControlName="category" class="form-select" aria-label="Default select example">
@@ -36,7 +36,7 @@
                     <option value="sports">Sport</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-warning" [disabled]="!categoryFrom.valid">Filtreaza</button>
+            <button type="submit" class="btn btn-warning" [disabled]="!categoryForm.valid">Filtreaza</button>
         </form>
     </div>
 </div>

@@ -19,7 +19,7 @@ export class EventsService {
     }
 
     eventsByStartDate(startDate: number) {
-        return this.http.get<EventWrapper>(environment.baseURL + '/fromStartDate', {
+        return this.http.get<EventWrapper>(environment.baseURL + this.allEventsEndpoint + '/fromStartDate', {
             params: {
                 startDate: startDate
             }
@@ -27,7 +27,7 @@ export class EventsService {
     }
 
     eventsByStartEnd(startDate: number, endDate: number) {
-        return this.http.get<EventWrapper>(environment.baseURL + '/fromStartEnd', {
+        return this.http.get<EventWrapper>(environment.baseURL + this.allEventsEndpoint + '/fromStartEnd', {
             params: {
                 startDate: startDate,
                 endDate: endDate
@@ -36,7 +36,7 @@ export class EventsService {
     }
 
     eventsByCategory(category: string) {
-        return this.http.get<EventWrapper>(environment.baseURL + 'byCategory', {
+        return this.http.get<EventWrapper>(environment.baseURL + this.allEventsEndpoint + '/byCategory', {
             params: {
                 category: category
             }

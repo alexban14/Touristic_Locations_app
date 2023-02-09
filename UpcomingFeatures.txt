@@ -59,12 +59,15 @@ ToDo
 	+ move create routes from header to a button grup related to their section
 	+ BE: more complex queries (filter by category, date selected, etc)
 	- FE: display events :
-		- calendar to select which events are taking place in a certain time frame & filter events by category
+		+ calendar to select which events are taking place in a certain time frame & filter events by category
+
+09/02/2023
 		- show events
 		- display one event as a modal
 	- FE: edit events component,
+	+ FE: hide create buttons if user is not loged in
 
--FE: show events component home page
+- FE: show events component home page
 
 - FE: break the angular app.module & app-routing.module into multiple separate modules for each feature set
 - BE: check for events creator, so that only he can edit or delete an event

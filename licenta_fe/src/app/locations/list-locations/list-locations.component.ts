@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
+import { DataStorageService } from 'src/app/services/data-storage.service';
 import { LocationsService } from 'src/app/services/locations/locations.service';
 import { environment } from 'src/environments/environment';
 import { Location, LocWrapper } from '../location.model';
@@ -11,10 +12,13 @@ import { Location, LocWrapper } from '../location.model';
     styleUrls: ['./list-locations.component.css']
 })
 export class ListLocationsComponent implements OnInit, OnDestroy {
-    subscription: Subscription | undefined;
+    subscription!: Subscription;
     locationsObj?: LocWrapper;
 
-    constructor(private locationsService: LocationsService) {}
+    logedStatus!: Subscription;
+    isLogedIn!: boolean;
+
+    constructor(private locationsService: LocationsService, private dataStorage: DataStorageService) {}
 
     ngOnInit(): void {
         const locationWrapperObs: Observable<LocWrapper> = this.locationsService.getAllLocations();
@@ -23,10 +27,18 @@ export class ListLocationsComponent implements OnInit, OnDestroy {
             this.locationsObj = response;
             console.log(response);
         });
+
+        this.logedStatus = this.dataStorage.currentLogedIn.subscribe({
+            next: (response: boolean) => {
+                this.isLogedIn = response;
+            },
+            error: (err) => console.log(err)
+        });
     }
 
     ngOnDestroy(): void {
-        this.subscription?.unsubscribe();
+        this.subscription.unsubscribe();
+        this.logedStatus.unsubscribe();
     }
 }
 
