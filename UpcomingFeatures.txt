@@ -62,6 +62,7 @@ ToDo
 		+ calendar to select which events are taking place in a certain time frame & filter events by category
 
 09/02/2023
+		- default hight for filter forms
 		- show events
 		- display one event as a modal
 	- FE: edit events component,
