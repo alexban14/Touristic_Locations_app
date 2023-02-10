@@ -62,11 +62,18 @@ ToDo
 		+ calendar to select which events are taking place in a certain time frame & filter events by category
 
 09/02/2023
+		+ passing the filtered events to the events subject
 		- default hight for filter forms
-		- show events
-		- display one event as a modal
-	- FE: edit events component,
+
+10/02/2023
+		+ show events
 	+ FE: hide create buttons if user is not loged in
+	+ FE: edit events component
+	- FE: event show page
+	- FE: google maps api each event show page
+	- FE: move the create button next to the title
+
+
 
 - FE: show events component home page
 

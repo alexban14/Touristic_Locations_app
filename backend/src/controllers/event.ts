@@ -4,7 +4,7 @@ import Event from '../models/event';
 
 const index = async (req: Request, res: Response) => {
     try {
-        const events = await Event.find({});
+        const events = await Event.find({}).populate('creator');
         Logging.info(events);
         res.status(200).json({ events });
     } catch (error) {
@@ -18,7 +18,7 @@ const showFromStartDate = async (req: Request, res: Response) => {
         if (!startDate) {
             res.status(404).json({ message: 'Start date parameter missing from the request' });
         }
-        const events = await Event.find({ startDate: { $gte: startDate } });
+        const events = await Event.find({ startDate: { $gte: startDate } }).populate('creator');
         Logging.info(events);
         events ? res.status(200).json({ events }) : res.status(404).json({ message: 'No events found starting with this date' });
     } catch (error) {
@@ -33,7 +33,7 @@ const showFromStartEnd = async (req: Request, res: Response) => {
         if (!startDate || !endDate) {
             res.status(404).json({ message: 'Start date or end date parameter missing from the request' });
         }
-        const events = await Event.find({ startDate: { $gte: startDate, $lte: endDate } });
+        const events = await Event.find({ startDate: { $gte: startDate, $lte: endDate } }).populate('creator');
         Logging.info(events);
         events ? res.status(200).json({ events }) : res.status(404).json({ message: 'No events found starting with this date' });
     } catch (error) {
@@ -47,7 +47,7 @@ const showByCategory = async (req: Request, res: Response) => {
         if (!categoryParam) {
             res.status(404).json({ message: 'Category parameter missing from the request' });
         }
-        const events = await Event.find({ category: categoryParam });
+        const events = await Event.find({ category: categoryParam }).populate('creator');
         Logging.info(events);
         events ? res.status(200).json({ events }) : res.status(404).json({ message: 'No events found for the specified category' });
     } catch (error) {

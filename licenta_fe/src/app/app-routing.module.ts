@@ -59,8 +59,8 @@ const appRoutes: Routes = [
             },
             {
                 path: 'edit/:id',
-                component: EditEventComponent,
-                canActivate: [AuthGuard]
+                component: EditEventComponent
+                // canActivate: [AuthGuard]
             }
         ]
     },

@@ -63,8 +63,8 @@ export class CreateEventComponent implements OnInit {
 
         const eventToSend = {
             name: this.createEventForm.controls['name'].value,
-            startDate: dates.endDate.getTime(),
-            endDate: dates.startDate.getTime(),
+            startDate: dates.startDate.getTime(),
+            endDate: dates.endDate.getTime(),
             category: this.createEventForm.controls['category'].value,
             location: {
                 lat: this.createEventForm.controls['location'].value.lat,
