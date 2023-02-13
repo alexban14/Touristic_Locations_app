@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="text-center">
+        <h3 class="section-heading text-uppercase">Exploarți evenimentele</h3>
+        <h3 class="section-subheading text-muted">din orasul Sibiu</h3>
+    </div>
+    <div class="row">
+        <div *ngFor="let event of eventsArr" class="col-lg-6 col-xl-4">
+            <div class="card card-margin">
+                <img src="http://localhost:3500/imgFiles/get/{{ event.image }}" class="card-img-top" alt="" />
+                <div class="card-header no-border">
+                    <h5 class="card-title p-2">{{ event.name }}</h5>
+                </div>
+                <div class="card-body pt-0">
+                    <div class="widget-49">
+                        <div class="widget-49-title-wrapper mb-3">
+                            <div class="widget-49-date-primary">
+                                <span class="widget-49-date-day">{{ event.startDate | date | slice : 0 : 4 }}</span>
+                                <span class="widget-49-date-month">{{ event.startDate | date | slice : 4 : 12 }}</span>
+                            </div>
+                            <div class="widget-49-meeting-info">
+                                <span class="widget-49-pro-title"
+                                    >Creat de: <b>{{ event.creator.username | uppercase }}</b></span
+                                >
+                                <span class="widget-49-meeting-time"
+                                    >Din <b>{{ event.startDate | date | slice : 0 : 12 }}</b> pana in <b>{{ event.endDate | date | slice : 0 : 12 }}</b></span
+                                >
+                            </div>
+                        </div>
+                        <div>
+                            <h5 *ngIf="event.ticket == 'true'">Intrarea se face pe baza de bilet.</h5>
+                            <h5 *ngIf="event.ticket == 'true'">
+                                Pret: <b>{{ event.ticket }} RON</b>
+                            </h5>
+                            <h5 *ngIf="event.ticket == 'false'">Intrarea este libera.</h5>
+                            <h5>Descriere:</h5>
+                            <p>{{ event.description | slice : 0 : 200 }}...</p>
+                        </div>
+                        <div class="widget-49-meeting-action">
+                            <a routerLink="/events/get/{{ event._id }}" class="btn btn-sm btn-flash-border-primary">Mai multe</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

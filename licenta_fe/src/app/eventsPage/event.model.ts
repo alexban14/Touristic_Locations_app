@@ -7,6 +7,7 @@ enum category {
 }
 
 export class Event {
+    _id: string;
     name: string;
     creationDate: number;
     startDate: string;
@@ -28,6 +29,7 @@ export class Event {
     image: string;
 
     constructor(
+        _id: string,
         name: string,
         creationDate: number,
         startDate: string,
@@ -41,7 +43,8 @@ export class Event {
         ticketsLink: string,
         image: string
     ) {
-        (this.name = name),
+        (this._id = _id),
+            (this.name = name),
             (this.creationDate = creationDate),
             (this.startDate = startDate),
             (this.endDate = endDate),

@@ -25,6 +25,7 @@ import { EditEventComponent } from './eventsPage/edit-event/edit-event.component
 import { SelectDatesComponent } from './eventsPage/list-events/select-dates/select-dates.component';
 import { ShowEventsComponent } from './eventsPage/list-events/show-events/show-events.component';
 import { ShowPageEventComponent } from './eventsPage/show-page-event/show-page-event.component';
+import { ShowEventsHomeComponent } from './home/show-events-home/show-events-home.component';
 
 @NgModule({
     declarations: [
@@ -48,7 +49,8 @@ import { ShowPageEventComponent } from './eventsPage/show-page-event/show-page-e
         EditEventComponent,
         SelectDatesComponent,
         ShowEventsComponent,
-        ShowPageEventComponent
+        ShowPageEventComponent,
+        ShowEventsHomeComponent
     ],
     imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule],
     providers: [],

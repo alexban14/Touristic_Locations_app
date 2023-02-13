@@ -55,8 +55,8 @@ export class EventsService {
         });
     }
 
-    editEvent(editedEvent: any) {
-        return this.http.put<OneEventWrapper>(environment.baseURL + this.editEventEndpoint, editedEvent, {
+    editEvent(editedEvent: any, id: string) {
+        return this.http.put<OneEventWrapper>(environment.baseURL + this.editEventEndpoint + `/${id}`, editedEvent, {
             observe: 'body',
             withCredentials: true,
             headers: new HttpHeaders().append('Content-Type', 'application/json')

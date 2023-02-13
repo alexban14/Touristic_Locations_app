@@ -1,4 +1,4 @@
-<div class="row d-flex justify-content-center">
+<div class="row">
     <div *ngFor="let event of displayEvents.events" class="col-lg-6 col-xl-4">
         <div class="card card-margin">
             <img src="http://localhost:3500/imgFiles/get/{{ event.image }}" class="card-img-top" alt="" />
@@ -31,7 +31,7 @@
                         <p>{{ event.description | slice : 0 : 200 }}...</p>
                     </div>
                     <div class="widget-49-meeting-action">
-                        <a href="#" class="btn btn-sm btn-flash-border-primary">Mai multe</a>
+                        <a routerLink="/events/get/{{ event._id }}" class="btn btn-sm btn-flash-border-primary">Mai multe</a>
                     </div>
                 </div>
             </div>

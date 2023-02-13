@@ -6,6 +6,7 @@ import { CreateEventComponent } from './eventsPage/create-event/create-event.com
 import { EditEventComponent } from './eventsPage/edit-event/edit-event.component';
 import { EventsComponent } from './eventsPage/events.component';
 import { ListEventsComponent } from './eventsPage/list-events/list-events.component';
+import { ShowPageEventComponent } from './eventsPage/show-page-event/show-page-event.component';
 import { HomeComponent } from './home/home.component';
 import { CreateLocationComponent } from './locations/create-location/create-location.component';
 import { EditLocationComponent } from './locations/edit-location/edit-location.component';
@@ -56,6 +57,10 @@ const appRoutes: Routes = [
                 path: 'new',
                 component: CreateEventComponent,
                 canActivate: [AuthGuard]
+            },
+            {
+                path: 'get/:id',
+                component: ShowPageEventComponent
             },
             {
                 path: 'edit/:id',
