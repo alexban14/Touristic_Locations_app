@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { ObjectId } from 'mongodb';
 import Location from '../models/location';
 import Review from '../models/review';
+import Event from '../models/event';
 
 export const isLogedIn = async (req: Request, res: Response, next: NextFunction) => {
     if (!req.isAuthenticated()) {
@@ -16,6 +17,17 @@ export const isLocationAuthor = async (req: Request, res: Response, next: NextFu
     const location = await Location.findOne({ _id: new ObjectId(id) });
     const userId = req.user?._id;
     if (userId.equals(location?.creator)) {
+        next();
+    } else {
+        res.status(401).json({ message: "You don't have permision to perform this operation!" });
+    }
+};
+
+export const isEventAuthor = async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const event = await Event.findOne({ _id: new ObjectId(id) });
+    const userId = req.user?._id;
+    if (userId.equals(event?.creator)) {
         next();
     } else {
         res.status(401).json({ message: "You don't have permision to perform this operation!" });
