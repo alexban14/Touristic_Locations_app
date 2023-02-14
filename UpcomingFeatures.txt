@@ -72,22 +72,23 @@ ToDo
 13/02/2023
 + FE: edit events component
 + FE: event show page
-+ FE: events on the home page
+
+14/02/2023
++ FE: show events component home page
 + FE: button for edit and delete
 
-- FE: google maps api each event show page
-- FE: move the create button next to the title
+15/02/2023
++ FE: google maps api each event show page
++ FE: move the create button next to the title
 - FE / BE: middleware for event author 
 - FE: if no events after filtering display something 
-
-- FE: show events component home page
 
 - FE: change the arhitecure of the how an object that is being sent gets created
 - FE: break the angular app.module & app-routing.module into multiple separate modules for each feature set
 - BE: check for events creator, so that only he can edit or delete an event
 ? FE / BE: reviews don't create anymore!!!
 
-
+- FE: find how to extract the session from the cookie that is beening set after login/register
 - FE / BE: Date construct in the schema model for every object (location, event, review)
 - FE / BE: price to not be required
 - FE: login & register forms to have the same style as create and edit

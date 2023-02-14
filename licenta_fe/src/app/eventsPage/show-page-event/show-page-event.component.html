@@ -4,30 +4,35 @@
             <div class="card mb-3">
                 <div class="p-2">
                     <img class="card-img-top" src="http://localhost:3500/imgFiles/get/{{ eventObj.image }}" alt="" />
-                    <div class="card-body">
-                        <h3 class="card-title text-center">{{ eventObj.name }}</h3>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item text-muted">
-                            Creat de: <b>{{ eventObj.creator.username }}</b>
-                        </li>
-                        <li class="list-group-item">
-                            Data de incepere: <b>{{ eventObj.startDate | date | slice : 0 : 12 }}</b>
-                        </li>
-                        <li class="list-group-item">
-                            Data de final: <b>{{ eventObj.endDate | date | slice : 0 : 12 }}</b>
-                        </li>
-                        <li class="list-group-item" *ngIf="eventObj.ticket == 'true'">Intrarea se face pe baza de bilet</li>
-                        <li class="list-group-item" *ngIf="eventObj.ticket == 'true'">Pretul biletului: {{ eventObj.price }}</li>
-                        <li class="list-group-item" *ngIf="eventObj.ticket == 'false'">Intrarea este libera</li>
-                        <li class="list-group-item">
-                            <p class="card-text">{{ eventObj.description }}</p>
-                        </li>
-                    </ul>
-                    <div class="card-body">
-                        <!-- *ngIf="isAuthor" -->
-                        <a class="card-link btn btn-info" routerLink="/events/edit/{{ eventObj._id }}">Edit</a>
-                        <a class="card-link btn btn-danger">Delete</a>
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="card-body">
+                                <h3 class="card-title text-center">{{ eventObj.name }}</h3>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item text-muted">
+                                    Creat de: <b>{{ eventObj.creator.username }}</b>
+                                </li>
+                                <li class="list-group-item">
+                                    Data de incepere: <b>{{ eventObj.startDate | date | slice : 0 : 12 }}</b>
+                                </li>
+                                <li class="list-group-item">
+                                    Data de final: <b>{{ eventObj.endDate | date | slice : 0 : 12 }}</b>
+                                </li>
+                                <li class="list-group-item" *ngIf="eventObj.ticket == 'true'">Intrarea se face pe baza de bilet</li>
+                                <li class="list-group-item" *ngIf="eventObj.ticket == 'true'">Pretul biletului: {{ eventObj.price }}</li>
+                                <li class="list-group-item" *ngIf="eventObj.ticket == 'false'">Intrarea este libera</li>
+                                <li class="list-group-item">
+                                    <p class="card-text">{{ eventObj.description }}</p>
+                                </li>
+                            </ul>
+                            <div class="card-body">
+                                <!-- *ngIf="isAuthor" -->
+                                <a class="card-link btn btn-info" routerLink="/events/edit/{{ eventObj._id }}">Edit</a>
+                                <a class="card-link btn btn-danger">Delete</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 full" id="map"></div>
                     </div>
                 </div>
             </div>

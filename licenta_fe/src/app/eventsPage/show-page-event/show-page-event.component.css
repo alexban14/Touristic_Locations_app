@@ -16,3 +16,7 @@
 .list-group li:last-child {
     justify-self: start;
 }
+
+#map {
+    max-height: 50rem;
+}
