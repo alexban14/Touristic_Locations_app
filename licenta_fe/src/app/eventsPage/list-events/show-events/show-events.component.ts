@@ -28,7 +28,8 @@ export class ShowEventsComponent implements OnInit, OnDestroy {
     }
 
     fetchInitialEvents() {
-        this.eventsSerSub = this.eventService.getAllEvents().subscribe({
+        const currentDate = new Date();
+        this.eventsSerSub = this.eventService.eventsByStartDate(currentDate.getTime()).subscribe({
             next: (response: EventWrapper) => {
                 console.log(response), this.dataStorage.changeEvents(response);
             },

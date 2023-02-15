@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { ObjectId } from 'mongodb';
 import Location from '../models/location';
+import Event from '../models/event';
 import Review from '../models/review';
 
 const isLogedInStatus = async (req: Request, res: Response) => {
@@ -31,6 +32,21 @@ const isLocationAuthorStatus = async (req: Request, res: Response) => {
     }
 };
 
+const isEventAuthorStatus = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const event = await Event.findById(id);
+        const userId = req.user?._id;
+        if (req.isAuthenticated() && userId.equals(event?.creator)) {
+            res.status(200).json({ eventAuthor: true });
+        } else {
+            res.status(200).json({ eventAuthor: false });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error });
+    }
+};
+
 const isReviewAuthorStatus = async (req: Request, res: Response) => {
     try {
         const { reviewId } = req.params;
@@ -47,4 +63,4 @@ const isReviewAuthorStatus = async (req: Request, res: Response) => {
     }
 };
 
-export default { isLogedInStatus, isLocationAuthorStatus, isReviewAuthorStatus };
+export default { isLogedInStatus, isLocationAuthorStatus, isEventAuthorStatus, isReviewAuthorStatus };

@@ -6,6 +6,8 @@ import { EventsService } from 'src/app/services/eventsPage/events.service';
 import { environment } from 'src/environments/environment';
 import { Event, OneEventWrapper } from '../event.model';
 import { eventMapStyles } from 'src/app/mapquest/mapStylesEvent';
+import { CheckService, EventAuthorResponse } from 'src/app/services/checking/check.service';
+import { response } from 'express';
 
 @Component({
     selector: 'app-show-page-event',
@@ -16,13 +18,14 @@ export class ShowPageEventComponent implements OnInit {
     event_id = this.route.snapshot.paramMap.get('id');
     subscription!: Subscription;
     authorStatusSub!: Subscription;
+    isAuthor!: boolean;
     loginStatusSub!: Subscription;
     eventObj!: Event;
 
-    constructor(private eventsService: EventsService, private route: ActivatedRoute) {}
+    constructor(private eventsService: EventsService, private checkService: CheckService, private route: ActivatedRoute, private _router: Router) {}
 
     ngOnInit(): void {
-        if (typeof this.event_id === 'string')
+        if (typeof this.event_id === 'string') {
             this.subscription = this.eventsService.getOneEvent(this.event_id).subscribe({
                 next: (response: OneEventWrapper) => {
                     console.log(response);
@@ -31,6 +34,21 @@ export class ShowPageEventComponent implements OnInit {
                 },
                 error: (err) => console.log(err)
             });
+
+            this.authorStatusSub = this.checkService.isEventAuthor(this.event_id).subscribe({
+                next: (response: EventAuthorResponse) => {
+                    this.isAuthor = response.eventAuthor;
+                },
+                error: (err) => console.log(err)
+            });
+        }
+    }
+
+    deleteEvent() {
+        if (typeof this.event_id === 'string') {
+            this.eventsService.deleteEvent(this.event_id);
+            this._router.navigate(['/events/get']);
+        }
     }
 
     title = 'google-maps';

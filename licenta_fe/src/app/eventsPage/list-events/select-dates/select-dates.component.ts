@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { response } from 'express';
+import { Subscription } from 'rxjs';
 import { DataStorageService } from 'src/app/services/data-storage.service';
 import { EventsService } from 'src/app/services/eventsPage/events.service';
 import { EventWrapper } from '../../event.model';
@@ -10,10 +11,13 @@ import { EventWrapper } from '../../event.model';
     templateUrl: './select-dates.component.html',
     styleUrls: ['./select-dates.component.css']
 })
-export class SelectDatesComponent implements OnInit {
+export class SelectDatesComponent implements OnInit, OnDestroy {
     startDateForm: FormGroup;
     startEndForm: FormGroup;
     categoryForm: FormGroup;
+
+    logedStatus!: Subscription;
+    isLogedIn!: boolean;
 
     constructor(private dataStorage: DataStorageService, private eventService: EventsService) {
         this.startDateForm = new FormGroup({
@@ -30,7 +34,18 @@ export class SelectDatesComponent implements OnInit {
         });
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.logedStatus = this.dataStorage.currentLogedIn.subscribe({
+            next: (response: boolean) => {
+                this.isLogedIn = response;
+            },
+            error: (err) => console.log(err)
+        });
+    }
+
+    ngOnDestroy(): void {
+        this.logedStatus.unsubscribe();
+    }
 
     submitStartForm() {
         const startDate = new Date(this.startDateForm.controls['startDate'].value);

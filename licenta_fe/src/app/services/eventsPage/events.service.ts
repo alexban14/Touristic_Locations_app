@@ -10,7 +10,7 @@ export class EventsService {
     private allEventsEndpoint = '/events/get';
     private createEventEndpoint = '/events/create';
     private editEventEndpoint = '/events/edit';
-    private deleteEventEndpoint = '/event/delete';
+    private deleteEventEndpoint = '/events/delete';
 
     constructor(private http: HttpClient) {}
 

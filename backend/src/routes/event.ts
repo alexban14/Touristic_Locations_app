@@ -12,6 +12,6 @@ router.get('/get/byCategory', eventController.showByCategory);
 router.post('/create', isLogedIn, validateJoi(eventSchema), eventController.createEvent);
 router.get('/get/:id', eventController.showEvent);
 router.put('/edit/:id', isLogedIn, isEventAuthor, validateJoi(eventSchema), eventController.editEvent);
-router.delete('/delete/:id', isLogedIn, isLocationAuthor, eventController.deleteEvent);
+router.delete('/delete/:id', isLogedIn, isEventAuthor, eventController.deleteEvent);
 
 export = router;
