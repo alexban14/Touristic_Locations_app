@@ -60,4 +60,12 @@ export class CheckService {
             headers: new HttpHeaders().append('Content-Type', 'aplication/json')
         });
     }
+
+    isReviewAuthor(id: string) {
+        return this.http.get(environment.baseURL + this.checkReviewAuthorEndpoint + `${id}`, {
+            observe: 'body',
+            withCredentials: true,
+            headers: new HttpHeaders().append('Content-Type', 'aplication/json')
+        });
+    }
 }
