@@ -26,6 +26,14 @@ export class EventAuthorResponse {
     }
 }
 
+export class UserRes {
+    logedInUser: string;
+
+    constructor(logedInUser: string) {
+        this.logedInUser = logedInUser;
+    }
+}
+
 @Injectable({
     providedIn: 'root'
 })
@@ -34,6 +42,7 @@ export class CheckService {
     checkLocationAuthorEndpoint = '/check/location';
     checkEventAuthorEndpoint = '/check/event';
     checkReviewAuthorEndpoint = '/check/review';
+    checkLogedInUserEndpoint = '/check/user';
 
     constructor(private http: HttpClient) {}
 
@@ -63,6 +72,14 @@ export class CheckService {
 
     isReviewAuthor(id: string) {
         return this.http.get(environment.baseURL + this.checkReviewAuthorEndpoint + `${id}`, {
+            observe: 'body',
+            withCredentials: true,
+            headers: new HttpHeaders().append('Content-Type', 'aplication/json')
+        });
+    }
+
+    logedInUser() {
+        return this.http.get<UserRes>(environment.baseURL + this.checkLogedInUserEndpoint, {
             observe: 'body',
             withCredentials: true,
             headers: new HttpHeaders().append('Content-Type', 'aplication/json')

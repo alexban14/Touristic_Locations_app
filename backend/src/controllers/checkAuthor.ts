@@ -63,4 +63,16 @@ const isReviewAuthorStatus = async (req: Request, res: Response) => {
     }
 };
 
-export default { isLogedInStatus, isLocationAuthorStatus, isEventAuthorStatus, isReviewAuthorStatus };
+const logedInUser = async (req: any, res: Response) => {
+    try {
+        const logedInUser = req.user.username;
+        if (!req.user) {
+            res.status(200).json({ message: 'Not found' });
+        }
+        res.status(200).json({ logedInUser });
+    } catch (error) {
+        res.status(500).json({ error });
+    }
+};
+
+export default { isLogedInStatus, isLocationAuthorStatus, isEventAuthorStatus, isReviewAuthorStatus, logedInUser };

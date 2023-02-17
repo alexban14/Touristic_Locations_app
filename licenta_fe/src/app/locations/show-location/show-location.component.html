@@ -39,8 +39,15 @@
                 <h3 class="caption-heading mb-3">Rating-urile vizitatorilor</h3>
                 <div class="card mb-3" *ngFor="let review of locationObj?.location.reviews">
                     <div class="card-body">
-                        <h5 class="card-title caption-subheading">{{ review.author.username | titlecase }}, a lasat un rating de {{ review.rating }} din 5</h5>
-                        <div class="starability-result" [attr.data-rating]="review.rating"></div>
+                        <div class="row d-flex justify-content-between">
+                            <div class="col-sm-10">
+                                <h5 class="card-title caption-subheading">{{ review.author.username | titlecase }}, a lasat un rating de {{ review.rating }} din 5</h5>
+                                <div class="starability-result" [attr.data-rating]="review.rating"></div>
+                            </div>
+                            <div class="col-sm-2 d-flex justify-content-end align-items-start p-1">
+                                <button class="btn btn-danger" (click)="(deleteReview)">Sterge</button>
+                            </div>
+                        </div>
                         <hr />
                         <p class="card-title description">{{ review.description }}</p>
                     </div>

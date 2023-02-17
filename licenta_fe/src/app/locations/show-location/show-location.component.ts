@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { CheckService } from 'src/app/services/checking/check.service';
+import { CheckService, UserRes } from 'src/app/services/checking/check.service';
 import { ImgUploadService } from 'src/app/services/locations/img-upload.service';
 import { LocationsService } from 'src/app/services/locations/locations.service';
 import { ReviewsService } from 'src/app/services/locations/reviews.service';
@@ -16,6 +16,8 @@ export class ShowLocationComponent implements OnInit, OnDestroy {
     subscription: Subscription | undefined;
     authorStatusSub: Subscription | undefined;
     loginStatusSub: Subscription | undefined;
+    logedInUserSub: Subscription | undefined;
+    logedInUser: string = '';
     locationObj?: any;
     imgFilename: string = '';
     isAuthor: boolean | unknown;
@@ -36,7 +38,7 @@ export class ShowLocationComponent implements OnInit, OnDestroy {
     ) {
         this.reviewForm = this.fb.group({
             description: ['', [Validators.required, Validators.minLength(5)]],
-            rating: [Number, [Validators.required, Validators.min(1), Validators.max(5)]]
+            rating: [0, [Validators.required, Validators.min(1), Validators.max(5)]]
         });
 
         this.reviewForm.valueChanges.subscribe(console.log);
@@ -51,13 +53,25 @@ export class ShowLocationComponent implements OnInit, OnDestroy {
         }
 
         this.subscription = locationWrapperObs?.subscribe((response) => ((this.locationObj = response), console.log(response), (this.imgFilename = response.location.images[0])));
+
         this.authorStatusSub = auhtorStatusRes?.subscribe((response) => {
             (this.isAuthor = response.locationAuthor), console.log(response);
         });
+
         let loginStatusRes = this.checkService.isLogedIn();
         this.loginStatusSub = loginStatusRes.subscribe({
             next: (response) => {
-                console.log(response), (this.isLogedIn = response.logedIn);
+                console.log(response);
+                this.isLogedIn = response.logedIn;
+                if (this.isLogedIn) {
+                    this.logedInUserSub = this.checkService.logedInUser().subscribe({
+                        next: (res: UserRes) => {
+                            this.logedInUser = res.logedInUser;
+                            console.log(this.logedInUser);
+                        },
+                        error: (err) => console.log(err)
+                    });
+                }
             },
             error: (error) => console.log(error)
         });
@@ -88,16 +102,21 @@ export class ShowLocationComponent implements OnInit, OnDestroy {
         };
         if (typeof this.id === 'string') {
             this.reviewsService.createReview(createdReview, this.id).subscribe({
-                next: (res: any) => console.log(res),
+                next: (res: any) => {
+                    console.log(res);
+                    window.location.reload();
+                },
                 error: (err) => console.log(err)
             });
         }
-        window.location.reload();
     }
+
+    deleteReview() {}
 
     ngOnDestroy(): void {
         this.subscription?.unsubscribe();
         this.authorStatusSub?.unsubscribe();
         this.loginStatusSub?.unsubscribe();
+        this.logedInUserSub?.unsubscribe();
     }
 }

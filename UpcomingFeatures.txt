@@ -83,11 +83,14 @@ ToDo
 + FE / BE: middleware for event author 
 + FE: delete event method
 + FE: if no events after filtering display something
-? FE / BE: reviews don't create anymore!!!
++ BE: check for events creator, so that only he can edit or delete an event
+
+17/02/2023
++ FE: reviews don't create anymore!!! (window reload was executing before the post request was sent
++ FE: delete button for reviews
 
 - FE: change the arhitecure of the how an object that is being sent gets created
 - FE: break the angular app.module & app-routing.module into multiple separate modules for each feature set
-- BE: check for events creator, so that only he can edit or delete an event
 
 - FE: find how to extract the session from the cookie that is beening set after login/register
 - FE / BE: Date construct in the schema model for every object (location, event, review)
