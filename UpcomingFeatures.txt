@@ -38,6 +38,7 @@ ToDo
 
 30/01/2023
 + FE: create/edit forms maxLenght validator was too small
++ FE / BE: resolve the authGuard problem with the loginStatus checking (see: https://www.dotnettricks.com/learn/angular/sharing-data-between-angular-components-methods)
 
 05/02/2023
 + FE / BE: start implementing the calendar events section
@@ -89,6 +90,9 @@ ToDo
 + FE: reviews don't create anymore!!! (window reload was executing before the post request was sent
 + FE: delete button for reviews
 
+18/02/2023
++ FE: delete review method fully implemented
+
 - FE: change the arhitecure of the how an object that is being sent gets created
 - FE: break the angular app.module & app-routing.module into multiple separate modules for each feature set
 
@@ -100,7 +104,6 @@ ToDo
 - BE: introduce pagination for events, locations, reviews
 
 - BE: make an endpoint for uploading multiple images
-- FE / BE: resolve the authGuard problem with the loginStatus checking (see: https://www.dotnettricks.com/learn/angular/sharing-data-between-angular-components-methods)
 - FE + BE: google account authentication 
 
 - FE + BE: application setup for deploy

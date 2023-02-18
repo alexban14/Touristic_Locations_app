@@ -89,11 +89,12 @@ export class ShowLocationComponent implements OnInit, OnDestroy {
     deleteLocationObj() {
         if (typeof this.id === 'string') {
             this.locationsService.deleteLocation(this.id).subscribe({
-                next: (res: any) => console.log(res),
+                next: (res: any) => {
+                    console.log(res), this._router.navigate(['/locations/get']);
+                },
                 error: (err) => console.log(err)
             });
         }
-        this._router.navigate(['/locations/get']);
     }
 
     submitReview() {
@@ -111,7 +112,13 @@ export class ShowLocationComponent implements OnInit, OnDestroy {
         }
     }
 
-    deleteReview() {}
+    deleteReview(reviewId: string) {
+        if (typeof this.id === 'string') {
+            this.reviewsService.deleteReview(this.id, reviewId).subscribe({
+                next: (response) => window.location.reload()
+            });
+        }
+    }
 
     ngOnDestroy(): void {
         this.subscription?.unsubscribe();

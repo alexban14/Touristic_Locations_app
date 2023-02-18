@@ -44,8 +44,8 @@
                                 <h5 class="card-title caption-subheading">{{ review.author.username | titlecase }}, a lasat un rating de {{ review.rating }} din 5</h5>
                                 <div class="starability-result" [attr.data-rating]="review.rating"></div>
                             </div>
-                            <div class="col-sm-2 d-flex justify-content-end align-items-start p-1">
-                                <button class="btn btn-danger" (click)="(deleteReview)">Sterge</button>
+                            <div *ngIf="isLogedIn" class="col-sm-2 d-flex justify-content-end align-items-start p-1">
+                                <button *ngIf="logedInUser == review.author.username" class="btn btn-danger" (click)="deleteReview(review._id)">Sterge</button>
                             </div>
                         </div>
                         <hr />
