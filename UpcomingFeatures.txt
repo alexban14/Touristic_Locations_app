@@ -93,14 +93,12 @@ ToDo
 18/02/2023
 + FE: delete review method fully implemented
 
+- FE: add review section for events
 - FE: change the arhitecure of the how an object that is being sent gets created
-- FE: break the angular app.module & app-routing.module into multiple separate modules for each feature set
-
-- FE: find how to extract the session from the cookie that is beening set after login/register
-- FE / BE: Date construct in the schema model for every object (location, event, review)
 - FE / BE: price to not be required
+- FE / BE: Date construct in the schema model for every object (location, event, review)
+
 - FE: login & register forms to have the same style as create and edit
-- FE / BE: make location price not required
 - BE: introduce pagination for events, locations, reviews
 
 - BE: make an endpoint for uploading multiple images
