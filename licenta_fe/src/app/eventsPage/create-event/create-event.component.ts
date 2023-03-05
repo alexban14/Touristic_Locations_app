@@ -71,7 +71,8 @@ export class CreateEventComponent implements OnInit {
                 long: this.createEventForm.controls['location'].value.long
             },
             ticket: this.createEventForm.controls['ticket'].value,
-            price: this.createEventForm.controls['price'].value,
+            price: this.createEventForm.controls['price'].value ? this.createEventForm.controls['price'].value : 1,
+            ticketsLink: this.createEventForm.controls['ticketsLink'].value ? this.createEventForm.controls['ticketsLink'].value : 'No link provided',
             image: this.fileName,
             description: this.createEventForm.controls['description'].value
         };

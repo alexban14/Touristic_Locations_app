@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ImgUploadService } from 'src/app/services/locations/img-upload.service';
 import { LocationsService } from 'src/app/services/locations/locations.service';
+import { LocationSend } from '../location.model';
 
 @Component({
     selector: 'app-create-location',
@@ -18,13 +19,13 @@ export class CreateLocationComponent {
     constructor(private imgUploadService: ImgUploadService, private locationsService: LocationsService, private _router: Router) {
         this.createLocationForm = new FormGroup({
             name: new FormControl('', [Validators.minLength(4), Validators.maxLength(40), Validators.required]),
-            description: new FormControl('', [Validators.required]),
+            description: new FormControl('', [Validators.minLength(100), Validators.maxLength(20000), Validators.minLength(4), Validators.required]),
             location: new FormGroup({
                 lat: new FormControl('', [Validators.required]),
                 long: new FormControl('', [Validators.required])
             }),
             ticket: new FormControl('', [Validators.required]),
-            price: new FormControl('', [Validators.pattern(/^[0-9]+$/), Validators.min(1), Validators.max(1000), Validators.required])
+            price: new FormControl('', [Validators.pattern(/^[0-9]+$/), Validators.min(1), Validators.max(1000)])
         });
 
         this.createLocationForm.valueChanges.subscribe(console.log);
@@ -48,7 +49,7 @@ export class CreateLocationComponent {
     }
 
     sendLocation() {
-        const locationToSend = {
+        const locationToSend: LocationSend = {
             name: this.createLocationForm.controls['name'].value,
             description: this.createLocationForm.controls['description'].value,
             location: {
@@ -56,8 +57,8 @@ export class CreateLocationComponent {
                 long: this.createLocationForm.controls['location'].value.long
             },
             ticket: this.createLocationForm.controls['ticket'].value, // === 'true' ? true : false,
-            price: this.createLocationForm.controls['price'].value,
-            images: this.fileNames
+            images: this.fileNames,
+            price: this.createLocationForm.controls['price'].value ? this.createLocationForm.controls['price'].value : 1
         };
         console.log(locationToSend);
 
@@ -70,3 +71,10 @@ export class CreateLocationComponent {
         });
     }
 }
+
+// this.locationToSend.name = this.createLocationForm.controls['name'].value;
+// this.locationToSend.name = this.createLocationForm.controls['description'].value;
+// this.locationToSend.location.lat = this.createLocationForm.controls['location'].value.lat;
+// this.locationToSend.location.long = this.createLocationForm.controls['location'].value.long;
+// this.locationToSend.ticket = this.createLocationForm.controls['description'].value;
+// this.locationToSend.images = this.fileNames;

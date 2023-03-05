@@ -87,21 +87,26 @@ ToDo
 + BE: check for events creator, so that only he can edit or delete an event
 
 17/02/2023
-+ FE: reviews don't create anymore!!! (window reload was executing before the post request was sent
++ FE: reviews don't create anymore!!! (window reload was executing before the post request was sent)
 + FE: delete button for reviews
 
 18/02/2023
 + FE: delete review method fully implemented
 
+05/03/2023
++ FE: change the arhitecure of the how an object that is being sent gets created
++ BE: price to not be required
+
 - FE: add review section for events
-- FE: change the arhitecure of the how an object that is being sent gets created
-- FE / BE: price to not be required
 - FE / BE: Date construct in the schema model for every object (location, event, review)
 
 - FE: login & register forms to have the same style as create and edit
 - BE: introduce pagination for events, locations, reviews
 
+- BE: user endpoints
+- BE / FE: dashboard for user profile
 - BE: make an endpoint for uploading multiple images
-- FE + BE: google account authentication 
+- FE + BE: google account authentication
 
+- FE / BE: REMOVE THE CONSOLE.LOG'S
 - FE + BE: application setup for deploy

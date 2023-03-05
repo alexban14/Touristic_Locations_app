@@ -73,7 +73,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="description">Descrie atractia turistica pe care vrei s-o adaugi:</label>
+                <label for="description">Descrie evenimentul pe care vrei sa-l adaugi:</label>
                 <textarea formControlName="description" class="form-control" name="description" id="description" cols="30" rows="5"></textarea>
                 <div *ngIf="createEventForm.controls['description'].touched && createEventForm.controls['description'].errors" class="text-danger mb-3 d-block">
                     <div *ngIf="createEventForm.controls['description'].errors['required']">Descrierea evenimentului este necesar pentru a crea un eveniment</div>
