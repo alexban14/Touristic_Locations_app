@@ -95,13 +95,14 @@ export class EditLocationComponent implements OnInit, OnDestroy {
     updateLocation(imageToSend: string[]) {
         const editedLocation: LocationSend = {
             name: this.editedLocationForm.controls['name'].value,
+            creationDate: this.locationObjToEdit.creationDate,
             description: this.editedLocationForm.controls['description'].value,
             location: {
                 lat: this.editedLocationForm.controls['location'].value.lat,
                 long: this.editedLocationForm.controls['location'].value.long
             },
-            ticket: this.editedLocationForm.controls['ticket'].value, //=== 'true' ? true : false,
-            price: this.editedLocationForm.controls['price'].value,
+            ticket: this.editedLocationForm.controls['ticket'].value,
+            price: this.editedLocationForm.controls['price'].value ? this.editedLocationForm.controls['price'].value : this.locationObjToEdit.price,
             images: imageToSend
         };
         // if (typeof this.editedLocationForm.controls['images'].value == 'string') {

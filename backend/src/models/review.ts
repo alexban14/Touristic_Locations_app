@@ -2,6 +2,7 @@ import mongoose, { Document, Schema } from 'mongoose';
 
 export interface IReview {
     description: string;
+    creationDate: number;
     rating: number;
     author: {
         type: Schema.Types.ObjectId;
@@ -14,6 +15,10 @@ export interface IReviewSchema extends IReview, Document {}
 const ReviewSchema = new Schema({
     description: {
         type: String,
+        required: true
+    },
+    creationDate: {
+        type: Number,
         required: true
     },
     rating: {

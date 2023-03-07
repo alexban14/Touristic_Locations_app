@@ -1,9 +1,10 @@
 export class Review {
+    public creationDate: number;
     public description: string;
     public rating: number;
 
-    constructor(description: string, rating: number) {
-        (this.description = description), (this.rating = rating);
+    constructor(creationDate: number, description: string, rating: number) {
+        (this.creationDate = creationDate), (this.description = description), (this.rating = rating);
     }
 }
 

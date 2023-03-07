@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Event, EventSend, EventWrapper, OneEventWrapper } from 'src/app/eventsPage/event.model';
+import { EventSend, EventWrapper, OneEventWrapper } from 'src/app/eventsPage/event.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -47,7 +47,7 @@ export class EventsService {
         return this.http.get<OneEventWrapper>(environment.baseURL + this.allEventsEndpoint + `/${id}`);
     }
 
-    createEvent(event: any) {
+    createEvent(event: EventSend) {
         return this.http.post<OneEventWrapper>(environment.baseURL + this.createEventEndpoint, event, {
             observe: 'body',
             withCredentials: true,
@@ -55,7 +55,7 @@ export class EventsService {
         });
     }
 
-    editEvent(editedEvent: any, id: string) {
+    editEvent(editedEvent: EventSend, id: string) {
         return this.http.put<OneEventWrapper>(environment.baseURL + this.editEventEndpoint + `/${id}`, editedEvent, {
             observe: 'body',
             withCredentials: true,

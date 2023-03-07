@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { EventsService } from 'src/app/services/eventsPage/events.service';
 import { BackendResponseUpload, ImgUploadService } from 'src/app/services/locations/img-upload.service';
-import { EventWrapper, OneEventWrapper } from '../event.model';
+import { EventSend, EventWrapper, OneEventWrapper } from '../event.model';
 
 @Component({
     selector: 'app-edit-event',
@@ -13,7 +13,7 @@ import { EventWrapper, OneEventWrapper } from '../event.model';
 })
 export class EditEventComponent implements OnInit {
     eventSubscription!: Subscription;
-    eventObjToEdit!: OneEventWrapper;
+    creationDate!: number;
     image: any;
     imgToUploadForm: FormData = new FormData();
     deleteImage!: string;
@@ -54,6 +54,7 @@ export class EditEventComponent implements OnInit {
             this.eventSubscription = this.eventsService.getOneEvent(this.event_id).subscribe({
                 next: (response: OneEventWrapper) => {
                     console.log(response),
+                        (this.creationDate = response.event.creationDate),
                         this.editedEvent.setValue({
                             name: response.event.name,
                             startDate: response.event.startDate,
@@ -65,7 +66,7 @@ export class EditEventComponent implements OnInit {
                             },
                             ticket: response.event.ticket,
                             price: response.event.price,
-                            ticketsLink: '',
+                            ticketsLink: response.event.ticketsLink,
                             description: response.event.description,
                             image: response.event.image
                         }),
@@ -103,8 +104,9 @@ export class EditEventComponent implements OnInit {
             endDate: new Date(this.editedEvent.controls['endDate'].value)
         };
 
-        const editedEvent = {
+        const editedEvent: EventSend = {
             name: this.editedEvent.controls['name'].value,
+            creationDate: this.creationDate,
             startDate: dates.startDate.getTime(),
             endDate: dates.endDate.getTime(),
             category: this.editedEvent.controls['category'].value,
@@ -113,6 +115,7 @@ export class EditEventComponent implements OnInit {
                 long: this.editedEvent.controls['location'].value.long
             },
             ticket: this.editedEvent.controls['ticket'].value,
+            ticketsLink: this.editedEvent.controls['ticketsLink'].value,
             price: this.editedEvent.controls['price'].value,
             image: imageToSend,
             description: this.editedEvent.controls['description'].value
@@ -122,11 +125,13 @@ export class EditEventComponent implements OnInit {
 
         if (typeof this.event_id === 'string') {
             this.eventsService.editEvent(editedEvent, this.event_id).subscribe({
-                next: (res: OneEventWrapper) => console.log(res),
-                error: (err: any) => console.log(err)
+                next: (res: OneEventWrapper) => {
+                    console.log(res), this._router.navigate([`/events/get/${this.event_id}`]);
+                },
+                error: (err: any) => {
+                    console.log(err), this._router.navigate([`/events/get/${this.event_id}`]);
+                }
             });
         }
-
-        this._router.navigate([`/events/get/${this.event_id}`]);
     }
 }

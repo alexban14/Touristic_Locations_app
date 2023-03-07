@@ -97,16 +97,23 @@ ToDo
 + FE: change the arhitecure of the how an object that is being sent gets created
 + BE: price to not be required
 
-- FE: add review section for events
-- FE / BE: Date construct in the schema model for every object (location, event, review)
+08/03/2023
++ FE / BE: Date construct in the schema model for every object (location, event, review)
++ FE: display creation date for locations, events and reviews also add link to buy tickets
++ FE / BE: add more types for events
+
+- BE: when retriving events and locations from the database sort the by start date / create date respectively
+- BE: introduce pagination for events, locations, reviews
 
 - FE: login & register forms to have the same style as create and edit
-- BE: introduce pagination for events, locations, reviews
+- BE / FE: add search functionality for touristic attractions
 
 - BE: user endpoints
 - BE / FE: dashboard for user profile
-- BE: make an endpoint for uploading multiple images
 - FE + BE: google account authentication
+- FE: add comments section for events
+- BE: make an endpoint for uploading multiple images
 
+- BE: code refactoring, implement Repository Pattern and Resource Pattern for storing the controllers logic and data retriving
 - FE / BE: REMOVE THE CONSOLE.LOG'S
 - FE + BE: application setup for deploy

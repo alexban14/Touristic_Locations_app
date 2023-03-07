@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ReviewWrapper } from 'src/app/locations/review.model';
+import { Review } from 'src/app/locations/review.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 export class ReviewsService {
     constructor(private http: HttpClient) {}
 
-    createReview(review: ReviewWrapper, id: string) {
+    createReview(review: Review, id: string) {
         return this.http.post(environment.baseURL + `/locations/${id}/reviews`, review, {
             observe: 'body',
             withCredentials: true,

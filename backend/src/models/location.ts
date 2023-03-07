@@ -4,6 +4,7 @@ import Review from './review';
 
 export interface ILoc {
     name: string;
+    creationDate: number;
     description: string;
     location: {
         lat: number;
@@ -27,6 +28,10 @@ export interface ILocSchema extends ILoc, Document {}
 const LocSchema = new Schema({
     name: {
         type: String,
+        required: true
+    },
+    creationDate: {
+        type: Number,
         required: true
     },
     description: {

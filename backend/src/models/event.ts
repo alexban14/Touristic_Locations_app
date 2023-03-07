@@ -2,9 +2,8 @@ import mongoose, { Document, Schema } from 'mongoose';
 
 enum category {
     theater = 'theater',
-    music_festival = 'music_festival',
-    comdey_show = 'comdey_show',
-    movie_festival = 'movie_festival',
+    festival = 'festival',
+    show = 'show',
     sports = 'sports'
 }
 
@@ -50,7 +49,7 @@ const EventSchema = new Schema({
     },
     category: {
         type: String,
-        enum: ['theater', 'music_festival', 'comdey_show', 'movie_festival', 'sports'],
+        enum: ['theater', 'festival', 'show', 'sports'],
         required: true
     },
     description: {

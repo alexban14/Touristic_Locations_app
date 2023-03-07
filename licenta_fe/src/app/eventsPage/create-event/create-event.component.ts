@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { response } from 'express';
 import { EventsService } from 'src/app/services/eventsPage/events.service';
 import { ImgUploadService } from 'src/app/services/locations/img-upload.service';
+import { EventSend } from '../event.model';
 
 @Component({
     selector: 'app-create-event',
@@ -61,8 +62,9 @@ export class CreateEventComponent implements OnInit {
         };
         console.log(dates);
 
-        const eventToSend = {
+        const eventToSend: EventSend = {
             name: this.createEventForm.controls['name'].value,
+            creationDate: Date.now(),
             startDate: dates.startDate.getTime(),
             endDate: dates.endDate.getTime(),
             category: this.createEventForm.controls['category'].value,

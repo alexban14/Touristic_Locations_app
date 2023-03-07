@@ -1,6 +1,7 @@
 export class Location {
     public _id: string;
     public name: string;
+    public creationDate: number;
     public description: string;
     public location: {
         lat: number;
@@ -11,9 +12,10 @@ export class Location {
     public images: string[];
     public reviews: [];
 
-    constructor(_id: string, name: string, description: string, location: { lat: number; long: number }, ticket: boolean, images: string[], reviews: [], price?: number) {
+    constructor(_id: string, name: string, creationDate: number, description: string, location: { lat: number; long: number }, ticket: boolean, images: string[], reviews: [], price?: number) {
         (this._id = _id),
             (this.name = name),
+            (this.creationDate = creationDate),
             (this.description = description),
             (this.location = location),
             (this.ticket = ticket),
@@ -25,6 +27,7 @@ export class Location {
 
 export class LocationSend {
     public name: string;
+    public creationDate: number;
     public description: string;
     public location: {
         lat: number;
@@ -34,8 +37,8 @@ export class LocationSend {
     public price?: number;
     public images: string[];
 
-    constructor(name: string, description: string, location: { lat: number; long: number }, ticket: boolean, images: string[], price?: number) {
-        (this.name = name), (this.description = description), (this.location = location), (this.ticket = ticket), (this.price = price), (this.images = images);
+    constructor(name: string, creationDate: number, description: string, location: { lat: number; long: number }, ticket: boolean, images: string[], price?: number) {
+        (this.name = name), (this.creationDate = creationDate), (this.description = description), (this.location = location), (this.ticket = ticket), (this.price = price), (this.images = images);
     }
 }
 

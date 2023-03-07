@@ -6,7 +6,6 @@
 
 .list-group {
     display: flex;
-    align-items: center;
     font-size: 1rem;
     font-weight: 400;
     font-style: italic;

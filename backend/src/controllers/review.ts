@@ -7,7 +7,7 @@ import Review from '../models/review';
 const createReview = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const review = new Review(req.body.review);
+        const review = new Review(req.body);
         review.author = req.user?._id;
         await review.save();
         // const newReview = await Review.findOne({ body: review.body});

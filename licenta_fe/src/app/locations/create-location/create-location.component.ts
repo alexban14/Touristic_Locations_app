@@ -51,6 +51,7 @@ export class CreateLocationComponent {
     sendLocation() {
         const locationToSend: LocationSend = {
             name: this.createLocationForm.controls['name'].value,
+            creationDate: Date.now(),
             description: this.createLocationForm.controls['description'].value,
             location: {
                 lat: this.createLocationForm.controls['location'].value.lat,

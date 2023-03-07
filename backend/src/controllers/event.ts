@@ -58,7 +58,6 @@ const showByCategory = async (req: Request, res: Response) => {
 const createEvent = async (req: Request, res: Response) => {
     try {
         const event = new Event(req.body);
-        event.creationDate = Date.now();
         event.creator = req.user!.id;
         await event.save();
         Logging.info(event);

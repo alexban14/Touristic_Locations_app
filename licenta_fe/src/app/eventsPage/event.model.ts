@@ -1,8 +1,7 @@
 enum category {
     theater = 'theater',
-    music_festival = 'music_festival',
-    comdey_show = 'comdey_show',
-    movie_festival = 'movie_festival',
+    festival = 'festival',
+    show = 'show',
     sports = 'sports'
 }
 
@@ -10,8 +9,8 @@ export class Event {
     _id: string;
     name: string;
     creationDate: number;
-    startDate: string;
-    endDate: string;
+    startDate: number;
+    endDate: number;
     category: category;
     creator: {
         _id: string;
@@ -32,8 +31,8 @@ export class Event {
         _id: string,
         name: string,
         creationDate: number,
-        startDate: string,
-        endDate: string,
+        startDate: number,
+        endDate: number,
         category: category,
         creator: { _id: string; email: string; username: string },
         description: string,
@@ -57,8 +56,9 @@ export class Event {
 
 export class EventSend {
     name: string;
-    startDate: string;
-    endDate: string;
+    creationDate: number;
+    startDate: number;
+    endDate: number;
     category: category;
     description: string;
     location: {
@@ -72,9 +72,9 @@ export class EventSend {
 
     constructor(
         name: string,
-        // creationDate: number,
-        startDate: string,
-        endDate: string,
+        creationDate: number,
+        startDate: number,
+        endDate: number,
         category: category,
         description: string,
         location: { lat: number; long: number },
@@ -83,7 +83,7 @@ export class EventSend {
         ticketsLink: string,
         image: string
     ) {
-        (this.name = name), /* (this.creationDate = creationDate),*/ (this.startDate = startDate), (this.endDate = endDate), (this.category = category), (this.description = description);
+        (this.name = name), (this.creationDate = creationDate), (this.startDate = startDate), (this.endDate = endDate), (this.category = category), (this.description = description);
         (this.location = location), (this.ticket = ticket), (this.price = price), (this.ticketsLink = ticketsLink), (this.image = image);
     }
 }

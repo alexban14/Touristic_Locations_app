@@ -22,6 +22,7 @@ export const validateJoi = (schema: ObjectSchema) => {
 
 export const locationSchema = Joi.object<ILocSchema>({
     name: Joi.string().required(),
+    creationDate: Joi.number().required(),
     description: Joi.string().required(),
     location: Joi.object({
         lat: Joi.number().min(4).required(),
@@ -34,10 +35,9 @@ export const locationSchema = Joi.object<ILocSchema>({
 
 export const eventSchema = Joi.object<IEventSchema>({
     name: Joi.string().required(),
+    creationDate: Joi.number().required(),
     startDate: Joi.number().required(),
     endDate: Joi.number().required(),
-    // startDate: JoiDate.date().format(['MM-DD-YYYY']).required(),
-    // endDate: JoiDate.date().format(['MM-DD-YYYY']).required(),
     category: Joi.string().required(),
     description: Joi.string().required(),
     location: Joi.object({
@@ -50,9 +50,8 @@ export const eventSchema = Joi.object<IEventSchema>({
     image: Joi.string().required()
 }).required();
 
-export const reviewSchema = Joi.object({
-    review: Joi.object<IReviewSchema>({
-        description: Joi.string().required(),
-        rating: Joi.number().min(1).required()
-    }).required()
-});
+export const reviewSchema = Joi.object<IReviewSchema>({
+    creationDate: Joi.number().required(),
+    description: Joi.string().required(),
+    rating: Joi.number().min(1).required()
+}).required();

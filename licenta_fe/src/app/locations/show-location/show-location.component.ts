@@ -6,6 +6,7 @@ import { CheckService, UserRes } from 'src/app/services/checking/check.service';
 import { ImgUploadService } from 'src/app/services/locations/img-upload.service';
 import { LocationsService } from 'src/app/services/locations/locations.service';
 import { ReviewsService } from 'src/app/services/locations/reviews.service';
+import { Review } from '../review.model';
 
 @Component({
     selector: 'app-show-location',
@@ -98,8 +99,10 @@ export class ShowLocationComponent implements OnInit, OnDestroy {
     }
 
     submitReview() {
-        const createdReview = {
-            review: this.reviewForm.value
+        const createdReview: Review = {
+            creationDate: Date.now(),
+            description: this.reviewForm.controls['description'].value,
+            rating: this.reviewForm.controls['rating'].value
         };
         if (typeof this.id === 'string') {
             this.reviewsService.createReview(createdReview, this.id).subscribe({

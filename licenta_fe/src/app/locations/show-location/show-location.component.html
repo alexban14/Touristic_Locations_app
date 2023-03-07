@@ -4,7 +4,7 @@
         <button (click)="locationDelete()" type="button" class="btn btn-danger">Sterge</button>
     </div>
     <div class="row">
-        <div class="col-md-8 mb-3">
+        <div class="col-sm-8 mb-3">
             <div id="carouselExampleControls" class="carousel slide mb-3" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active" *ngFor="let image of locationObj?.location.images">
@@ -21,16 +21,22 @@
                 </button>
             </div>
         </div>
-        <div class="col-md-4">
-            <div>
+        <div class="col-sm-4">
+            <div class="d-flex flex-column">
                 <h3 class="caption-heading mb-3">{{ locationObj?.location.name }}</h3>
                 <div *ngIf="locationObj?.location.ticket == 'true'">
                     <button class="btn btn-info mb-3 d-block px-2 caption-subheading">Intrarea se face cu bilet</button>
                     <button class="btn btn-primary mb-3 d-block px-2 caption-subheading">Pretul biletului: {{ locationObj?.location.price }} RON</button>
                 </div>
+                <h5 class="caption-subheading">
+                    Creat de: <b>{{ locationObj.location.creator.username }}</b> in data de <b>{{ locationObj.location.creationDate | date | slice : 0 : 12 }}</b>
+                </h5>
             </div>
-            <p class="caption-subheading">{{ locationObj?.location.description }}</p>
         </div>
+    </div>
+    <hr />
+    <div class="row">
+        <p class="caption-subheading">{{ locationObj?.location.description }}</p>
     </div>
     <hr />
     <div class="row">
@@ -41,7 +47,9 @@
                     <div class="card-body">
                         <div class="row d-flex justify-content-between">
                             <div class="col-sm-10">
-                                <h5 class="card-title caption-subheading">{{ review.author.username | titlecase }}, a lasat un rating de {{ review.rating }} din 5</h5>
+                                <h5 class="card-title caption-subheading">
+                                    {{ review.author.username | titlecase }}, a lasat un rating de <b>{{ review.rating }}</b> din 5 in data de <b>{{ review.creationDate | date | slice : 0 : 12 }}</b>
+                                </h5>
                                 <div class="starability-result" [attr.data-rating]="review.rating"></div>
                             </div>
                             <div *ngIf="isLogedIn" class="col-sm-2 d-flex justify-content-end align-items-start p-1">

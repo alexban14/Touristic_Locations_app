@@ -7,11 +7,11 @@
                     <div class="row">
                         <div class="col-lg-8">
                             <div class="card-body">
-                                <h3 class="card-title text-center">{{ eventObj.name }}</h3>
+                                <h3 class="card-title">{{ eventObj.name }}</h3>
                             </div>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item text-muted">
-                                    Creat de: <b>{{ eventObj.creator.username }}</b>
+                                    Creat de: <b>{{ eventObj.creator.username }}</b> in data de <b>{{ eventObj.creationDate | date | slice : 0 : 12 }}</b>
                                 </li>
                                 <li class="list-group-item">
                                     Data de incepere: <b>{{ eventObj.startDate | date | slice : 0 : 12 }}</b>
@@ -24,6 +24,7 @@
                                     Pretul biletului: <b>{{ eventObj.price }}</b>
                                 </li>
                                 <li class="list-group-item" *ngIf="eventObj.ticket == 'false'">Intrarea este libera</li>
+                                <a href="{{ eventObj.ticketsLink }}" target="_blank" class="btn btn-info my-3"> Rezervat-ti bilet</a>
                                 <li class="list-group-item">
                                     <p class="card-text">{{ eventObj.description }}</p>
                                 </li>
