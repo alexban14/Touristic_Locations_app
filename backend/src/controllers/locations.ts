@@ -4,7 +4,7 @@ import Location from '../models/location';
 
 const index = async (req: Request, res: Response) => {
     try {
-        const locations = await Location.find({});
+        const locations = await Location.find({}).sort({ creationDate: -1 });
         console.log(locations);
         res.status(200).json({ locations });
     } catch (error) {
@@ -42,6 +42,23 @@ const showLocation = async (req: Request, res: Response) => {
     }
 };
 
+const searchLocation = async (req: Request, res: Response) => {
+    try {
+        const locationName: string = req.query.locationName as string;
+        if (!locationName) {
+            res.status(422).json({ message: 'Query parameter not provided' });
+        }
+        const queryRegEx = new RegExp(locationName, 'i');
+        const locations = await Location.find({ name: queryRegEx });
+        if (!locations) {
+            res.status(404).json({ message: 'No Location found matching the query parameter' });
+        }
+        res.status(200).json({ locations });
+    } catch (error) {
+        res.status(500).json({ error });
+    }
+};
+
 const updateLocation = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
@@ -63,4 +80,4 @@ const deleteLocation = async (req: Request, res: Response) => {
     }
 };
 
-export default { index, createLocation, showLocation, updateLocation, deleteLocation };
+export default { index, createLocation, searchLocation, showLocation, updateLocation, deleteLocation };

@@ -102,8 +102,11 @@ ToDo
 + FE: display creation date for locations, events and reviews also add link to buy tickets
 + FE / BE: add more types for events
 
-- BE: when retriving events and locations from the database sort the by start date / create date respectively
-- BE: introduce pagination for events, locations, reviews
+11/03/2023
++ BE / FE: when retriving locations from the database sort them create date respectively
+- BE / FE: when retriving events from the database sort them from the present date
+- BE / FE: search field for searching thru locations and implement BehivourSubject for locations
+- BE / FE: introduce pagination for events, locations, reviews
 
 - FE: login & register forms to have the same style as create and edit
 - BE / FE: add search functionality for touristic attractions
