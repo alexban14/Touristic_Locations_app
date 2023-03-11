@@ -26,6 +26,7 @@ import { SelectDatesComponent } from './eventsPage/list-events/select-dates/sele
 import { ShowEventsComponent } from './eventsPage/list-events/show-events/show-events.component';
 import { ShowPageEventComponent } from './eventsPage/show-page-event/show-page-event.component';
 import { ShowEventsHomeComponent } from './home/show-events-home/show-events-home.component';
+import { SearchLocationComponent } from './locations/list-locations/search-location/search-location.component';
 
 @NgModule({
     declarations: [
@@ -50,7 +51,8 @@ import { ShowEventsHomeComponent } from './home/show-events-home/show-events-hom
         SelectDatesComponent,
         ShowEventsComponent,
         ShowPageEventComponent,
-        ShowEventsHomeComponent
+        ShowEventsHomeComponent,
+        SearchLocationComponent
     ],
     imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule],
     providers: [],

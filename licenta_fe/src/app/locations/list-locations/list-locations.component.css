@@ -118,3 +118,7 @@ a:not([href]):not([class]):hover {
     font-style: italic;
     font-family: 'Roboto Slab', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+.not-found {
+    height: 7.5rem;
+}

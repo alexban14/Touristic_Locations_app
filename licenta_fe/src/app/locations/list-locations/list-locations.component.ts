@@ -12,8 +12,9 @@ import { Location, LocWrapper } from '../location.model';
     styleUrls: ['./list-locations.component.css']
 })
 export class ListLocationsComponent implements OnInit, OnDestroy {
-    subscription!: Subscription;
-    locationsObj?: LocWrapper;
+    serverSubscription!: Subscription;
+    serviceSubscription!: Subscription;
+    locationsObj!: LocWrapper;
 
     logedStatus!: Subscription;
     isLogedIn!: boolean;
@@ -21,24 +22,41 @@ export class ListLocationsComponent implements OnInit, OnDestroy {
     constructor(private locationsService: LocationsService, private dataStorage: DataStorageService) {}
 
     ngOnInit(): void {
+        this.fetchInitialLocations();
+        this.fetchLocations();
+        this.getLoggedInStatus();
+    }
+
+    ngOnDestroy(): void {
+        this.serverSubscription.unsubscribe();
+        this.logedStatus.unsubscribe();
+    }
+
+    fetchInitialLocations() {
         const locationWrapperObs: Observable<LocWrapper> = this.locationsService.getAllLocations();
 
-        this.subscription = locationWrapperObs.subscribe((response) => {
-            this.locationsObj = response;
+        this.serverSubscription = locationWrapperObs.subscribe((response) => {
+            this.dataStorage.changeLocations(response);
             console.log(response);
         });
+    }
 
+    fetchLocations() {
+        this.serviceSubscription = this.dataStorage.currentLocations.subscribe({
+            next: (response: LocWrapper) => {
+                (this.locationsObj = response), console.log(this.locationsObj);
+            },
+            error: (err) => console.log(err)
+        });
+    }
+
+    getLoggedInStatus() {
         this.logedStatus = this.dataStorage.currentLogedIn.subscribe({
             next: (response: boolean) => {
                 this.isLogedIn = response;
             },
             error: (err) => console.log(err)
         });
-    }
-
-    ngOnDestroy(): void {
-        this.subscription.unsubscribe();
-        this.logedStatus.unsubscribe();
     }
 }
 

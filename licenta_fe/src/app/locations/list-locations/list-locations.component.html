@@ -1,12 +1,15 @@
 <div class="mb-1 mx-0">
     <app-mapquest></app-mapquest>
 </div>
-<div class="container p-3 mt-3 wrapper">
-    <div *ngIf="isLogedIn" class="btn-group mb-5">
-        <button routerLink="/locations/new" type="button" class="btn btn-lg">Creaza Atractie</button>
+<div class="container p-3 mt-1 wrapper">
+    <div class="d-flex flex-row justify-content-between align-items-center mb-3">
+        <div *ngIf="isLogedIn" class="btn-group">
+            <button routerLink="/locations/new" type="button" class="btn btn-lg">Creaza Atractie</button>
+        </div>
+        <app-search-location></app-search-location>
     </div>
     <div class="row gx-3 mx-auto d-flex justify-content-start">
-        <div class="col-12 col-md-6 col-lg-4 mb-5 d-flex align-items-sm-start" *ngFor="let location of locationsObj?.locations">
+        <div class="col-12 col-md-6 col-lg-4 mb-5 d-flex align-items-sm-start" *ngFor="let location of locationsObj.locations">
             <!-- <div class="card">
             <img src="http://localhost:3500/imgFiles/get/{{ location.images[0] }}" class="card-img-top" alt="..." />
             <div class="card-body">
@@ -28,6 +31,13 @@
                     <div class="portfolio-caption-heading">{{ location.name }}</div>
                     <div class="portfolio-caption-subheading text-muted">{{ location.description | slice : 0 : 100 }}...</div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div *ngIf="locationsObj.locations.length < 1" class="card text-bg-dark mb-3 not-found" style="max-width: 30rem">
+            <div class="card-body">
+                <h5 class="card-title">Nu am gasit nici-o atractie turisitica care sa se potriveasca.</h5>
             </div>
         </div>
     </div>

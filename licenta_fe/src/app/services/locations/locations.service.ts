@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { OneLocWrapper, LocationSend, LocWrapper } from '../../locations/location.model';
@@ -8,6 +8,7 @@ import { OneLocWrapper, LocationSend, LocWrapper } from '../../locations/locatio
 })
 export class LocationsService {
     private allLocationsEndpoint = '/locations/get';
+    private searchLocationsEndpoint = '/locations/search';
     private createLocationEndpoint = '/locations/create';
     private editLocationEndpoint = '/locations/edit';
     private deleteLocationEndpoint = '/locations/delete';
@@ -20,6 +21,12 @@ export class LocationsService {
 
     getOneLocation(id: string) {
         return this.http.get<OneLocWrapper>(environment.baseURL + this.allLocationsEndpoint + `/${id}`);
+    }
+
+    searchedLocation(searchQuery: string) {
+        return this.http.get<LocWrapper>(environment.baseURL + this.searchLocationsEndpoint, {
+            params: new HttpParams().set('locationName', searchQuery)
+        });
     }
 
     createLocation(location: LocationSend) {
