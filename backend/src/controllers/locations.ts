@@ -4,9 +4,17 @@ import Location from '../models/location';
 
 const index = async (req: Request, res: Response) => {
     try {
-        const locations = await Location.find({}).sort({ creationDate: -1 });
-        console.log(locations);
-        res.status(200).json({ locations });
+        const { locationsLimit = 12, page = 1 }: any = req.query;
+        const locations = await Location.find({})
+            .limit(locationsLimit)
+            .skip((page - 1) * locationsLimit)
+            .sort({ creationDate: -1 });
+        const locationsCount = await Location.countDocuments();
+        res.status(200).json({
+            locations,
+            totalPages: Math.ceil(locationsCount / locationsLimit),
+            currentPage: page
+        });
     } catch (error) {
         res.status(500).json({ error });
     }

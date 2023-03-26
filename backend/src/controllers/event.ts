@@ -4,9 +4,14 @@ import Event from '../models/event';
 
 const index = async (req: Request, res: Response) => {
     try {
-        const events = await Event.find({}).populate('creator');
+        const { eventsLimit = 12, page = 1 }: any = req.query;
+        const events = await Event.find({})
+            .limit(eventsLimit)
+            .skip((page - 1) * eventsLimit)
+            .populate('creator');
         Logging.info(events);
-        res.status(200).json({ events });
+        const eventsCount = await Event.countDocuments();
+        res.status(200).json({ events, totalPages: Math.ceil(eventsCount / eventsLimit), currentPage: page });
     } catch (error) {
         res.status(500).json({ error });
     }
@@ -14,13 +19,21 @@ const index = async (req: Request, res: Response) => {
 
 const showFromStartDate = async (req: Request, res: Response) => {
     try {
-        const startDate = req.query.startDate;
+        const { startDate, eventsLimit = 12, page = 1 }: any = req.query;
         if (!startDate) {
             res.status(404).json({ message: 'Start date parameter missing from the request' });
         }
-        const events = await Event.find({ startDate: { $gte: startDate } }).populate('creator');
+        const events = await Event.find({ startDate: { $gte: startDate } })
+            .limit(eventsLimit)
+            .skip((page - 1) * eventsLimit)
+            .populate('creator');
         Logging.info(events);
-        events ? res.status(200).json({ events }) : res.status(404).json({ message: 'No events found starting with this date' });
+        const eventsCount = await Event.countDocuments();
+        if (events) {
+            res.status(200).json({ events, totalPages: Math.ceil(eventsCount / eventsLimit), currentPage: page });
+        } else {
+            res.status(404).json({ message: 'No events found starting with this date' });
+        }
     } catch (error) {
         res.status(500).json({ error });
     }
@@ -28,14 +41,21 @@ const showFromStartDate = async (req: Request, res: Response) => {
 
 const showFromStartEnd = async (req: Request, res: Response) => {
     try {
-        const startDate = req.query.startDate;
-        const endDate = req.query.endDate;
+        const { startDate, endDate, eventsLimit = 12, page = 1 }: any = req.query;
         if (!startDate || !endDate) {
             res.status(404).json({ message: 'Start date or end date parameter missing from the request' });
         }
-        const events = await Event.find({ startDate: { $gte: startDate, $lte: endDate } }).populate('creator');
+        const events = await Event.find({ startDate: { $gte: startDate, $lte: endDate } })
+            .limit(eventsLimit)
+            .skip((page - 1) * eventsLimit)
+            .populate('creator');
         Logging.info(events);
-        events ? res.status(200).json({ events }) : res.status(404).json({ message: 'No events found starting with this date' });
+        const eventsCount = await Event.countDocuments();
+        if (events) {
+            res.status(200).json({ events, totalPages: Math.ceil(eventsCount / eventsLimit), currentPage: page });
+        } else {
+            res.status(404).json({ message: 'No events found starting with this date' });
+        }
     } catch (error) {
         res.status(500).json({ error });
     }
@@ -43,13 +63,21 @@ const showFromStartEnd = async (req: Request, res: Response) => {
 
 const showByCategory = async (req: Request, res: Response) => {
     try {
-        const categoryParam = req.query.category;
-        if (!categoryParam) {
+        const { category, eventsLimit = 12, page = 1 }: any = req.query;
+        if (!category) {
             res.status(404).json({ message: 'Category parameter missing from the request' });
         }
-        const events = await Event.find({ category: categoryParam }).populate('creator');
+        const events = await Event.find({ category: category })
+            .limit(eventsLimit)
+            .skip((page - 1) * eventsLimit)
+            .populate('creator');
         Logging.info(events);
-        events ? res.status(200).json({ events }) : res.status(404).json({ message: 'No events found for the specified category' });
+        const eventsCount = await Event.countDocuments();
+        if (events) {
+            res.status(200).json({ events, totalPages: Math.ceil(eventsCount / eventsLimit), currentPage: page });
+        } else {
+            res.status(404).json({ message: 'No events found for the specified category' });
+        }
     } catch (error) {
         res.status(500).json({ error });
     }
