@@ -58,18 +58,14 @@ export class ListLocationsComponent implements OnInit, OnDestroy {
             error: (err) => console.log(err)
         });
     }
+
+    paginateArray(numPages: number): number[] {
+        return Array(numPages);
+    }
+
+    changePage(page: number) {
+        // make a call to the locations endpoint with the specified page nr
+        // pass the result to the locations behavior subject
+        console.log(page);
+    }
 }
-
-// .pipe(
-//   map(response => {
-//       reducer.setLocations(response)
-//       return response;
-//   }),
-//   catchError((error) => {
-//       reducer.setLocationsError(error);
-//         console.log('error', error);
-//         return of();
-//     })
-// );
-
-// *ngFor="let location of (subscription | async)?.locations"

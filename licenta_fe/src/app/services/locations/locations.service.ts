@@ -15,8 +15,18 @@ export class LocationsService {
 
     constructor(private http: HttpClient) {}
 
-    getAllLocations() {
-        return this.http.get<LocWrapper>(environment.baseURL + this.allLocationsEndpoint);
+    getAllLocations(page?: number, locationsLimit?: number) {
+        let params;
+        if (locationsLimit && page) {
+            params = {
+                params: new HttpParams().append('locationsLimit', locationsLimit).append('page', page)
+            };
+        }
+        if (params) {
+            return this.http.get<LocWrapper>(environment.baseURL + this.allLocationsEndpoint, params);
+        } else {
+            return this.http.get<LocWrapper>(environment.baseURL + this.allLocationsEndpoint);
+        }
     }
 
     getOneLocation(id: string) {

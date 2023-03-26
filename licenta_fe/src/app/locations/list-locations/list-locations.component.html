@@ -8,16 +8,9 @@
         </div>
         <app-search-location></app-search-location>
     </div>
+
     <div class="row gx-3 mx-auto d-flex justify-content-start">
         <div class="col-12 col-md-6 col-lg-4 mb-5 d-flex align-items-sm-start" *ngFor="let location of locationsObj.locations">
-            <!-- <div class="card">
-            <img src="http://localhost:3500/imgFiles/get/{{ location.images[0] }}" class="card-img-top" alt="..." />
-            <div class="card-body">
-                <h5 class="card-title">{{ location.name }}</h5>
-                <p class="card-text">{{ location.description | slice : 0 : 100 }}...</p>
-                <a [routerLink]="['/locations/get', location._id]" class="btn btn-outline-primary">Viziteaza</a>
-            </div>
-        </div> -->
             <div class="portfolio-item">
                 <a class="portfolio-link" data-bs-toggle="modal" routerLink="/locations/get/{{ location._id }}">
                     <div class="portfolio-hover">
@@ -34,6 +27,7 @@
             </div>
         </div>
     </div>
+
     <div class="d-flex justify-content-center">
         <div *ngIf="locationsObj.locations.length < 1" class="card text-bg-dark mb-3 not-found" style="max-width: 30rem">
             <div class="card-body">
@@ -41,4 +35,17 @@
             </div>
         </div>
     </div>
+    <nav *ngIf="locationsObj.totalPages > 0">
+        <ul class="pagination" *ngFor="let pageNumber of paginateArray(locationsObj.totalPages); let i = index">
+            <!-- <li class="page-item active" aria-current="page">
+                <span class="page-link">1</span>
+            </li> -->
+            <li class="page-item">
+                <a class="page-link {{ locationsObj.currentPage == i + 1 ? 'active' : '' }}" (click)="changePage(i + 1)">
+                    {{ i + 1 }}
+                </a>
+            </li>
+            <!-- <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+        </ul>
+    </nav>
 </div>

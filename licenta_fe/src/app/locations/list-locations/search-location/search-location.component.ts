@@ -15,7 +15,7 @@ export class SearchLocationComponent implements OnInit {
 
     constructor(private locationsService: LocationsService, private dataStorage: DataStorageService) {
         this.searchForm = new FormGroup({
-            locationName: new FormControl('', [Validators.required])
+            locationName: new FormControl('', [Validators.required, Validators.minLength(5)])
         });
     }
 

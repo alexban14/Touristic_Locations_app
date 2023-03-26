@@ -44,9 +44,13 @@ export class LocationSend {
 
 export class LocWrapper {
     public locations: Location[];
+    public totalPages: number;
+    public currentPage: number;
 
-    constructor(locations: Location[]) {
+    constructor(locations: Location[], totalPages: number, currentPage: number) {
         this.locations = locations;
+        this.totalPages = totalPages;
+        this.currentPage = currentPage;
     }
 }
 
