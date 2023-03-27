@@ -22,6 +22,7 @@ export class LocationsService {
                 params: new HttpParams().append('locationsLimit', locationsLimit).append('page', page)
             };
         }
+
         if (params) {
             return this.http.get<LocWrapper>(environment.baseURL + this.allLocationsEndpoint, params);
         } else {

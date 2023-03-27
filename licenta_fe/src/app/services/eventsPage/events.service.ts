@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EventSend, EventWrapper, OneEventWrapper } from 'src/app/eventsPage/event.model';
 import { environment } from 'src/environments/environment';
@@ -14,33 +14,77 @@ export class EventsService {
 
     constructor(private http: HttpClient) {}
 
-    getAllEvents() {
-        return this.http.get<EventWrapper>(environment.baseURL + this.allEventsEndpoint);
+    getAllEvents(page?: number, eventsLimit?: number) {
+        let params;
+        if (eventsLimit && page) {
+            params = {
+                params: new HttpParams().append('eventsLimit', eventsLimit).append('page', page)
+            };
+        }
+
+        if (params) {
+            return this.http.get<EventWrapper>(environment.baseURL + this.allEventsEndpoint, params);
+        } else {
+            return this.http.get<EventWrapper>(environment.baseURL + this.allEventsEndpoint);
+        }
     }
 
-    eventsByStartDate(startDate: number) {
-        return this.http.get<EventWrapper>(environment.baseURL + this.allEventsEndpoint + '/fromStartDate', {
-            params: {
-                startDate: startDate
-            }
-        });
+    eventsByStartDate(startDate: number, page?: number, eventsLimit?: number) {
+        let params;
+        if (eventsLimit && page) {
+            params = {
+                params: new HttpParams().append('eventsLimit', eventsLimit).append('page', page).append('startDate', startDate)
+            };
+        }
+
+        if (params) {
+            return this.http.get<EventWrapper>(environment.baseURL + this.allEventsEndpoint + '/fromStartDate', params);
+        } else {
+            return this.http.get<EventWrapper>(environment.baseURL + this.allEventsEndpoint + '/fromStartDate', {
+                params: {
+                    startDate: startDate
+                }
+            });
+        }
     }
 
-    eventsByStartEnd(startDate: number, endDate: number) {
-        return this.http.get<EventWrapper>(environment.baseURL + this.allEventsEndpoint + '/fromStartEnd', {
-            params: {
-                startDate: startDate,
-                endDate: endDate
-            }
-        });
+    eventsByStartEnd(startDate: number, endDate: number, page?: number, eventsLimit?: number) {
+        let params;
+        if (eventsLimit && page) {
+            params = {
+                params: new HttpParams().append('eventsLimit', eventsLimit).append('page', page).append('startDate', startDate).append('endDate', endDate)
+            };
+        }
+
+        if (params) {
+            return this.http.get<EventWrapper>(environment.baseURL + this.allEventsEndpoint + '/fromStartEnd', params);
+        } else {
+            return this.http.get<EventWrapper>(environment.baseURL + this.allEventsEndpoint + '/fromStartEnd', {
+                params: {
+                    startDate: startDate,
+                    endDate: endDate
+                }
+            });
+        }
     }
 
-    eventsByCategory(category: string) {
-        return this.http.get<EventWrapper>(environment.baseURL + this.allEventsEndpoint + '/byCategory', {
-            params: {
-                category: category
-            }
-        });
+    eventsByCategory(category: string, page?: number, eventsLimit?: number) {
+        let params;
+        if (eventsLimit && page) {
+            params = {
+                params: new HttpParams().append('eventsLimit', eventsLimit).append('page', page).append('category', category)
+            };
+        }
+
+        if (params) {
+            return this.http.get<EventWrapper>(environment.baseURL + this.allEventsEndpoint + '/byCategory', params);
+        } else {
+            return this.http.get<EventWrapper>(environment.baseURL + this.allEventsEndpoint + '/byCategory', {
+                params: {
+                    category: category
+                }
+            });
+        }
     }
 
     getOneEvent(id: string) {

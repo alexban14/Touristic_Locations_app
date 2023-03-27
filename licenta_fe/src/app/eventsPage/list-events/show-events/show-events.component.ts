@@ -29,7 +29,7 @@ export class ShowEventsComponent implements OnInit, OnDestroy {
 
     fetchInitialEvents() {
         const currentDate = new Date();
-        this.eventsSerSub = this.eventService.eventsByStartDate(currentDate.getTime()).subscribe({
+        this.eventsSerSub = this.eventService.eventsByStartDate(currentDate.getTime(), 1, 12).subscribe({
             next: (response: EventWrapper) => {
                 console.log(response), this.dataStorage.changeEvents(response);
             },
@@ -42,6 +42,20 @@ export class ShowEventsComponent implements OnInit, OnDestroy {
             next: (response: EventWrapper) => {
                 console.log(response), (this.displayEvents = response);
             }
+        });
+    }
+
+    paginateArray(numPages: number): number[] {
+        return Array(numPages);
+    }
+
+    changePage(page: number) {
+        const currentTime = new Date();
+        this.eventService.eventsByStartDate(currentTime.getTime(), page, 12).subscribe({
+            next: (res: EventWrapper) => {
+                this.dataStorage.changeEvents(res);
+            },
+            error: (err) => console.log(err)
         });
     }
 }

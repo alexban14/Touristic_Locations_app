@@ -90,9 +90,13 @@ export class EventSend {
 
 export class EventWrapper {
     public events: Event[];
+    public totalPages: number;
+    public currentPage: number;
 
-    constructor(events: Event[]) {
+    constructor(events: Event[], totalPages: number, currentPage: number) {
         this.events = events;
+        this.totalPages = totalPages;
+        this.currentPage = currentPage;
     }
 }
 

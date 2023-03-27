@@ -35,17 +35,17 @@
             </div>
         </div>
     </div>
-    <nav *ngIf="locationsObj.totalPages > 0">
-        <ul class="pagination" *ngFor="let pageNumber of paginateArray(locationsObj.totalPages); let i = index">
-            <!-- <li class="page-item active" aria-current="page">
-                <span class="page-link">1</span>
-            </li> -->
-            <li class="page-item">
-                <a class="page-link {{ locationsObj.currentPage == i + 1 ? 'active' : '' }}" (click)="changePage(i + 1)">
+    <nav *ngIf="locationsObj.totalPages > 1">
+        <ul class="pagination">
+            <li class="page-item d-flex flex-row">
+                <a
+                    *ngFor="let pageNumber of paginateArray(locationsObj.totalPages); let i = index"
+                    class="page-link {{ locationsObj.currentPage == i + 1 ? 'active' : '' }}"
+                    (click)="changePage(i + 1)"
+                >
                     {{ i + 1 }}
                 </a>
             </li>
-            <!-- <li class="page-item"><a class="page-link" href="#">3</a></li> -->
         </ul>
     </nav>
 </div>

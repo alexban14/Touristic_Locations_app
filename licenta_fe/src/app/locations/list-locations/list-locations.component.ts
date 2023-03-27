@@ -33,7 +33,7 @@ export class ListLocationsComponent implements OnInit, OnDestroy {
     }
 
     fetchInitialLocations() {
-        const locationWrapperObs: Observable<LocWrapper> = this.locationsService.getAllLocations();
+        const locationWrapperObs: Observable<LocWrapper> = this.locationsService.getAllLocations(1, 12);
 
         this.serverSubscription = locationWrapperObs.subscribe((response) => {
             this.dataStorage.changeLocations(response);
@@ -64,8 +64,12 @@ export class ListLocationsComponent implements OnInit, OnDestroy {
     }
 
     changePage(page: number) {
-        // make a call to the locations endpoint with the specified page nr
-        // pass the result to the locations behavior subject
+        this.locationsService.getAllLocations(page, 3).subscribe({
+            next: (res: LocWrapper) => {
+                this.dataStorage.changeLocations(res);
+            },
+            error: (err) => console.log(err)
+        });
         console.log(page);
     }
 }

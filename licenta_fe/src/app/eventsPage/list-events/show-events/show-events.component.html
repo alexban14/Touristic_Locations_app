@@ -36,6 +36,15 @@
         </div>
     </div>
 </div>
+<nav *ngIf="displayEvents.totalPages > 1">
+    <ul class="pagination">
+        <li class="page-item d-flex flex-row">
+            <a *ngFor="let pageNumber of paginateArray(displayEvents.totalPages); let i = index" class="page-link {{ displayEvents.currentPage == i + 1 ? 'active' : '' }}" (click)="changePage(i + 1)">
+                {{ i + 1 }}
+            </a>
+        </li>
+    </ul>
+</nav>
 <div class="d-flex justify-content-center">
     <div *ngIf="displayEvents.events.length < 1" class="card text-bg-dark mb-3" style="max-width: 30rem">
         <div class="card-body">
