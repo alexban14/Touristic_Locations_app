@@ -14,3 +14,7 @@ button.btn {
 button.btn:hover {
     color: white;
 }
+
+.input-query {
+    height: 10rem;
+}

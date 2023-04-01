@@ -100,11 +100,13 @@ export class MapquestComponent implements OnInit, OnDestroy {
 
                 const contentString =
                     '<div id="content">' +
-                    '<div class="card" style="width: 20rem;">' +
+                    '<div class="card location-card">' +
                     `<img src=http://localhost:3500/imgFiles/get/${locationMarker.image} class="card-img-top" alt="...">` +
                     '<div class="card-body">' +
-                    `<h5 class="card-title">${locationMarker.label}</h5>` +
-                    `<p class="card-text">${locationMarker.description}</p>` +
+                    `<h5 class="card-title" style="font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">${locationMarker.label}</h5>` +
+                    `<p class="card-text" style="font-style: italic;
+                            font-family: 'Roboto Slab', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">${locationMarker.description}</p>` +
+                    '</div>' +
                     `<a href=http://localhost:4200/locations/get/${locationMarker.id}><button class="btn btn-outline-primary">Detalii</button></a>` +
                     '</div>' +
                     '</div>' +

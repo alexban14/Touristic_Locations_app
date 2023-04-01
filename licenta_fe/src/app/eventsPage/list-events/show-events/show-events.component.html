@@ -1,7 +1,9 @@
 <div class="row">
     <div *ngFor="let event of displayEvents.events" class="col-lg-6 col-xl-4">
         <div class="card card-margin">
-            <img src="http://localhost:3500/imgFiles/get/{{ event.image }}" class="card-img-top" alt="" />
+            <div class="img-container">
+                <img src="http://localhost:3500/imgFiles/get/{{ event.image }}" class="card-img-top" alt="" />
+            </div>
             <div class="card-header no-border">
                 <h5 class="card-title p-2">{{ event.name }}</h5>
             </div>

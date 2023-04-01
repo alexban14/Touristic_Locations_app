@@ -27,7 +27,9 @@
 
 .img-fluid {
     max-width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 img,
@@ -83,6 +85,10 @@ a:not([href]):not([class]):hover {
     justify-content: center;
     opacity: 0;
     transition: opacity ease-in-out 0.25s;
+}
+.portfolio-link {
+    height: 20rem;
+    overflow: hidden;
 }
 #portfolio .portfolio-item {
     min-height: 25rem;

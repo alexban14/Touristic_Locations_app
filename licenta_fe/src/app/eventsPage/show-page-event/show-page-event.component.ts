@@ -67,7 +67,7 @@ export class ShowPageEventComponent implements OnInit {
                     lat: event.location.lat,
                     lng: event.location.long
                 },
-                zoom: 14,
+                zoom: 16,
                 styles: eventMapStyles
             });
 
