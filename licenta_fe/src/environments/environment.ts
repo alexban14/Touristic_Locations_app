@@ -5,7 +5,7 @@
 export const environment = {
     production: false,
     baseURL: 'http://localhost:3500',
-    googleAPI_KEY: 'AIzaSyDLXnC7qLf5uo2cQLfWyYqrokBtg1DBliw'
+    googleAPI_KEY: 'AIzaSyDEMKDlcDBYUolFsr1IPzGd3GN1PP-arUA'
 };
 
 /*
